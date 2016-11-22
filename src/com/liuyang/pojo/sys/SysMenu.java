@@ -1,5 +1,7 @@
 package com.liuyang.pojo.sys;
 
+import com.liuyang.vo.sys.SysMenuVo;
+
 public class SysMenu {
     private String id;
 
@@ -66,6 +68,15 @@ public class SysMenu {
 		return "SysMenu [id=" + id + ", pid=" + pid + ", name=" + name + ", url=" + url + ", img=" + img + ", sort="
 				+ sort + "]";
 	}
-    
+	public SysMenuVo toVo() {
+		SysMenuVo vo = new SysMenuVo();
+		vo.setId(id);
+		vo.setPid(pid);
+		vo.setName(name);
+		vo.setUrl(url);
+		vo.setImg(img);
+		vo.setSort(sort);
+		return vo;
+	}
     
 }

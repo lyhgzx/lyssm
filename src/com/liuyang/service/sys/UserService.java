@@ -8,5 +8,7 @@ public interface UserService {
 	
 	SysUser getUserByName(String username );
 	
+	void update(SysUser user);
+	
 
 }

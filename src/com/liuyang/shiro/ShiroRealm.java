@@ -1,18 +1,27 @@
 package com.liuyang.shiro;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 import com.liuyang.dao.sys.SysMenuMapper;
 import com.liuyang.dao.sys.SysUserMapper;
+import com.liuyang.pojo.sys.SysMenu;
 import com.liuyang.pojo.sys.SysUser;
 
 
@@ -32,7 +41,17 @@ public class ShiroRealm extends AuthorizingRealm {
 		logger.debug("开始登录认证");
 		UsernamePasswordToken token=(UsernamePasswordToken)arg0;
 		SysUser user=userMapper.selectByName(token.getUsername());
-		return null;
+		// 账号不存在
+				if (user == null) {
+					return null;
+				}
+				// 账号已禁用
+				if (user.getStatus() == 0) {
+					return null;
+				}
+				ShiroUser shiroUser = new ShiroUser(user.getId(), user.getUsername(), user.getName(), user.getRoleid());
+				// 认证缓存信息
+				return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
 	}
 	
 	/**
@@ -40,8 +59,19 @@ public class ShiroRealm extends AuthorizingRealm {
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
-		// TODO Auto-generated method stub
-		return null;
+		logger.debug("开始授权认证");
+		ShiroUser shiroUser = (ShiroUser) arg0.getPrimaryPrincipal();
+		String roleId = shiroUser.getRoleId();
+		List<SysMenu> roleMenuList=menuMapper.findMenuByRoleId(roleId);
+		Set<String> urlSet = new HashSet<String>();
+		for (SysMenu menu : roleMenuList) {
+			if (StringUtils.isNoneBlank(menu.getUrl())) {
+				urlSet.add(menu.getUrl());
+			}
+		}
+		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+		info.addStringPermissions(urlSet);
+		return info;
 	}
 
 	

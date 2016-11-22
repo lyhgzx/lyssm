@@ -30,4 +30,11 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 		return usersList.size() == 1 ? usersList.get(0) : null;
 	}
 
+	@Override
+	public void update(SysUser user) {
+		
+		dao.updateByPrimaryKey(user);
+		
+	}
+
 }

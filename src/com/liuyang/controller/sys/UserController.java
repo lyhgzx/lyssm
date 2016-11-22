@@ -1,7 +1,15 @@
 package com.liuyang.controller.sys;
 
 
+import java.util.Date;
+
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.DisabledAccountException;
+import org.apache.shiro.authc.IncorrectCredentialsException;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 import com.liuyang.controller.base.BaseController;
 import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.service.impl.sys.UserServiceImpl;
 import com.liuyang.utils.Config;
+import com.liuyang.utils.DigestUtil;
+import com.liuyang.utils.ShiroUtil;
 
 
 @Controller
@@ -52,13 +63,36 @@ public class UserController extends BaseController{
         if (StringUtils.isBlank(password)) {
             return sendError("密码不能为空");
         }
-        if(username.equals("admin")&&password.equals("888888")){
-        	
-        }else{
-            logger.error("账号密码错误：{}");
-            return sendError(2,"账号密码错误");
+        Subject user = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, DigestUtil.md5Hex(password).toCharArray());
+        token.setRememberMe(true);
+        try {
+            user.login(token);
+            updateUserLastTime();
+        } catch (UnknownAccountException e) {
+            logger.error("账号不存在：{}", e.getMessage());
+            return sendError(2,"账号不存在");
+        } catch (DisabledAccountException e) {
+            logger.error("账号已禁用：{}", e.getMessage());
+            return sendError(2,"账号已禁用");
+        } catch (IncorrectCredentialsException e) {
+            logger.error("密码错误：{}", e.getMessage());
+            return sendError(2,"密码错误");
+        } catch (RuntimeException e) {
+            logger.error("未知错误,请联系管理员：{}", e.getMessage());
+            return sendError("未知错误,请联系管理员");
         }
-		return sendOk();
+        return sendOk();
         
+	}
+	
+	/**
+	 * 跟新用户登录时间
+	 */
+	private void updateUserLastTime() {
+		SysUser user = new SysUser();
+		user.setId(ShiroUtil.getSysUserId());
+		user.setLasttime(new Date());
+		service.update(user);
 	}
 }
