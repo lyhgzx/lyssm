@@ -286,5 +286,14 @@
       lastTime = #{lasttime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
-  </update>
+    </update>
+    
+  
+<!--   自定义方法 -->
+ <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
 </mapper>

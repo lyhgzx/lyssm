@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.liuyang.pojo.sys.SysUser;
+import com.liuyang.pojo.sys.SysUserExample;
+import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class SysUserMapperTest {
 
@@ -26,4 +28,18 @@ public class SysUserMapperTest {
 		System.out.print(user.toString());
 	}
 
+	@Test
+	public void testSelectByName() {
+		/*SysUser user=dao.selectByName("admin");
+		System.out.print(user.toString());*/
+		
+		SysUserExample userExample=new SysUserExample();
+	    SysUserExample.Criteria criteria=userExample.createCriteria();
+	    criteria.andUsernameEqualTo("admin");
+	   java.util.List<SysUser> usersList= dao.selectByExample(userExample);
+	   System.out.print(usersList.size());
+	  
+	}
+
+	
 }
