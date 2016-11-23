@@ -33,7 +33,7 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 	@Override
 	public void update(SysUser user) {
 		
-		dao.updateByPrimaryKey(user);
+		dao.updateByPrimaryKeySelective(user);
 		
 	}
 

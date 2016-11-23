@@ -14,6 +14,7 @@
 	<!-- 自动扫描 -->
 	<context:component-scan base-package="com.liuyang.dao" />
 	<context:component-scan base-package="com.liuyang.service" />
+	<context:component-scan base-package="com.liuyang.utils" />
 	<!-- 引入配置文件 -->
     <context:property-placeholder location="classpath:config.properties" />
 

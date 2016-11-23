@@ -13,6 +13,8 @@
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 <link href="${staticPath}/css/animate.css" rel="stylesheet">
 <link href="${staticPath}/css/style.css?v=4.1.0" rel="stylesheet">
+   <script type="text/javascript">var basePath="${basePath}";</script>
+	<script type="text/javascript">var adminPath="${adminPath}";</script>
 <!-- 全局js -->
 <script src="${staticPath}/js/jquery.min.js?v=2.1.4"></script>
 <script src="${staticPath}/js/bootstrap.min.js?v=3.3.6"></script>
@@ -26,6 +28,9 @@
 <script type="text/javascript" src="${staticPath}/js/contabs.js"></script>
 <!-- 第三方插件 -->
 <script src="${staticPath}/js/plugins/pace/pace.min.js"></script>
+
+
+<script src="${staticPath}/js/sys/index.js"></script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow: hidden">
@@ -63,11 +68,11 @@
 							class="nav-label">主页</span> <span class="fa arrow"></span>
 					</a>
 						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href="index_v1.html"
+							<li><a class="J_menuItem" href=""
 								data-index="0">主页示例一</a> <!--默认主页需在对应的菜单a元素上添加data-index="0"-->
 							</li>
-							<li><a class="J_menuItem" href="index_v2.html">主页示例二</a></li>
-							<li><a class="J_menuItem" href="index_v3.html">主页示例三</a></li>
+							<li><a class="J_menuItem" href="">主页示例二</a></li>
+							<li><a class="J_menuItem" href="">主页示例三</a></li>
 
 						</ul></li>
 					<li>
@@ -102,7 +107,7 @@
 				<nav class="page-tabs J_menuTabs">
 					<div class="page-tabs-content">
 						<a href="javascript:;" class="active J_menuTab"
-							data-id="index_v1.html">首页</a>
+							data-id="">首页</a>
 						<!--默认主页需在对应的选项卡a元素上添加data-id="默认主页的url"-->
 					</div>
 				</nav>
@@ -121,12 +126,12 @@
 						<li class="J_tabCloseOther"><a>关闭其他选项卡</a></li>
 					</ul>
 				</div>
-				<a href="login.html" class="roll-nav roll-right J_tabExit"><i
+				<a href="#" id="logout" class="roll-nav roll-right J_tabExit"><i
 					class="fa fa fa-sign-out"></i> 退出</a>
 			</div>
 			<div class="row J_mainContent" id="content-main">
 				<iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-					src="index_v1.html?v=4.0" frameborder="0" data-id="index_v1.html"
+					src="" frameborder="0" data-id=""
 					seamless></iframe>
 				<!--默认主页需在对应的页面显示iframe元素上添加name="iframe0"和data-id="默认主页的url"-->
 			</div>

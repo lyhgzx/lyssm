@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.liuyang.controller.base.BaseController;
 import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.service.impl.sys.UserServiceImpl;
+import com.liuyang.service.sys.MenuService;
+import com.liuyang.service.sys.UserService;
 import com.liuyang.utils.Config;
 import com.liuyang.utils.DigestUtil;
 import com.liuyang.utils.ShiroUtil;
+import com.liuyang.utils.SpringContextUtil;
 
 
 @Controller
@@ -33,8 +36,8 @@ public class UserController extends BaseController{
 	@Value("${adminPath}")  
 	private String strUrl;  
 	@Autowired
-	private UserServiceImpl service;
-	
+	private UserService service;
+
 	@RequestMapping(value = "/index")
 	public String index() {
 		return "sys/index";
@@ -69,6 +72,7 @@ public class UserController extends BaseController{
         try {
             user.login(token);
             updateUserLastTime();
+ 
         } catch (UnknownAccountException e) {
             logger.error("账号不存在：{}", e.getMessage());
             return sendError(2,"账号不存在");
@@ -86,10 +90,26 @@ public class UserController extends BaseController{
         
 	}
 	
+
+    /**
+     * 退出登录
+     * @return {Result}
+     */
+    @RequestMapping(value = "/logout")
+    @ResponseBody
+    public Object logout() {
+        logger.info("退出登录");
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
+        return sendOk();
+    }
+	
+	
 	/**
 	 * 跟新用户登录时间
 	 */
 	private void updateUserLastTime() {
+		
 		SysUser user = new SysUser();
 		user.setId(ShiroUtil.getSysUserId());
 		user.setLasttime(new Date());

@@ -5,12 +5,13 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.liuyang.dao.sys.SysMenuMapper;
 import com.liuyang.pojo.sys.SysMenu;
 import com.liuyang.service.sys.MenuService;
 import com.liuyang.vo.sys.SysMenuVo;
-
+@Service
 public class MenuServiceImpl implements MenuService {
 
 	@Autowired
