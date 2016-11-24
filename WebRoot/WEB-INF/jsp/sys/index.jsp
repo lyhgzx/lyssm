@@ -31,6 +31,14 @@
 
 
 <script src="${staticPath}/js/sys/index.js"></script>
+	<script type="text/javascript">
+	
+	var sys_menus = ${config:getSysMenus()};
+	
+	for (var i = 0; i < sys_menus.length; i++) {
+		var j=sys_menus[i];
+	}
+	</script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
 	style="overflow: hidden">
@@ -48,8 +56,8 @@
 								src="${staticPath}/img/profile_small.jpg" /></span> <a
 								data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 								class="clear"> <span class="block m-t-xs"><strong
-										class="font-bold">Beaut-zihan</strong></span> <span
-									class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+										class="font-bold">${config:getSysUserName()}</strong></span> <span
+									class="text-muted text-xs block"> ${config:getSysRoleName()} <b class="caret"></b></span>
 							</span>
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">

@@ -18,15 +18,26 @@ public class ShiroUser implements Serializable {
 	private String name;
 	// 角色id
 	private String roleId;
+	//角色名称
+	private String roleName;
 
-    public ShiroUser(String id, String username, String name, String roleId) {
+    public ShiroUser(String id, String username, String name, String roleId,String roleName) {
         this.id = id;
         this.username = username;
         this.name = name;
         this.roleId = roleId;
+        this.roleName=roleName;
     }
 
-    public String getId() {
+    public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
+	}
+
+	public String getId() {
 		return id;
 	}
 

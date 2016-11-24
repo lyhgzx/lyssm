@@ -290,10 +290,10 @@
     
   
 <!--   自定义方法 -->
- <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
-    <include refid="Base_Column_List" />
-    from sys_user
+ <select id="selectByName" resultType="com.liuyang.pojo.sys.SysUserExtend" parameterType="java.lang.String" >
+   select t0.*,t1.`name` as roleName from sys_user t0 left JOIN sys_role t1 on t0.roleId=t1.id
     where username = #{username,jdbcType=VARCHAR}
   </select>
+  
+ 
 </mapper>

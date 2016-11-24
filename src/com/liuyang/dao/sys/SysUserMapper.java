@@ -2,6 +2,8 @@ package com.liuyang.dao.sys;
 
 import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.pojo.sys.SysUserExample;
+import com.liuyang.pojo.sys.SysUserExtend;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,5 +33,5 @@ public interface SysUserMapper {
    
     
     /*自定义方法*/
-    SysUser selectByName(String username);
+    SysUserExtend selectByName(String username);
 }

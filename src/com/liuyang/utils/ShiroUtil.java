@@ -37,7 +37,15 @@ public class ShiroUtil {
 		return getSysUser().getName();
 	}
 
-
+	/**
+	 * 获取当前角色名
+	 * 
+	 * @return 用户对象
+	 */
+	public static String getSysRoleName() {
+		return getSysUser().getRoleName();
+	}
+	
 	/**
 	 * 获取当前登录用户id
 	 * 

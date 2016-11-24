@@ -22,6 +22,7 @@ import com.liuyang.dao.sys.SysMenuMapper;
 import com.liuyang.dao.sys.SysUserMapper;
 import com.liuyang.pojo.sys.SysMenu;
 import com.liuyang.pojo.sys.SysUser;
+import com.liuyang.pojo.sys.SysUserExtend;
 
 
 
@@ -41,7 +42,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
 		logger.debug("开始登录认证");
 		UsernamePasswordToken token=(UsernamePasswordToken)arg0;
-		SysUser user=userDao.selectByName(token.getUsername());
+		SysUserExtend user=userDao.selectByName(token.getUsername());
 		// 账号不存在
 				if (user == null) {
 					return null;
@@ -50,7 +51,7 @@ public class ShiroRealm extends AuthorizingRealm {
 				if (user.getStatus() == 0) {
 					return null;
 				}
-				ShiroUser shiroUser = new ShiroUser(user.getId(), user.getUsername(), user.getName(), user.getRoleid());
+				ShiroUser shiroUser = new ShiroUser(user.getId(), user.getUsername(), user.getName(), user.getRoleid(),user.getRoleName());
 				// 认证缓存信息
 				return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
 	}
