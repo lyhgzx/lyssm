@@ -30,6 +30,14 @@ import com.liuyang.utils.ShiroUtil;
 import com.liuyang.utils.SpringContextUtil;
 
 
+
+/**
+  * @ClassName: UserController
+  * @Description: 用户控制器
+  * @author liuyang
+  * @date 2016年11月24日 上午8:46:11
+  *
+  */
 @Controller
 @RequestMapping(value="/admin")
 public class UserController extends BaseController{

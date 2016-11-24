@@ -7,9 +7,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.pojo.sys.SysUserExample;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class SysUserMapperTest {
 

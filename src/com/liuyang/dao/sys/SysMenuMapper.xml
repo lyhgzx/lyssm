@@ -225,10 +225,10 @@
   </update>
   
   
-  <!--   自定义方法 -->
+ 
+   <!--   自定义方法 -->
   <select id="findMenuByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
    select a.* from sys_menu a left join sys_role_menu b on(a.id=b.menuid) where b.roleid=#{id,jdbcType=VARCHAR}
  
   </select>
-  
 </mapper>

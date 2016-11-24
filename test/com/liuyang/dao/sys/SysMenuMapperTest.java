@@ -1,7 +1,5 @@
 package com.liuyang.dao.sys;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.After;

@@ -13,12 +13,14 @@ import com.liuyang.pojo.sys.SysUserExample;
 public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 
 	@Autowired
-	SysUserMapper dao;
-
+	SysUserMapper mapper;
+ 
+	
+	
 	@Override
 	public SysUser getUser(String id) {
 
-		return dao.selectByPrimaryKey(id);
+		return mapper.selectByPrimaryKey(id);
 	}
 
 	@Override
@@ -26,14 +28,14 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 		SysUserExample userExample = new SysUserExample();
 		SysUserExample.Criteria criteria = userExample.createCriteria();
 		criteria.andUsernameEqualTo(username);
-		List<SysUser> usersList = dao.selectByExample(userExample);
+		List<SysUser> usersList = mapper.selectByExample(userExample);
 		return usersList.size() == 1 ? usersList.get(0) : null;
 	}
 
 	@Override
 	public void update(SysUser user) {
 		
-		dao.updateByPrimaryKeySelective(user);
+		mapper.updateByPrimaryKeySelective(user);
 		
 	}
 

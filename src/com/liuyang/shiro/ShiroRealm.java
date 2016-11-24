@@ -18,7 +18,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import com.liuyang.dao.sys.SysMenuMapper;
 import com.liuyang.dao.sys.SysUserMapper;
 import com.liuyang.pojo.sys.SysMenu;
@@ -30,9 +29,11 @@ public class ShiroRealm extends AuthorizingRealm {
 	private static Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
 	
 	@Autowired
-	private SysUserMapper userMapper;
+	private SysUserMapper userDao;
 	@Autowired
-	private SysMenuMapper menuMapper;
+	private SysMenuMapper menuDao;
+	
+	
 	/**
 	 * 登录认证
 	 */
@@ -40,7 +41,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
 		logger.debug("开始登录认证");
 		UsernamePasswordToken token=(UsernamePasswordToken)arg0;
-		SysUser user=userMapper.selectByName(token.getUsername());
+		SysUser user=userDao.selectByName(token.getUsername());
 		// 账号不存在
 				if (user == null) {
 					return null;
@@ -62,7 +63,7 @@ public class ShiroRealm extends AuthorizingRealm {
 		logger.debug("开始授权认证");
 		ShiroUser shiroUser = (ShiroUser) arg0.getPrimaryPrincipal();
 		String roleId = shiroUser.getRoleId();
-		List<SysMenu> roleMenuList=menuMapper.findMenuByRoleId(roleId);
+		List<SysMenu> roleMenuList=menuDao.findMenuByRoleId(roleId);
 		Set<String> urlSet = new HashSet<String>();
 		for (SysMenu menu : roleMenuList) {
 			if (StringUtils.isNoneBlank(menu.getUrl())) {

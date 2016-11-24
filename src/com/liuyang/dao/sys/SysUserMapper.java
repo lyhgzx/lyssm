@@ -28,8 +28,8 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
     
+   
+    
     /*自定义方法*/
     SysUser selectByName(String username);
-    
-  
 }
