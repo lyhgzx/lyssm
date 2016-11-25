@@ -33,11 +33,9 @@
 <script src="${staticPath}/js/sys/index.js"></script>
 	<script type="text/javascript">
 	
-	var sys_menus = ${config:getSysMenus()};
+
 	
-	for (var i = 0; i < sys_menus.length; i++) {
-		var j=sys_menus[i];
-	}
+
 	</script>
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
@@ -72,20 +70,8 @@
 						</div>
 						<div class="logo-element">H+</div>
 					</li>
-					<li><a href="#"> <i class="fa fa-home"></i> <span
-							class="nav-label">主页</span> <span class="fa arrow"></span>
-					</a>
-						<ul class="nav nav-second-level">
-							<li><a class="J_menuItem" href=""
-								data-index="0">主页示例一</a> <!--默认主页需在对应的菜单a元素上添加data-index="0"-->
-							</li>
-							<li><a class="J_menuItem" href="">主页示例二</a></li>
-							<li><a class="J_menuItem" href="">主页示例三</a></li>
-
-						</ul></li>
-					<li>
-						<!--其他菜单项-->
-					</li>
+					
+					${config:getSysMenus()}
 				</ul>
 			</div>
 		</nav>

@@ -11,6 +11,7 @@ import com.liuyang.pojo.SessionConst;
 import com.liuyang.service.sys.MenuService;
 import com.liuyang.shiro.ShiroUser;
 import com.liuyang.vo.sys.SysMenuVo;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
  * shiro用户工具类
@@ -66,7 +67,40 @@ public class ShiroUtil {
 		Object menus = ShiroUtil.getSessionKey(SessionConst.SYS_MENUS);
 		if(menus == null){
 			List<SysMenuVo> list = extracted(); 
-			menus = JsonUtil.toString(list);
+			StringBuilder sbMenus=new StringBuilder();
+			for (SysMenuVo menu1 : list) {
+				List<SysMenuVo> menu2List=menu1.getSon();
+				if(menu2List!=null){
+					sbMenus.append("<li>");
+					sbMenus.append("<a href='#'><i class='fa fa-flask'></i> <span class='nav-label'>"+menu1.getName()+"</span><span class='fa arrow'></span></a>");
+					sbMenus.append("<ul class='nav nav-second-level'>");
+					
+					for (SysMenuVo menu2 : menu2List) {
+						List<SysMenuVo> menu3List=menu2.getSon();
+						if(menu3List!=null){
+							sbMenus.append("<li>");
+							sbMenus.append("<a href='#'>"+menu2+" <span class='fa arrow'></span></a>");
+							sbMenus.append(" <ul class='nav nav-third-level'>");
+							
+							for (SysMenuVo menu3 : menu3List) {
+								sbMenus.append(" <li><a class='J_menuItem' href='"+menu3.getUrl()+"'>"+menu3.getName()+"</a></li>");
+							}
+							sbMenus.append("</ul>");
+							sbMenus.append("<li>");
+						}else{
+							sbMenus.append(" <li><a class='J_menuItem' href='"+menu2.getUrl()+"'>"+menu2.getName()+"</a></li>");
+						}
+					}
+					sbMenus.append("</ul>");
+					sbMenus.append("<li>");
+					
+				}else{
+					sbMenus.append(" <li><a class='J_menuItem' href='"+menu1.getUrl()+"'>"+menu1.getName()+"</a></li>");
+				}
+				
+			}
+			
+			menus = sbMenus.toString();
 			ShiroUtil.setSessionKey(SessionConst.SYS_MENUS, menus);
 		}
 		return menus.toString();
@@ -76,6 +110,7 @@ public class ShiroUtil {
 		return sysMenuBiz.findMenusByRoleId(ShiroUtil.getSysUser().getRoleId());
 	}
 
+	
 	/**
 	 * 获取当前session
 	 * 
