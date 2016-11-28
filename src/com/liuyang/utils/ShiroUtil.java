@@ -83,19 +83,19 @@ public class ShiroUtil {
 							sbMenus.append(" <ul class='nav nav-third-level'>");
 							
 							for (SysMenuVo menu3 : menu3List) {
-								sbMenus.append(" <li><a class='J_menuItem' href='"+menu3.getUrl()+"'>"+menu3.getName()+"</a></li>");
+								sbMenus.append(" <li><a class='J_menuItem' href='"+"/"+Config.getContextPath()+menu3.getUrl()+"'>"+menu3.getName()+"</a></li>");
 							}
 							sbMenus.append("</ul>");
 							sbMenus.append("<li>");
 						}else{
-							sbMenus.append(" <li><a class='J_menuItem' href='"+menu2.getUrl()+"'>"+menu2.getName()+"</a></li>");
+							sbMenus.append(" <li><a class='J_menuItem' href='"+"/"+Config.getContextPath()+menu2.getUrl()+"'>"+menu2.getName()+"</a></li>");
 						}
 					}
 					sbMenus.append("</ul>");
 					sbMenus.append("<li>");
 					
 				}else{
-					sbMenus.append(" <li><a class='J_menuItem' href='"+menu1.getUrl()+"'>"+menu1.getName()+"</a></li>");
+					sbMenus.append(" <li><a class='J_menuItem' href='"+"/"+Config.getContextPath()+menu1.getUrl()+"'>"+menu1.getName()+"</a></li>");
 				}
 				
 			}

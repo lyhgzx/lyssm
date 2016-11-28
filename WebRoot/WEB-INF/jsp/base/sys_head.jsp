@@ -6,6 +6,12 @@
 <link
 	href="${staticPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
+
+
+		<link
+	href="${staticPath}/css/style.css"
+	rel="stylesheet">
+	
 <script type="text/javascript">
 	var basePath = "${basePath}";
 </script>
@@ -16,9 +22,11 @@
 
 <!-- Bootstrap table -->
 <script
-
 	src="${staticPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
 <script
 	src="${staticPath}/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
 <script
 	src="${staticPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script
+	src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
+	

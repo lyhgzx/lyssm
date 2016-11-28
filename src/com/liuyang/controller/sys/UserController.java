@@ -123,4 +123,10 @@ public class UserController extends BaseController{
 		user.setLasttime(new Date());
 		service.update(user);
 	}
+	
+	@RequestMapping("userList")
+	public String UserList(){
+		   logger.info("用户管理");
+		return "/sys/userList";
+	}
 }

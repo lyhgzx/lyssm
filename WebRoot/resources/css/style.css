@@ -7890,3 +7890,4 @@ body.skin-3 {
         font-size: 12px
     }
 }
+ #example tbody tr td { white-space: nowrap;text-overflow: ellipsis;overflow: hidden;}

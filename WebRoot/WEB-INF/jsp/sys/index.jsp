@@ -4,10 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="renderer" content="webkit">
 <title>地图汇</title>
-
+ <base href="${basePath}">
 <link href="${staticPath}/css/bootstrap.min.css?v=3.3.6"
 	rel="stylesheet">
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
@@ -32,9 +33,6 @@
 
 <script src="${staticPath}/js/sys/index.js"></script>
 	<script type="text/javascript">
-	
-
-	
 
 	</script>
 </head>

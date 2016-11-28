@@ -3,26 +3,17 @@
  */
 $(function() {
 			index.init();
-			bind.init();
+
 		});
 
 var app = {};
-var menuTemplate = {
 
-}
 var index = {
 	init : function() {
-		
-	}
-
-}
-
-var bind = {
-	init : function() {
-		bind.logout();
+		index.bind();
 	},
-	logout : function() {
-		$("#logout").click(function() {
+	bind:function(){
+			$("#logout").click(function() {
 					$.get(adminPath + "/logout", function(data) {
 								if (data.code == 1) {
 									window.location.href = adminPath + '/login';
@@ -33,6 +24,8 @@ var bind = {
 							});
 
 				});
-
 	}
+
+
 }
+

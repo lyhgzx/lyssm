@@ -4,6 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+/**
+  * @ClassName: Config
+  * @Description: TODO
+  * @author liuyang
+  * @date 2016年11月28日 上午11:18:18
+  *
+  */
+/**
+  * @ClassName: Config
+  * @Description: TODO
+  * @author liuyang
+  * @date 2016年11月28日 上午11:18:25
+  *
+  */
 public class Config {
 	/**
 	 * 保存全局属性值
@@ -32,5 +46,18 @@ public class Config {
 	 */
 	public static String getAdminPath() {
 		return getConfig("adminPath");
+	}
+	/**
+	 * 
+	  * getContextPath()
+	  *
+	  * @Title: getContextPath
+	  * @Description: 获取项目上下文路径
+	  * @param @return    设定文件
+	  * @return String    返回类型
+	  * @throws
+	 */
+	public static String getContextPath(){
+		return getConfig("contextPath");
 	}
 }
