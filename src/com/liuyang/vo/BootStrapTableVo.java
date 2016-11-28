@@ -5,17 +5,23 @@ public class BootStrapTableVo {
 	/**
 	 * 页面大小
 	 */
-	private int PageSize;
+	public int PageSize;
+	/**
+	 * 表示在mysql中从第几条记录的索引号开始显示，索引从0开始
+	 */
+	public int PageIndex;
 	/**
 	 * 页面索引
 	 */
-	private int PageNumber;
+	public int PageNumber;
 	/**
 	 * 总数
 	 */
-	private int TotalNum;
+	public int TotalNum;
 	/**
 	 * 排序
 	 */
-	private String OrderBy;
+	public String OrderBy;
+	
+	
 }
