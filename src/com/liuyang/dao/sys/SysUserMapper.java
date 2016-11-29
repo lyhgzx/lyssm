@@ -4,6 +4,8 @@ import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.pojo.sys.SysUserExample;
 import com.liuyang.pojo.sys.SysUserExtend;
 
+import com.liuyang.vo.sys.UserVo;
+
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
@@ -34,4 +36,7 @@ public interface SysUserMapper {
     
     /*自定义方法*/
     SysUserExtend selectByName(String username);
+    
+    List<SysUserExtend> selectUsersTable(UserVo vo);
+    int getAllCount();
 }
