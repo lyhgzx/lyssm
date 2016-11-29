@@ -5,17 +5,17 @@ public class BootStrapTableVo {
 	/**
 	 * 页面大小
 	 */
-	private int PageSize;
+	public int PageSize;
 	/**
 	 * 页面索引
 	 */
-	private int PageNumber;
+	public int PageNumber;
 	/**
 	 * 总数
 	 */
-	private int TotalNum;
+	public int TotalNum;
 	/**
 	 * 排序
 	 */
-	private String OrderBy;
+	public String OrderBy;
 }
