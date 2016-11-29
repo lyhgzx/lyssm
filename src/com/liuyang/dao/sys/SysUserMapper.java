@@ -38,5 +38,6 @@ public interface SysUserMapper {
     SysUserExtend selectByName(String username);
     
     List<SysUserExtend> selectUsersTable(UserVo vo);
+    
     int getAllCount();
 }

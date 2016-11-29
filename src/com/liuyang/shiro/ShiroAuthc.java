@@ -44,7 +44,9 @@ public class ShiroAuthc extends AuthorizationFilter {
 
 		// 权限验证
 		String uri = getServletPath(request);
-		/*String permitted = uri.replace("/".concat(Config.getAdminPath()), "");*/
+		/*System.out.println(uri);
+		String permitted = uri.replace("/".concat(Config.getAdminPath()), "");
+		System.out.println(permitted);*/
 		if (!(URIOK.contains(uri) || SecurityUtils.getSubject().isPermitted(uri))) {
 			return false;
 		}
@@ -60,10 +62,10 @@ public class ShiroAuthc extends AuthorizationFilter {
 	private String getServletPath(ServletRequest request) {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		String path = httpRequest.getServletPath();
-	/*	String[] arr = path.split("/");
+		String[] arr = path.split("/");
 		if(arr.length>2){
 			return new StringBuilder("/").append(arr[1]).append("/").append(arr[2]).toString();
-		}*/
+		}
 		return path;
 	}
 }

@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 <!-- search end -->
-                <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap ">
                   <table id="tb"></table>
                   
                 </div>

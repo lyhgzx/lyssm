@@ -49,15 +49,15 @@ public class SysUserMapperTest {
 	@Test
 	public void testSelectAllTable(){
 		UserVo v=new UserVo();
-		v.PageSize=2;
-		v.PageIndex=0;
+	/*	v.PageSize=2;
+		v.PageIndex=0;*/
 		List<SysUserExtend> result=dao.selectUsersTable(v);
 	    int count =dao.getAllCount();
 	    UserVo v2=new UserVo();
 	    System.out.println(result);
 	    System.out.println(count);
-		v2.PageSize=1;
-		v2.PageIndex=0;
+	/*	v2.PageSize=1;
+		v2.PageIndex=0;*/
 		List<SysUserExtend> result2=dao.selectUsersTable(v);
 	    int count2 =dao.getAllCount();
 	    System.out.println(result2);

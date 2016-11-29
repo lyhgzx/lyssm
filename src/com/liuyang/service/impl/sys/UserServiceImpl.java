@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.liuyang.dao.sys.SysUserMapper;
 import com.liuyang.pojo.sys.SysUser;
 import com.liuyang.pojo.sys.SysUserExample;
+import com.liuyang.vo.sys.UserVo;
 
 @Service
 public class UserServiceImpl implements com.liuyang.service.sys.UserService {
@@ -37,6 +38,16 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 		
 		mapper.updateByPrimaryKeySelective(user);
 		
+	}
+
+	@Override
+	public UserVo getUserTable(UserVo vo) {
+	      UserVo vo2=new UserVo();
+	      vo.setPageIndex((vo.getPageNumber()-1)*vo.getPageSize());
+	   
+	      vo2.setRows(mapper.selectUsersTable(vo));
+	      vo2.setTotal(mapper.getAllCount());
+	      return vo2;
 	}
 
 }

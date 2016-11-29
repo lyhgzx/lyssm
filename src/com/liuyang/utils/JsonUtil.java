@@ -3,7 +3,7 @@ package com.liuyang.utils;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**

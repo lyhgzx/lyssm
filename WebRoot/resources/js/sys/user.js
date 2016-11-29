@@ -29,7 +29,7 @@
  	loadTable:function(){
  		  var opt = {
             target: "#tb",
-            url: "/IntegratedManagement/Notice/Get",
+            url: basePath+"/admin/sysUser/findtable",
             uniqueId: "id",
             columns: [{
                 checkbox: true
@@ -42,9 +42,15 @@
                 title: '用户名'
     
             }, {
-                field: 'createTime',
-                title: '创建时间'
+                field: 'roleName',
+                title: '所属角色'
     
+            }, {
+                field: 'status',
+                title: '状态',
+                formatter:function(value, row){
+                	return value=="1"?"开启":"关闭";
+                }
             }]
            
            
