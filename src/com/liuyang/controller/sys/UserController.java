@@ -22,7 +22,6 @@ public class UserController extends BaseController {
 
 	
 	@RequestMapping("")
-	
 	public String UserList(){
 		   logger.info("用户管理");
 		   
@@ -34,7 +33,6 @@ public class UserController extends BaseController {
 	public Object getTable(HttpServletRequest request, UserVo vo){
 		String pageNumString=request.getParameter("PageNumber");
 		UserVo vUserVo=service.getUserTable(vo);
-		System.out.print(vUserVo);
 		return vUserVo;
 	}
 }
