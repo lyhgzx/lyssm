@@ -49,7 +49,7 @@ public class UserController extends BaseController {
 		service.insert(user);
 		return sendOk();
 	}
-	@RequestMapping("/userAdd")
+	@RequestMapping("/addPage")
 	public String userAdd(Model model){
 		DropDowmVo ddvDowmVo=new DropDowmVo("id", "name", "sys_role", "");
 		List<DropDown> down=commonService.getDropDowm(ddvDowmVo);

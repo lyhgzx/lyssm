@@ -18,8 +18,17 @@
                 title: '增加页面',
                 shadeClose: false,
                 maxmin: true, //开启最大化最小化按钮
-                area: ['700px', '400px'],
-                content: [basePath+'/admin/sysUser/userAdd', 'no'], //iframe的url
+                area: ['700px', '300px'],
+                content: [basePath+'/admin/sysUser/addPage', 'no'], //iframe的url
+                 btn: ['确认', '取消'],
+         
+                 yes:function(index, layero){
+                 	var iframeWin = window[layero.find('iframe')[0]['name']]; //得到iframe页的窗口对象，执行iframe页的方法：
+                 	iframeWin.save();
+                 },
+                 cancel:function(){
+                 	
+                 },
                 end: function () {
                     $('#tb').bootstrapTable('refresh');
                 }
