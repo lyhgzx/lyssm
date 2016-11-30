@@ -12,55 +12,28 @@
 	src="${staticPath}/js/sys/user.js"></script>
 </head>
 <body>
-<div class="row col-lg-12">
-    <div class="wrapper wrapper-content animated fadeInUp">
-        <div class="ibox">
-            <div class="ibox-title">
-                  <h5>用户管理</h5>
-                <div class="ibox-tools rboor">
-                <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
-                 <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
-         <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>
- 
-                  
-                </div>
-            </div>
-            <div class="ibox-content">
-              
-                    <div class="form-horizontal clearfix">
-                        <div class="col-lg-4 col-sm-3 pl0" style="width:38%;">
-                            <div class="form-group">
-                                <label class="control-label" style="width:20%; float:left;">用户名称：</label>
-                                <div class="col-lg-8 col-sm-7">
-                                   <input type="text" class="form-control"></input>
+<div class="panel panel-default">
+    <div class="col-md-12 col-lg-12">
+        <div class="panel panel-widget">
+            <form class="form-inline" style="padding:15px">
+                <div class="form-group">
+                    <label >发布时间</label>
 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-sm-4" style="float:right;">
-                            <div class="form-group">
-                                <div class="col-lg-12 col-sm-12 input-group">
-                                   
-                                    <span class="input-group-btn">
-                                   
-            <button class="btn btn-primary " type="button"><i class="fa fa-search"></i> 搜索</button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <!-- search end -->
-                <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap ">
-                  <table id="tb"></table>
-                  
+                    <input id="bg_RTM" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" class="Wdate" type="text" name="bg_RTM" />
                 </div>
-                
-            </div>
+                <div class="form-group">
+                    <label >至</label>
+                    <input id="ed_RTM" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'bg_RTM\')}' })" class="Wdate" type="text" name="ed_RTM" />
+             
+                </div>
+              <button class="btn btn-primary " type="button"><i class="fa fa-search"></i> 搜索</button>
+               <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
+             <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
+                   <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>
+            </form>
         </div>
     </div>
 </div>
-<!-- table end -->
-
-
+<table id="tb"></table>
 </body>
 </html>

@@ -17,9 +17,9 @@
                 type: 2,
                 title: '增加页面',
                 shadeClose: false,
-
-                area: ['800px', '600px'],
-                content: ['/IntegratedManagement/Notice/add', 'no'], //iframe的url
+                maxmin: true, //开启最大化最小化按钮
+                area: ['700px', '400px'],
+                content: [basePath+'/admin/sysUser/userAdd', 'no'], //iframe的url
                 end: function () {
                     $('#tb').bootstrapTable('refresh');
                 }

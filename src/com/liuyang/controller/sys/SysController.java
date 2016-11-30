@@ -55,7 +55,7 @@ public class SysController extends BaseController{
 	}
 	@RequestMapping(value="/user")
 	@ResponseBody
-	public String getUserById(@RequestParam(value="id",required=false,defaultValue="1")String id){
+	public String getUserById(@RequestParam(value="id",required=false,defaultValue="1")String id) throws Exception{
 		SysUser user=service.getUser(id);
        logger.info(Config.getAdminPath());
 		return user.toString();
@@ -69,7 +69,7 @@ public class SysController extends BaseController{
 	
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	@ResponseBody
-	public Object Login(String username,String password){
+	public Object Login(String username,String password) throws Exception{
         logger.info("POST请求登录");
         if (StringUtils.isBlank(username)) {
             return sendError("用户名不能为空");
@@ -118,8 +118,9 @@ public class SysController extends BaseController{
 	
 	/**
 	 * 跟新用户登录时间
+	 * @throws Exception 
 	 */
-	private void updateUserLastTime() {
+	private void updateUserLastTime() throws Exception {
 		
 		SysUser user = new SysUser();
 		user.setId(ShiroUtil.getSysUserId());

@@ -5,11 +5,13 @@ import com.liuyang.vo.sys.UserVo;
 
 public interface UserService {
 	
-	SysUser getUser(String id);
+	int insert(SysUser record) throws Exception;
 	
-	SysUser getUserByName(String username );
+	SysUser getUser(String id) throws Exception;;
 	
-	void update(SysUser user);
+	SysUser getUserByName(String username ) throws Exception;;
 	
-	UserVo getUserTable(UserVo vo);
+	void update(SysUser user) throws Exception;;
+	
+	UserVo getUserTable(UserVo vo) throws Exception;;
 }
