@@ -35,5 +35,6 @@
     </div>
 </div>
 <table id="tb"></table>
+<input id="handle_status" value="" hidden="hidden">
 </body>
 </html>

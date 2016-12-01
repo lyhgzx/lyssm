@@ -14,6 +14,7 @@
 	
 <script type="text/javascript">
 	var basePath = "${basePath}";
+	var staticPath="${staticPath}";
 </script>
 <!-- 全局js -->
 <script src="${staticPath}/js/jquery.min.js?v=2.1.4"></script>
