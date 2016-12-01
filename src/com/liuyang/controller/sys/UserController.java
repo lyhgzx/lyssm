@@ -38,7 +38,7 @@ public class UserController extends BaseController {
 	@RequestMapping(value="/findtable",method=RequestMethod.POST)
 	@ResponseBody
 	public Object getTable(HttpServletRequest request, UserVo vo) throws Exception{
-		String pageNumString=request.getParameter("PageNumber");
+		
 		UserVo vUserVo=service.getUserTable(vo);
 		return vUserVo;
 	}

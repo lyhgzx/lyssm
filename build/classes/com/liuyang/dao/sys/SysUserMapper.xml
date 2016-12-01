@@ -297,8 +297,18 @@
   </select>
   
   <select id="selectUsersTable" parameterType="com.liuyang.vo.sys.UserVo" resultType="com.liuyang.pojo.sys.SysUserExtend" >
-  select SQL_CALC_FOUND_ROWS  t0.*,t1.`name` as roleName from sys_user t0 left JOIN sys_role t1 on t0.roleId=t1.id   
-  limit #{PageIndex},#{PageSize};
+  select SQL_CALC_FOUND_ROWS  t0.*,t1.`name` as roleName from sys_user t0 left JOIN sys_role t1 on t0.roleId=t1.id 
+  <where>
+  	<if test="username!=null and username!=''">
+  	and	t0.username like '%${username}%'
+  	</if>
+  	<if test="name!=null and name!=''">
+  	and	t0.name like '%${name}%'
+  	</if>
+  </where>
+  	order by createTime   
+  	
+  limit #{PageIndex},#{PageSize} ;
   </select>
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();

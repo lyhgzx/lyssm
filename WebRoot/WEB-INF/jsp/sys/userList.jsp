@@ -17,16 +17,16 @@
         <div class="panel panel-widget">
             <form class="form-inline" style="padding:15px">
                 <div class="form-group">
-                    <label >发布时间</label>
+                    <label >登录名:</label>
 
-                    <input id="bg_RTM" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd' })" class="Wdate" type="text" name="bg_RTM" />
+<input type="text" class="form-control" id="username" / >
                 </div>
                 <div class="form-group">
-                    <label >至</label>
-                    <input id="ed_RTM" onclick="WdatePicker({ dateFmt: 'yyyy-MM-dd', minDate: '#F{$dp.$D(\'bg_RTM\')}' })" class="Wdate" type="text" name="ed_RTM" />
+                    <label >用户名:</label>
+                  <input type="text" class="form-control" id="name" />
              
                 </div>
-              <button class="btn btn-primary " type="button"><i class="fa fa-search"></i> 搜索</button>
+              <button id="search" class="btn btn-primary " type="button"><i class="fa fa-search"></i> 搜索</button>
                <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
              <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
                    <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>

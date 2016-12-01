@@ -89,6 +89,7 @@ select.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
 				return value.split(char);
 			}
 			var formData = this.serialize();
+			formData=decodeURIComponent(formData,true);
 			var params = toArray(formData, "&");
 			var resultJSON = {};
 			var connecter = function(name, source, value) {

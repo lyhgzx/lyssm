@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <%@include file="/WEB-INF/jsp/base/sys_form.jsp"%>
 <script type="text/javascript">
 	$(function() {
@@ -50,13 +50,14 @@
 
 			var data = $("form").serializeJSON();
 
-			data.roleId = $("#role").val();
-
+			data.roleid = $("#role").val();
+			data.status=$("#status").val();
 			$.ajax({
 				url : basePath + '/admin/sysUser/saveSysUser',
 				type : 'POST',
 				dataType : 'json',
 				cache : false,
+				contentType: "application/x-www-form-urlencoded;charset=UTF-8",  
 				data : data,
 				success : function(msg) {
 					var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
@@ -89,14 +90,8 @@
 		<table class="myTable">
 			<tr>
 				<th>登录账号<i>*</i></th>
-				<td><input type="text" name="username" id="username" /></td>
-				<th>用户角色<i>*</i></th>
-				<td><select name="role" id="role">
-						<option value="">--请选择--</option>
-						<c:forEach items="${roles}" var="role" varStatus="status">
-							<option value="${role.id}">${role.name}</option>
-						</c:forEach>
-				</select></td>
+				<td colspan="3"><input type="text" name="username" id="username" /></td>
+				
 			<tr>
 			<tr>
 				<th>登录密码<i>*</i></th>
@@ -110,6 +105,21 @@
 				<th>电话</th>
 				<td><input type="text" name="phone" /></td>
 			<tr>
+			<tr>
+			<th>用户角色<i>*</i></th>
+				<td><select name="role" id="role">
+						<option value="">--请选择--</option>
+						<c:forEach items="${roles}" var="role" varStatus="status">
+							<option value="${role.id}">${role.name}</option>
+						</c:forEach>
+				</select></td>
+				<th>状态</th>
+				<td><select name="status" id="status">
+						<option value="1">开启</option>
+							<option value="0">关闭</option>
+					
+				</select></td>
+			</tr>
 		</table>
 	</form>
 </body>

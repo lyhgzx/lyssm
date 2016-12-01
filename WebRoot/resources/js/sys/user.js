@@ -5,13 +5,15 @@ $(function() {
 			user.init();
 		});
 
-var app = {};
+var app = {table:null};
 var user = {
 	init : function() {
 		user.bind();
 		user.loadTable();
 	},
 	bind : function() {
+		
+		
 		$("#insert").click(function() {
 			layer.open({
 						type : 2,
@@ -38,6 +40,7 @@ var user = {
 										// 2秒关闭（如果不配置，默认是3秒）
 									}, function() {
 									$('#tb').bootstrapTable('refresh');
+									
 								});
 							} else if (handle_status == '0') {
 								layer.msg('添加失败！', {
@@ -48,9 +51,19 @@ var user = {
 									$('#tb').bootstrapTable('refresh');
 								});
 							}
+							 $("#handle_status").val("");
 
 						}
 					});
+		});
+		
+		$("#search").click(function(){
+			table.SetQueryParam({
+				username:$("#username").val(),
+				name:$("#name").val()
+			});
+			$('#tb').bootstrapTable('refresh');
+			
 		});
 	},
 	loadTable : function() {
@@ -81,6 +94,6 @@ var user = {
 					}]
 
 		};
-		var bt = new BTable(opt);
+		table = new BTable(opt);
 	}
 }
