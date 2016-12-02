@@ -17,47 +17,11 @@ var user = {
 	bind : function() {
 		// 增加
 		$("#insert").click(function() {
-
-			layer.open({
-						type : 2,
-						title : '添加人员',
-						shadeClose : false,
-						maxmin : true, // 开启最大化最小化按钮
-						area : ['750px', '300px'],
-						fix : false, // 不固定
-						content : [basePath + '/admin/sysUser/addPage', 'no'], // iframe的url
-						btn : ['确认', '取消'],
-
-						yes : function(index, layero) {
-							var iframeWin = window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：
-							iframeWin.save();
-						},
-						end : function() {
-
-							var handle_status = $("#handle_status").val();
-
-							if (handle_status == '1') {
-								layer.msg('添加成功！', {
-									icon : 1,
-									time : 2000
-										// 2秒关闭（如果不配置，默认是3秒）
-									}, function() {
-									table.reload();
-
-								});
-							} else if (handle_status == '0') {
-								layer.msg('添加失败！', {
-									icon : 2,
-									time : 2000
-										// 2秒关闭（如果不配置，默认是3秒）
-									}, function() {
-									table.reload();
-								});
-							}
-							$("#handle_status").val("");
-
-						}
-					});
+			user.openDialog({
+				status:"增加",
+				url:basePath + '/admin/sysUser/addPage'				
+			});
+			
 		});
 		// 查询
 		$("#search").click(function() {
@@ -103,52 +67,18 @@ var user = {
 			if (selected == null) {
 				return;
 			}
-
-			layer.open({
-						type : 2,
-						title : '修改人员',
-						shadeClose : false,
-						maxmin : true, // 开启最大化最小化按钮
-						area : ['750px', '300px'],
-						fix : false, // 不固定
-						content : [
-								basePath + '/admin/sysUser/updatePage?id='
-										+ selected.id, 'no'], // iframe的url
-						btn : ['确认', '取消'],
-						yes : function(index, layero) {
-							var iframeWin = window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：
-							iframeWin.save();
-						},
-						end : function() {
-
-							var handle_status = $("#handle_status").val();
-
-							if (handle_status == '1') {
-								layer.msg('修改成功！', {
-									icon : 1,
-									time : 2000
-										// 2秒关闭（如果不配置，默认是3秒）
-									}, function() {
-									table.reload();
-
-								});
-							} else if (handle_status == '0') {
-								layer.msg('修改失败！', {
-									icon : 2,
-									time : 2000
-										// 2秒关闭（如果不配置，默认是3秒）
-									}, function() {
-									table.reload();
-								});
-							}
-							$("#handle_status").val("");
-
-						}
-					});
+			user.openDialog({
+				status:"修改",
+				url:basePath + '/admin/sysUser/updatePage?id='+ selected.id
+				
+				
+			});
+			
 
 		});
 	},
 	loadTable : function() {
+
 		var opt = {
 			target : "#tb",
 			url : basePath + "/admin/sysUser/findtable",
@@ -177,5 +107,48 @@ var user = {
 
 		};
 		table = new BTable(opt);
+	},
+	openDialog:function(param){
+		layer.open({
+			type : 2,
+			title : param.status+'人员',
+			shadeClose : false,
+			maxmin : true, // 开启最大化最小化按钮
+			area : ['750px', '300px'],
+			fix : false, // 不固定
+			content : [param.url, 'no'], // iframe的url
+			btn : ['确认', '取消'],
+			yes : function(index, layero) {
+				var iframeWin = window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：
+				iframeWin.save();
+			},
+			end : function() {
+
+				var handle_status = $("#handle_status").val();
+
+				if (handle_status == '1') {
+					layer.msg(param.status+'成功！', {
+						icon : 1,
+						time : 2000
+							// 2秒关闭（如果不配置，默认是3秒）
+						}, function() {
+						table.reload();
+
+					});
+				} else if (handle_status == '0') {
+					layer.msg(param.status+'失败！', {
+						icon : 2,
+						time : 2000
+							// 2秒关闭（如果不配置，默认是3秒）
+						}, function() {
+						table.reload();
+					});
+				}
+				$("#handle_status").val("");
+
+			}
+		});
 	}
+       
+
 }

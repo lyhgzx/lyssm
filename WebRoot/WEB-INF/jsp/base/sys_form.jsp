@@ -89,6 +89,7 @@ select.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
 				return value.split(char);
 			}
 			var formData = this.serialize();
+			//解决序列化乱码问题
 			formData=decodeURIComponent(formData,true);
 			var params = toArray(formData, "&");
 			var resultJSON = {};
