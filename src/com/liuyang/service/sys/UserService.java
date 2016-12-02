@@ -7,11 +7,14 @@ public interface UserService {
 	
 	int insert(SysUser record) throws Exception;
 	
-	SysUser getUser(String id) throws Exception;;
+	SysUser getUser(String id) throws Exception;
 	
-	SysUser getUserByName(String username ) throws Exception;;
+	SysUser getUserByName(String username ) throws Exception;
 	
-	void update(SysUser user) throws Exception;;
+	void update(SysUser user) throws Exception;
 	
-	UserVo getUserTable(UserVo vo) throws Exception;;
+	UserVo getUserTable(UserVo vo) throws Exception;
+	
+	int delete(String ids) throws Exception;
+	
 }

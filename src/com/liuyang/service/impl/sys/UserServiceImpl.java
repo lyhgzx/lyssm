@@ -61,4 +61,11 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 		return mapper.insert(record);
 	}
 
+	@Override
+	public int delete(String ids) throws Exception {
+		String[] iStrings=ids.split(",");
+		
+		return mapper.deleteByIds(iStrings);
+	}
+
 }

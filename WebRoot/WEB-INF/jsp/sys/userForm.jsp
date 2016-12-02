@@ -87,36 +87,49 @@
 <body>
 
 	<form id="myForm">
+	<input type="hidden" name="id" value="${user.id}">
 		<table class="myTable">
 			<tr>
 				<th>登录账号<i>*</i></th>
-				<td colspan="3"><input type="text" name="username" id="username" /></td>
+				<td colspan="3"><input type="text" name="username" id="username" value="${user.username}" /></td>
 				
 			<tr>
 			<tr>
 				<th>登录密码<i>*</i></th>
-				<td><input type="password" name="password" id="password" /></td>
+				<c:choose>
+				<c:when test="${status =='add'}">
+				<td ><input type="password" name="password" id="password" /></td>
 				<th>确认密码</th>
-				<td><input type="password" name="password2" id="password2" /></td>
+				<td><input type="password" name="password2" id="password2"  /></td>
+				</c:when>
+				<c:otherwise>
+					<td ><input type="password" name="password" id="password" value="${user.password}"  disabled="disabled"/></td>
+				<th>确认密码</th>
+				<td><input type="password" name="password2" id="password2"  value="${user.password}"  disabled="disabled" /></td>
+				</c:otherwise>
+				</c:choose>
+			
+				
+				
 			<tr>
 			<tr>
 				<th>姓名<i>*</i></th>
-				<td><input type="text" name="name" /></td>
+				<td><input type="text" name="name" value="${user.name}" /></td>
 				<th>电话</th>
-				<td><input type="text" name="phone" /></td>
+				<td><input type="text" name="phone" value="${user.phone}"/></td>
 			<tr>
 			<tr>
 			<th>用户角色<i>*</i></th>
 				<td><select name="role" id="role">
 						<option value="">--请选择--</option>
 						<c:forEach items="${roles}" var="role" varStatus="status">
-							<option value="${role.id}">${role.name}</option>
+							<option value="${role.id}"  <c:if test="${user.roleid==role.id}">selected="selected"</c:if>>${role.name}</option>
 						</c:forEach>
 				</select></td>
 				<th>状态</th>
 				<td><select name="status" id="status">
-						<option value="1">开启</option>
-							<option value="0">关闭</option>
+						<option value="1" <c:if test="${user.status ==1}">selected="selected"</c:if> >开启</option>
+							<option value="0" <c:if test="${user.status !=1}">selected="selected"</c:if> >关闭</option>
 					
 				</select></td>
 			</tr>

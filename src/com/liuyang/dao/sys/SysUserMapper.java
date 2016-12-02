@@ -40,4 +40,6 @@ public interface SysUserMapper {
     List<SysUserExtend> selectUsersTable(UserVo vo);
     
     int getAllCount();
+    
+    int deleteByIds(String[] ids);
 }
