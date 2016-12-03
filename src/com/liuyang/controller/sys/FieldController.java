@@ -26,7 +26,7 @@ public class FieldController extends BaseController {
 	private  SysFieldService service;
 	
 	@RequestMapping("")
-	public String personList(){
+	public String showTable(){
 		   logger.info("字典管理");
 		   
 		return "/sys/fieldList";
@@ -40,7 +40,7 @@ public class FieldController extends BaseController {
 		return vpersonVo;
 	}
 	
-	@RequestMapping(value="/saveForm",method=RequestMethod.POST)
+	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
 	public Object save(Sysfield model) throws Exception{
 		if(StringUtil.isBlank(model.getId())){

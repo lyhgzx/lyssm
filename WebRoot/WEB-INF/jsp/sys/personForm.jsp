@@ -48,7 +48,7 @@
 
       data.status = $("#status").val();
       $.ajax({
-        url: basePath + '/admin/person/saveSysperson',
+        url: basePath + '/admin/person/save',
         type: 'POST',
         dataType: 'json',
         cache: false,

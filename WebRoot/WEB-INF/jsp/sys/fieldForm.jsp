@@ -43,7 +43,7 @@ function save() {
 
     data.status = $("#status").val();
     $.ajax({
-      url: basePath + '/admin/field/saveForm',
+      url: basePath + '/admin/field/save',
       type: 'POST',
       dataType: 'json',
       cache: false,

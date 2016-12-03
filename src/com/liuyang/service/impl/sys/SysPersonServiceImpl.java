@@ -30,7 +30,7 @@ public class SysPersonServiceImpl implements SysPersonService {
 	}
 
 	@Override
-	public Sysperson getUser(String id) throws Exception {
+	public Sysperson getById(String id) throws Exception {
 		return mapper.selectByPrimaryKey(id);
 	}
 
@@ -52,7 +52,7 @@ public class SysPersonServiceImpl implements SysPersonService {
 	}
 
 	@Override
-	public SysPersonVo getUserTable(SysPersonVo vo) throws Exception {
+	public SysPersonVo getTable(SysPersonVo vo) throws Exception {
 		SysPersonVo vo2=new SysPersonVo();
 	      vo.setPageIndex((vo.getPageNumber()-1)*vo.getPageSize());
 	   
