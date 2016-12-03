@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang.dao.sys.SyspersonMapper" >
+  <resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.Sysperson" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="MyName" property="myname" jdbcType="VARCHAR" />
+    <result column="Password" property="password" jdbcType="VARCHAR" />
+    <result column="SurePassword" property="surepassword" jdbcType="VARCHAR" />
+    <result column="Sex" property="sex" jdbcType="INTEGER" />
+    <result column="SysDepartmentId" property="sysdepartmentid" jdbcType="VARCHAR" />
+    <result column="Position" property="position" jdbcType="VARCHAR" />
+    <result column="MobilePhoneNumber" property="mobilephonenumber" jdbcType="VARCHAR" />
+    <result column="PhoneNumber" property="phonenumber" jdbcType="VARCHAR" />
+    <result column="Province" property="province" jdbcType="VARCHAR" />
+    <result column="City" property="city" jdbcType="VARCHAR" />
+    <result column="Village" property="village" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="EmailAddress" property="emailaddress" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="State" property="state" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+    <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="LogonNum" property="logonnum" jdbcType="INTEGER" />
+    <result column="LastLogonTime" property="lastlogontime" jdbcType="TIMESTAMP" />
+    <result column="LastLogonIP" property="lastlogonip" jdbcType="VARCHAR" />
+    <result column="HDpic" property="hdpic" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, MyName, Password, SurePassword, Sex, SysDepartmentId, Position, MobilePhoneNumber, 
+    PhoneNumber, Province, City, Village, Address, EmailAddress, Remark, State, CreateTime, 
+    CreatePerson, UpdateTime, LogonNum, LastLogonTime, LastLogonIP, HDpic
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SyspersonExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sysperson
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sysperson
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sysperson
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SyspersonExample" >
+    delete from sysperson
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.liuyang.pojo.sys.Sysperson" >
+    insert into sysperson (Id, Name, MyName, 
+      Password, SurePassword, Sex, 
+      SysDepartmentId, Position, MobilePhoneNumber, 
+      PhoneNumber, Province, City, 
+      Village, Address, EmailAddress, 
+      Remark, State, CreateTime, 
+      CreatePerson, UpdateTime, LogonNum, 
+      LastLogonTime, LastLogonIP, HDpic
+      )
+    values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{myname,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{surepassword,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
+      #{sysdepartmentid,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobilephonenumber,jdbcType=VARCHAR}, 
+      #{phonenumber,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{village,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{emailaddress,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createperson,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{logonnum,jdbcType=INTEGER}, 
+      #{lastlogontime,jdbcType=TIMESTAMP}, #{lastlogonip,jdbcType=VARCHAR}, #{hdpic,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuyang.pojo.sys.Sysperson" >
+    insert into sysperson
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="myname != null" >
+        MyName,
+      </if>
+      <if test="password != null" >
+        Password,
+      </if>
+      <if test="surepassword != null" >
+        SurePassword,
+      </if>
+      <if test="sex != null" >
+        Sex,
+      </if>
+      <if test="sysdepartmentid != null" >
+        SysDepartmentId,
+      </if>
+      <if test="position != null" >
+        Position,
+      </if>
+      <if test="mobilephonenumber != null" >
+        MobilePhoneNumber,
+      </if>
+      <if test="phonenumber != null" >
+        PhoneNumber,
+      </if>
+      <if test="province != null" >
+        Province,
+      </if>
+      <if test="city != null" >
+        City,
+      </if>
+      <if test="village != null" >
+        Village,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="emailaddress != null" >
+        EmailAddress,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="state != null" >
+        State,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="createperson != null" >
+        CreatePerson,
+      </if>
+      <if test="updatetime != null" >
+        UpdateTime,
+      </if>
+      <if test="logonnum != null" >
+        LogonNum,
+      </if>
+      <if test="lastlogontime != null" >
+        LastLogonTime,
+      </if>
+      <if test="lastlogonip != null" >
+        LastLogonIP,
+      </if>
+      <if test="hdpic != null" >
+        HDpic,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="myname != null" >
+        #{myname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="surepassword != null" >
+        #{surepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="sysdepartmentid != null" >
+        #{sysdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephonenumber != null" >
+        #{mobilephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null" >
+        #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emailaddress != null" >
+        #{emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createperson != null" >
+        #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logonnum != null" >
+        #{logonnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogontime != null" >
+        #{lastlogontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogonip != null" >
+        #{lastlogonip,jdbcType=VARCHAR},
+      </if>
+      <if test="hdpic != null" >
+        #{hdpic,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.liuyang.pojo.sys.SyspersonExample" resultType="java.lang.Integer" >
+    select count(*) from sysperson
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sysperson
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.myname != null" >
+        MyName = #{record.myname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        Password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.surepassword != null" >
+        SurePassword = #{record.surepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        Sex = #{record.sex,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysdepartmentid != null" >
+        SysDepartmentId = #{record.sysdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        Position = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobilephonenumber != null" >
+        MobilePhoneNumber = #{record.mobilephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phonenumber != null" >
+        PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null" >
+        Province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null" >
+        City = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.village != null" >
+        Village = #{record.village,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailaddress != null" >
+        EmailAddress = #{record.emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null" >
+        State = #{record.state,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createperson != null" >
+        CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logonnum != null" >
+        LogonNum = #{record.logonnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.lastlogontime != null" >
+        LastLogonTime = #{record.lastlogontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.lastlogonip != null" >
+        LastLogonIP = #{record.lastlogonip,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hdpic != null" >
+        HDpic = #{record.hdpic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sysperson
+    set Id = #{record.id,jdbcType=VARCHAR},
+      Name = #{record.name,jdbcType=VARCHAR},
+      MyName = #{record.myname,jdbcType=VARCHAR},
+      Password = #{record.password,jdbcType=VARCHAR},
+      SurePassword = #{record.surepassword,jdbcType=VARCHAR},
+      Sex = #{record.sex,jdbcType=INTEGER},
+      SysDepartmentId = #{record.sysdepartmentid,jdbcType=VARCHAR},
+      Position = #{record.position,jdbcType=VARCHAR},
+      MobilePhoneNumber = #{record.mobilephonenumber,jdbcType=VARCHAR},
+      PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
+      Province = #{record.province,jdbcType=VARCHAR},
+      City = #{record.city,jdbcType=VARCHAR},
+      Village = #{record.village,jdbcType=VARCHAR},
+      Address = #{record.address,jdbcType=VARCHAR},
+      EmailAddress = #{record.emailaddress,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=VARCHAR},
+      State = #{record.state,jdbcType=INTEGER},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      LogonNum = #{record.logonnum,jdbcType=INTEGER},
+      LastLogonTime = #{record.lastlogontime,jdbcType=TIMESTAMP},
+      LastLogonIP = #{record.lastlogonip,jdbcType=VARCHAR},
+      HDpic = #{record.hdpic,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuyang.pojo.sys.Sysperson" >
+    update sysperson
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="myname != null" >
+        MyName = #{myname,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="surepassword != null" >
+        SurePassword = #{surepassword,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        Sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="sysdepartmentid != null" >
+        SysDepartmentId = #{sysdepartmentid,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        Position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="mobilephonenumber != null" >
+        MobilePhoneNumber = #{mobilephonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="phonenumber != null" >
+        PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        Province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        City = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="village != null" >
+        Village = #{village,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emailaddress != null" >
+        EmailAddress = #{emailaddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createperson != null" >
+        CreatePerson = #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logonnum != null" >
+        LogonNum = #{logonnum,jdbcType=INTEGER},
+      </if>
+      <if test="lastlogontime != null" >
+        LastLogonTime = #{lastlogontime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogonip != null" >
+        LastLogonIP = #{lastlogonip,jdbcType=VARCHAR},
+      </if>
+      <if test="hdpic != null" >
+        HDpic = #{hdpic,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuyang.pojo.sys.Sysperson" >
+    update sysperson
+    set Name = #{name,jdbcType=VARCHAR},
+      MyName = #{myname,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      SurePassword = #{surepassword,jdbcType=VARCHAR},
+      Sex = #{sex,jdbcType=INTEGER},
+      SysDepartmentId = #{sysdepartmentid,jdbcType=VARCHAR},
+      Position = #{position,jdbcType=VARCHAR},
+      MobilePhoneNumber = #{mobilephonenumber,jdbcType=VARCHAR},
+      PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
+      Province = #{province,jdbcType=VARCHAR},
+      City = #{city,jdbcType=VARCHAR},
+      Village = #{village,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      EmailAddress = #{emailaddress,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{createperson,jdbcType=VARCHAR},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      LogonNum = #{logonnum,jdbcType=INTEGER},
+      LastLogonTime = #{lastlogontime,jdbcType=TIMESTAMP},
+      LastLogonIP = #{lastlogonip,jdbcType=VARCHAR},
+      HDpic = #{hdpic,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <!--   自定义方法 -->
+   <select id="selectByName" resultType="com.liuyang.pojo.sys.SyspersonExtend" parameterType="java.lang.String" >
+            select * from sysperson
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+  
+     <select id="selectTable" parameterType="com.liuyang.vo.sys.SysPersonVo" resultType="com.liuyang.pojo.sys.SyspersonExtend" >
+  select SQL_CALC_FOUND_ROWS  * from sysperson 
+  <where>
+  	<if test="name!=null and name!=''">
+  	and	name like '%${name}%'
+  	</if>
+  	<if test="myname!=null and myname!=''">
+  	and	myname like '%${myname}%'
+  	</if>
+  </where>
+  	order by createtime   
+  	
+  limit #{PageIndex},#{PageSize} ;
+  </select>
+  
+  <select id="getAllCount" resultType="java.lang.Integer">
+ 	SELECT FOUND_ROWS();
+ </select>
+ 
+  <delete id="deleteByIds">
+ 	delete from sysperson
+ 	where id in
+ 	<foreach collection="array" item="id" open="(" separator="," close=")">
+ 		#{id}
+ 	</foreach>
+ </delete>
+</mapper>
