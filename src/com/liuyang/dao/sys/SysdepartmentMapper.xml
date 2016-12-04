@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang.dao.sys.SysdepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.Sysdepartment" >
+    <id column="Id" property="id" jdbcType="INTEGER" />
+    <result column="Name" property="name" jdbcType="VARCHAR" />
+    <result column="ParentId" property="parentid" jdbcType="INTEGER" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="Sort" property="sort" jdbcType="INTEGER" />
+    <result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+    <result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="UpdatePerson" property="updateperson" jdbcType="VARCHAR" />
+    <result column="IsLeaf" property="isleaf" jdbcType="TINYINT" />
+    <result column="IsAutoExpand" property="isautoexpand" jdbcType="TINYINT" />
+    <result column="IconName" property="iconname" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="CascadeId" property="cascadeid" jdbcType="VARCHAR" />
+    <result column="ParentName" property="parentname" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.liuyang.pojo.sys.Sysdepartment" extends="BaseResultMap" >
+    <result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    Id, Name, ParentId, Address, Sort, CreateTime, CreatePerson, UpdateTime, UpdatePerson, 
+    IsLeaf, IsAutoExpand, IconName, Status, CascadeId, ParentName
+  </sql>
+  <sql id="Blob_Column_List" >
+    Remark
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.liuyang.pojo.sys.SysdepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sysdepartment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysdepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sysdepartment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from sysdepartment
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sysdepartment
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SysdepartmentExample" >
+    delete from sysdepartment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.liuyang.pojo.sys.Sysdepartment" >
+    insert into sysdepartment (Id, Name, ParentId, 
+      Address, Sort, CreateTime, 
+      CreatePerson, UpdateTime, UpdatePerson, 
+      IsLeaf, IsAutoExpand, IconName, 
+      Status, CascadeId, ParentName, 
+      Remark)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{parentid,jdbcType=INTEGER}, 
+      #{address,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{createperson,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, #{updateperson,jdbcType=VARCHAR}, 
+      #{isleaf,jdbcType=TINYINT}, #{isautoexpand,jdbcType=TINYINT}, #{iconname,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{cascadeid,jdbcType=VARCHAR}, #{parentname,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.liuyang.pojo.sys.Sysdepartment" >
+    insert into sysdepartment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="name != null" >
+        Name,
+      </if>
+      <if test="parentid != null" >
+        ParentId,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="sort != null" >
+        Sort,
+      </if>
+      <if test="createtime != null" >
+        CreateTime,
+      </if>
+      <if test="createperson != null" >
+        CreatePerson,
+      </if>
+      <if test="updatetime != null" >
+        UpdateTime,
+      </if>
+      <if test="updateperson != null" >
+        UpdatePerson,
+      </if>
+      <if test="isleaf != null" >
+        IsLeaf,
+      </if>
+      <if test="isautoexpand != null" >
+        IsAutoExpand,
+      </if>
+      <if test="iconname != null" >
+        IconName,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="cascadeid != null" >
+        CascadeId,
+      </if>
+      <if test="parentname != null" >
+        ParentName,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createperson != null" >
+        #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateperson != null" >
+        #{updateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        #{isleaf,jdbcType=TINYINT},
+      </if>
+      <if test="isautoexpand != null" >
+        #{isautoexpand,jdbcType=TINYINT},
+      </if>
+      <if test="iconname != null" >
+        #{iconname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cascadeid != null" >
+        #{cascadeid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentname != null" >
+        #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.liuyang.pojo.sys.SysdepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from sysdepartment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sysdepartment
+    <set >
+      <if test="record.id != null" >
+        Id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.name != null" >
+        Name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentid != null" >
+        ParentId = #{record.parentid,jdbcType=INTEGER},
+      </if>
+      <if test="record.address != null" >
+        Address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        Sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null" >
+        CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createperson != null" >
+        CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updatetime != null" >
+        UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateperson != null" >
+        UpdatePerson = #{record.updateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isleaf != null" >
+        IsLeaf = #{record.isleaf,jdbcType=TINYINT},
+      </if>
+      <if test="record.isautoexpand != null" >
+        IsAutoExpand = #{record.isautoexpand,jdbcType=TINYINT},
+      </if>
+      <if test="record.iconname != null" >
+        IconName = #{record.iconname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        Status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.cascadeid != null" >
+        CascadeId = #{record.cascadeid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.parentname != null" >
+        ParentName = #{record.parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        Remark = #{record.remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update sysdepartment
+    set Id = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      ParentId = #{record.parentid,jdbcType=INTEGER},
+      Address = #{record.address,jdbcType=VARCHAR},
+      Sort = #{record.sort,jdbcType=INTEGER},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      UpdatePerson = #{record.updateperson,jdbcType=VARCHAR},
+      IsLeaf = #{record.isleaf,jdbcType=TINYINT},
+      IsAutoExpand = #{record.isautoexpand,jdbcType=TINYINT},
+      IconName = #{record.iconname,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=INTEGER},
+      CascadeId = #{record.cascadeid,jdbcType=VARCHAR},
+      ParentName = #{record.parentname,jdbcType=VARCHAR},
+      Remark = #{record.remark,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sysdepartment
+    set Id = #{record.id,jdbcType=INTEGER},
+      Name = #{record.name,jdbcType=VARCHAR},
+      ParentId = #{record.parentid,jdbcType=INTEGER},
+      Address = #{record.address,jdbcType=VARCHAR},
+      Sort = #{record.sort,jdbcType=INTEGER},
+      CreateTime = #{record.createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+      UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+      UpdatePerson = #{record.updateperson,jdbcType=VARCHAR},
+      IsLeaf = #{record.isleaf,jdbcType=TINYINT},
+      IsAutoExpand = #{record.isautoexpand,jdbcType=TINYINT},
+      IconName = #{record.iconname,jdbcType=VARCHAR},
+      Status = #{record.status,jdbcType=INTEGER},
+      CascadeId = #{record.cascadeid,jdbcType=VARCHAR},
+      ParentName = #{record.parentname,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.liuyang.pojo.sys.Sysdepartment" >
+    update sysdepartment
+    <set >
+      <if test="name != null" >
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        ParentId = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        Sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createperson != null" >
+        CreatePerson = #{createperson,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateperson != null" >
+        UpdatePerson = #{updateperson,jdbcType=VARCHAR},
+      </if>
+      <if test="isleaf != null" >
+        IsLeaf = #{isleaf,jdbcType=TINYINT},
+      </if>
+      <if test="isautoexpand != null" >
+        IsAutoExpand = #{isautoexpand,jdbcType=TINYINT},
+      </if>
+      <if test="iconname != null" >
+        IconName = #{iconname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="cascadeid != null" >
+        CascadeId = #{cascadeid,jdbcType=VARCHAR},
+      </if>
+      <if test="parentname != null" >
+        ParentName = #{parentname,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuyang.pojo.sys.Sysdepartment" >
+    update sysdepartment
+    set Name = #{name,jdbcType=VARCHAR},
+      ParentId = #{parentid,jdbcType=INTEGER},
+      Address = #{address,jdbcType=VARCHAR},
+      Sort = #{sort,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{createperson,jdbcType=VARCHAR},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      UpdatePerson = #{updateperson,jdbcType=VARCHAR},
+      IsLeaf = #{isleaf,jdbcType=TINYINT},
+      IsAutoExpand = #{isautoexpand,jdbcType=TINYINT},
+      IconName = #{iconname,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      CascadeId = #{cascadeid,jdbcType=VARCHAR},
+      ParentName = #{parentname,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.liuyang.pojo.sys.Sysdepartment" >
+    update sysdepartment
+    set Name = #{name,jdbcType=VARCHAR},
+      ParentId = #{parentid,jdbcType=INTEGER},
+      Address = #{address,jdbcType=VARCHAR},
+      Sort = #{sort,jdbcType=INTEGER},
+      CreateTime = #{createtime,jdbcType=TIMESTAMP},
+      CreatePerson = #{createperson,jdbcType=VARCHAR},
+      UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+      UpdatePerson = #{updateperson,jdbcType=VARCHAR},
+      IsLeaf = #{isleaf,jdbcType=TINYINT},
+      IsAutoExpand = #{isautoexpand,jdbcType=TINYINT},
+      IconName = #{iconname,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      CascadeId = #{cascadeid,jdbcType=VARCHAR},
+      ParentName = #{parentname,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

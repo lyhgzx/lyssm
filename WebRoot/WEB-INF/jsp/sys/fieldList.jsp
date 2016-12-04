@@ -12,6 +12,7 @@
 	src="${staticPath}/js/sys/field.js"></script>
 </head>
 <body>
+<div class="container-fluid">
 <div class="panel panel-default">
     <div class="col-md-12 col-lg-12">
         <div class="panel panel-widget">
@@ -34,7 +35,10 @@
         </div>
     </div>
 </div>
-<table id="tb"></table>
+ <div class="row">
+ <table id="tb"></table>
+ </div>
+</div>
 <input id="handle_status" value="" hidden="hidden">
 </body>
 </html>

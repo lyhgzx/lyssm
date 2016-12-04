@@ -6,7 +6,8 @@
 <link
 	href="${staticPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-
+<link
+	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"	rel="stylesheet">
 
 		<link
 	href="${staticPath}/css/style.css"
@@ -29,4 +30,6 @@
 	src="${staticPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
 <script
 	src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
+	<!-- ztree -->
+		<script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
 	
