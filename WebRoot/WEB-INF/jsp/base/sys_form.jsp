@@ -5,7 +5,8 @@
 <c:set var="staticPath" value="${basePath}/resources"></c:set>
 
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
-
+<link
+	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"	rel="stylesheet">
 <!-- 全局js -->
 <script src="${staticPath}/js/jquery.min.js?v=2.1.4"></script>
 
@@ -15,7 +16,8 @@
 <script
 	src="${staticPath}/js/plugins/jquery-validation/localization/messages_zh.js"></script>
 
-
+	<!-- ztree -->
+		<script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
 
 <style>
  /*错误样式*/

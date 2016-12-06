@@ -1,5 +1,7 @@
 package com.liuyang.controller.sys;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +13,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.liuyang.controller.base.BaseController;
 import com.liuyang.pojo.sys.Sysdepartment;
-import com.liuyang.pojo.sys.Sysfield;
-import com.liuyang.pojo.sys.Sysperson;
 import com.liuyang.service.sys.SysDepartmentService;
-import com.liuyang.service.sys.SysFieldService;
-import com.liuyang.service.sys.SysPersonService;
 import com.liuyang.utils.StringUtil;
-import com.liuyang.vo.sys.SysPersonVo;
-import com.liuyang.vo.sys.SysfieldVo;
-import java.util.List;
+import com.liuyang.vo.sys.SysdepartmentVo;
 
 @Controller
 @RequestMapping(value="/admin/department")
@@ -34,17 +30,17 @@ public class DepartmentController extends BaseController {
 		return "/sys/departmentList";
 	}
 	
-/*	@RequestMapping(value="/findtable",method=RequestMethod.POST)
+	@RequestMapping(value="/findtable",method=RequestMethod.POST)
 	@ResponseBody
-	public Object getTable(HttpServletRequest request, SysfieldVo vo) throws Exception{
+	public Object getTable(HttpServletRequest request, SysdepartmentVo vo) throws Exception{
 		
-	SysfieldVo vpersonVo=service.getTable(vo);
+	   SysdepartmentVo vpersonVo=service.GetSubOrgs(vo);
 		return vpersonVo;
 	}
-	*/
+	
 	@RequestMapping(value="/save",method=RequestMethod.POST)
 	@ResponseBody
-	public Object save(Sysfield model) throws Exception{
+	public Object save(Sysdepartment model) throws Exception{
 		if(StringUtil.isBlank(model.getId())){
 
 			service.insert(model);
@@ -61,19 +57,19 @@ public class DepartmentController extends BaseController {
 		
 	
 		model.addAttribute("status", "add");
-		return "sys/fieldForm";
+		return "sys/departmentForm";
 	}
 	
 	@RequestMapping("/updatePage")
 	public String Update(Model model,String id) throws Exception{
-		Sysfield sysfield=service.getById(id);
+		Sysdepartment Sysdepartment=service.getById(id);
 		
-		model.addAttribute("sysfield", sysfield);
+		model.addAttribute("Sysdepartment", Sysdepartment);
 		model.addAttribute("status", "update");
 		return "sys/fieldForm";
 	}
 	
-	@RequestMapping("/delete")
+	@RequestMapping("/departmentForm")
 	@ResponseBody
 	public Object delete(String ids) throws Exception{
 		if(StringUtil.isNotBlank(ids)){
@@ -97,5 +93,11 @@ public class DepartmentController extends BaseController {
 		sysdepartments.add(deSysdepartment);
 		return sysdepartments ;
 	}
-	
+	@RequestMapping("/treeform")
+	@ResponseBody
+	public Object getDepartmentTreeForm(){
+		List<Sysdepartment> sysdepartments=service.getList();
+		
+		return sysdepartments ;
+	}
 }

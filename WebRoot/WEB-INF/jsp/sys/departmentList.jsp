@@ -46,7 +46,7 @@
 
 				</ul>
 			</div>
-			<div class="col-md-10">.col-md-4</div>
+			<div class="col-md-10"> <table id="tb"></table></div>
 		</div>
 	</div>
 </body>

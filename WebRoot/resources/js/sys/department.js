@@ -20,7 +20,7 @@ var list = {
 		$("#insert").click(function() {
 			list.openDialog({
 				status:"增加",
-				url:basePath + '/admin/field/addPage'				
+				url:basePath + '/admin/department/addPage'				
 			});
 			
 		});
@@ -28,7 +28,7 @@ var list = {
 		$("#search").click(function() {
 
 					table.reload({
-								dicName : $("#dicName").val(),
+								id : $("#dicName").val(),
 								dicTypename : $("#dicTypename").val()
 							});
 
@@ -82,25 +82,44 @@ var list = {
 
 		var opt = {
 			target : "#tb",
-			url : basePath + "/admin/field/findtable",
+			url : basePath + "/admin/department/findtable",
 			uniqueId : "id",
+			queryparam:{
+				id:0
+			},
 			columns : [{
 						checkbox : true
 					}, {
-						field : 'dicKey',
-						title : '字典编号'
+						field : 'id',
+						title : '流水号'
 
 					}, {
-						field : 'dicName',
-						title : '字典名称'
+						field : 'cascadeid',
+						title : '节点语义ID'
 
 					}, {
-						field : 'dicType',
-						title : '字典类型'
+						field : 'name',
+						title : '组织名称'
 
 					}, {
-						field : 'dicTypename',
-						title : '字典类型名称'
+						field : 'isleaf',
+						title : '是否叶子节点',
+                        formatter : function(value, row) {
+							return value == true ? "是" : "否";
+						}
+					}, {
+						field : 'isautoexpand',
+						title : '是否自动展开',
+                        formatter : function(value, row) {
+							return value == true ? "是" : "否";
+						}
+					}, {
+						field : 'iconname',
+						title : '节点图标文件名称'
+
+					}, {
+						field : 'sort',
+						title : '排序号'
 
 					}]
 
@@ -110,13 +129,14 @@ var list = {
 	openDialog:function(param){
 		layer.open({
 			type : 2,
-			title : param.status+'字典',
+			title : param.status+'部门',
 			shadeClose : false,
 			maxmin : true, // 开启最大化最小化按钮
 			area : ['750px', '300px'],
 			fix : false, // 不固定
 			content : [param.url, 'no'], // iframe的url
 			btn : ['确认', '取消'],
+			zIndex:0,
 			yes : function(index, layero) {
 				var iframeWin = window[layero.find('iframe')[0]['name']]; // 得到iframe页的窗口对象，执行iframe页的方法：
 				iframeWin.save();
@@ -167,7 +187,11 @@ var list = {
     	        callback: { onClick: zTreeOnClick }
     	    };
     	    function zTreeOnClick(event, treeId, treeNode) {
-    	        list.reload(treeNode.Id);
+    
+    	       table.reload({
+								id : treeNode.id
+							});
+
     	    }
     	    $.getJSON(url, function (json) {
     	        $.fn.zTree.init($("#tree"), setting, json).expandAll(true);
