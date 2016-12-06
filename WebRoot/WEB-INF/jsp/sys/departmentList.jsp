@@ -49,5 +49,6 @@
 			<div class="col-md-10"> <table id="tb"></table></div>
 		</div>
 	</div>
+	<input id="handle_status" value="" hidden="hidden">
 </body>
 </html>

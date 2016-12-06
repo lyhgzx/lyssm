@@ -152,7 +152,7 @@ var list = {
 							// 2秒关闭（如果不配置，默认是3秒）
 						}, function() {
 						table.reload();
-
+                        list.bindTree();
 					});
 				} else if (handle_status == '0') {
 					layer.msg(param.status+'失败！', {
@@ -161,6 +161,7 @@ var list = {
 							// 2秒关闭（如果不配置，默认是3秒）
 						}, function() {
 						table.reload();
+						 list.bindTree();
 					});
 				}
 				$("#handle_status").val("");

@@ -44,4 +44,7 @@ public interface SysdepartmentMapper {
 	int getAllCount();
 
 	int deleteByIds(String[] ids);
+	
+	List<Sysdepartment> selectDepartMentByParent(Sysdepartment record);
+	Sysdepartment selectFirst(Sysdepartment record);
 }

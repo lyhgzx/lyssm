@@ -460,7 +460,14 @@
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();
  </select>
- 
+ <select id="selectDepartMentByParent" parameterType="com.liuyang.pojo.sys.Sysdepartment" 
+ resultMap="BaseResultMap">
+ 	select * from sysdepartment where ParentId=#{parentid} and id!=#{id} order by id
+ </select>
+  <select id="selectFirst" parameterType="com.liuyang.pojo.sys.Sysdepartment" 
+ resultMap="BaseResultMap">
+ 	select * from sysdepartment where id=#{parentid}  order by id limit 0;
+ </select>
   <delete id="deleteByIds">
  	delete from sysdepartment
  	where id in
