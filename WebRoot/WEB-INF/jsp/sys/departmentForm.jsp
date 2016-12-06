@@ -23,25 +23,7 @@ ul.ztree {
     //启动验证
     var v = $("#myForm").validate({
 
-      rules: {
-        dicKey: {
-          required: true,
-          digits: true
-        },
-
-        dicName: {
-          required: true
-        }
-
-      },
-      messages: {
-        dicKey: {
-          required: "请输入字典编号",
-          digits: "请输入整数"
-        },
-        dicName: "请输入字典名称"
-
-      }
+      
     });
 
     
@@ -130,8 +112,8 @@ ul.ztree {
           $(idDom).val(ids);
       }
       function zTreeOnClick(event, treeId, treeNode) {
-          zTreeObj.checkNode(treeNode, !treeNode.checked, true, true);
-          event.preventDefault();
+          zTreeObj.checkNode(treeNode, !treeNode.checked, null, true);
+        	return false;
       }
     	function showMenu() {
     		var cityObj = $("#parentname");
