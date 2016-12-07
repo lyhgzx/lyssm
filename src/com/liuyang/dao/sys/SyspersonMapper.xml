@@ -8,7 +8,7 @@
     <result column="Password" property="password" jdbcType="VARCHAR" />
     <result column="SurePassword" property="surepassword" jdbcType="VARCHAR" />
     <result column="Sex" property="sex" jdbcType="INTEGER" />
-    <result column="SysDepartmentId" property="sysdepartmentid" jdbcType="VARCHAR" />
+    <result column="SysDepartmentId" property="sysdepartmentid" jdbcType="INTEGER" />
     <result column="Position" property="position" jdbcType="VARCHAR" />
     <result column="MobilePhoneNumber" property="mobilephonenumber" jdbcType="VARCHAR" />
     <result column="PhoneNumber" property="phonenumber" jdbcType="VARCHAR" />
@@ -132,7 +132,7 @@
       )
     values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{myname,jdbcType=VARCHAR}, 
       #{password,jdbcType=VARCHAR}, #{surepassword,jdbcType=VARCHAR}, #{sex,jdbcType=INTEGER}, 
-      #{sysdepartmentid,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{mobilephonenumber,jdbcType=VARCHAR}, 
+      #{sysdepartmentid,jdbcType=INTEGER}, #{position,jdbcType=VARCHAR}, #{mobilephonenumber,jdbcType=VARCHAR}, 
       #{phonenumber,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
       #{village,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{emailaddress,jdbcType=VARCHAR}, 
       #{remark,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
@@ -236,7 +236,7 @@
         #{sex,jdbcType=INTEGER},
       </if>
       <if test="sysdepartmentid != null" >
-        #{sysdepartmentid,jdbcType=VARCHAR},
+        #{sysdepartmentid,jdbcType=INTEGER},
       </if>
       <if test="position != null" >
         #{position,jdbcType=VARCHAR},
@@ -319,7 +319,7 @@
         Sex = #{record.sex,jdbcType=INTEGER},
       </if>
       <if test="record.sysdepartmentid != null" >
-        SysDepartmentId = #{record.sysdepartmentid,jdbcType=VARCHAR},
+        SysDepartmentId = #{record.sysdepartmentid,jdbcType=INTEGER},
       </if>
       <if test="record.position != null" >
         Position = #{record.position,jdbcType=VARCHAR},
@@ -385,7 +385,7 @@
       Password = #{record.password,jdbcType=VARCHAR},
       SurePassword = #{record.surepassword,jdbcType=VARCHAR},
       Sex = #{record.sex,jdbcType=INTEGER},
-      SysDepartmentId = #{record.sysdepartmentid,jdbcType=VARCHAR},
+      SysDepartmentId = #{record.sysdepartmentid,jdbcType=INTEGER},
       Position = #{record.position,jdbcType=VARCHAR},
       MobilePhoneNumber = #{record.mobilephonenumber,jdbcType=VARCHAR},
       PhoneNumber = #{record.phonenumber,jdbcType=VARCHAR},
@@ -426,7 +426,7 @@
         Sex = #{sex,jdbcType=INTEGER},
       </if>
       <if test="sysdepartmentid != null" >
-        SysDepartmentId = #{sysdepartmentid,jdbcType=VARCHAR},
+        SysDepartmentId = #{sysdepartmentid,jdbcType=INTEGER},
       </if>
       <if test="position != null" >
         Position = #{position,jdbcType=VARCHAR},
@@ -489,7 +489,7 @@
       Password = #{password,jdbcType=VARCHAR},
       SurePassword = #{surepassword,jdbcType=VARCHAR},
       Sex = #{sex,jdbcType=INTEGER},
-      SysDepartmentId = #{sysdepartmentid,jdbcType=VARCHAR},
+      SysDepartmentId = #{sysdepartmentid,jdbcType=INTEGER},
       Position = #{position,jdbcType=VARCHAR},
       MobilePhoneNumber = #{mobilephonenumber,jdbcType=VARCHAR},
       PhoneNumber = #{phonenumber,jdbcType=VARCHAR},
@@ -510,7 +510,6 @@
     where Id = #{id,jdbcType=VARCHAR}
   </update>
   
-  
   <!--   自定义方法 -->
    <select id="selectByName" resultType="com.liuyang.pojo.sys.SyspersonExtend" parameterType="java.lang.String" >
             select * from sysperson
@@ -518,16 +517,17 @@
   </select>
   
      <select id="selectTable" parameterType="com.liuyang.vo.sys.SysPersonVo" resultType="com.liuyang.pojo.sys.SyspersonExtend" >
-  select SQL_CALC_FOUND_ROWS  * from sysperson 
+  select SQL_CALC_FOUND_ROWS * ,t1.`Name` as departmentname from sysperson t0 LEFT JOIN sysdepartment t1 on t0.SysDepartmentId=t1.Id
+
   <where>
   	<if test="name!=null and name!=''">
-  	and	name like '%${name}%'
+  	and	t0.name like '%${name}%'
   	</if>
   	<if test="myname!=null and myname!=''">
-  	and	myname like '%${myname}%'
+  	and	t0.myname like '%${myname}%'
   	</if>
   </where>
-  	order by createtime   
+  	order by t0.createtime   
   	
   limit #{PageIndex},#{PageSize} ;
   </select>

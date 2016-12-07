@@ -39,7 +39,7 @@ var list = {
 
 					var ids = table.getSelectedProperties("id");
 
-					$.getJSON(basePath + '/admin/field/delete?ids=' + ids, function(
+					$.getJSON(basePath + '/admin/department/delete?ids=' + ids, function(
 									data) {
 								if(data.code==1){
 									layer.msg('删除成功！', {
@@ -48,6 +48,7 @@ var list = {
 										// 2秒关闭（如果不配置，默认是3秒）
 									}, function() {
 									table.reload();
+									          list.bindTree();
 								});
 								}else{
 										layer.msg('删除失败！', {
@@ -56,6 +57,7 @@ var list = {
 										// 2秒关闭（如果不配置，默认是3秒）
 									}, function() {
 									table.reload();
+									          list.bindTree();
 								});
 								
 								}
@@ -70,7 +72,7 @@ var list = {
 			}
 			list.openDialog({
 				status:"修改",
-				url:basePath + '/admin/field/updatePage?id='+ selected.id
+				url:basePath + '/admin/department/updatePage?id='+ selected.id
 				
 				
 			});

@@ -525,62 +525,52 @@ public class SyspersonExample {
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidEqualTo(String value) {
+        public Criteria andSysdepartmentidEqualTo(Integer value) {
             addCriterion("SysDepartmentId =", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidNotEqualTo(String value) {
+        public Criteria andSysdepartmentidNotEqualTo(Integer value) {
             addCriterion("SysDepartmentId <>", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidGreaterThan(String value) {
+        public Criteria andSysdepartmentidGreaterThan(Integer value) {
             addCriterion("SysDepartmentId >", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidGreaterThanOrEqualTo(String value) {
+        public Criteria andSysdepartmentidGreaterThanOrEqualTo(Integer value) {
             addCriterion("SysDepartmentId >=", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidLessThan(String value) {
+        public Criteria andSysdepartmentidLessThan(Integer value) {
             addCriterion("SysDepartmentId <", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidLessThanOrEqualTo(String value) {
+        public Criteria andSysdepartmentidLessThanOrEqualTo(Integer value) {
             addCriterion("SysDepartmentId <=", value, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidLike(String value) {
-            addCriterion("SysDepartmentId like", value, "sysdepartmentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysdepartmentidNotLike(String value) {
-            addCriterion("SysDepartmentId not like", value, "sysdepartmentid");
-            return (Criteria) this;
-        }
-
-        public Criteria andSysdepartmentidIn(List<String> values) {
+        public Criteria andSysdepartmentidIn(List<Integer> values) {
             addCriterion("SysDepartmentId in", values, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidNotIn(List<String> values) {
+        public Criteria andSysdepartmentidNotIn(List<Integer> values) {
             addCriterion("SysDepartmentId not in", values, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidBetween(String value1, String value2) {
+        public Criteria andSysdepartmentidBetween(Integer value1, Integer value2) {
             addCriterion("SysDepartmentId between", value1, value2, "sysdepartmentid");
             return (Criteria) this;
         }
 
-        public Criteria andSysdepartmentidNotBetween(String value1, String value2) {
+        public Criteria andSysdepartmentidNotBetween(Integer value1, Integer value2) {
             addCriterion("SysDepartmentId not between", value1, value2, "sysdepartmentid");
             return (Criteria) this;
         }

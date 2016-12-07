@@ -466,7 +466,7 @@
  </select>
   <select id="selectFirst" parameterType="com.liuyang.pojo.sys.Sysdepartment" 
  resultMap="BaseResultMap">
- 	select * from sysdepartment where id=#{parentid}  order by id limit 0;
+ 	select * from sysdepartment where id=#{parentid}  order by id limit 1;
  </select>
   <delete id="deleteByIds">
  	delete from sysdepartment

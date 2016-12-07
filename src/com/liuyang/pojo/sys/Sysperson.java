@@ -15,7 +15,7 @@ public class Sysperson {
 
     private Integer sex;
 
-    private String sysdepartmentid;
+    private Integer sysdepartmentid;
 
     private String position;
 
@@ -99,12 +99,12 @@ public class Sysperson {
         this.sex = sex;
     }
 
-    public String getSysdepartmentid() {
+    public Integer getSysdepartmentid() {
         return sysdepartmentid;
     }
 
-    public void setSysdepartmentid(String sysdepartmentid) {
-        this.sysdepartmentid = sysdepartmentid == null ? null : sysdepartmentid.trim();
+    public void setSysdepartmentid(Integer sysdepartmentid) {
+        this.sysdepartmentid = sysdepartmentid;
     }
 
     public String getPosition() {

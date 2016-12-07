@@ -38,14 +38,14 @@
 
       }
     });
-
+		parentTree.bind();
   })
 
   function save() {
     if ($("#myForm").valid()) {
 
       var data = $("form").serializeJSON();
-
+      data.sysdepartmentid=$("#parentid").val();
       data.status = $("#status").val();
       $.ajax({
         url: basePath + '/admin/person/save',
@@ -77,6 +77,103 @@
     }
 
   }
+  
+  
+	function showMenu() {
+
+		var cityObj = $("#parentname");
+		var cityOffset = $("#parentname").offset();
+		$("#menuContent").css({
+			left : cityOffset.left + "px",
+			top : cityOffset.top + cityObj.outerHeight() + "px"
+		}).slideDown("fast");
+
+		$("body").bind("mousedown", onBodyDown);
+	}
+	function hideMenu() {
+		$("#menuContent").fadeOut("fast");
+		$("body").unbind("mousedown", onBodyDown);
+	}
+	function onBodyDown(event) {
+		if (!(event.target.id == "menuBtn" || event.target.id == "parentname"
+				|| event.target.id == "menuContent" || $(event.target).parents(
+				"#menuContent").length > 0)) {
+			hideMenu();
+		}
+	}
+
+	//编辑时，选择上级弹出的树
+	var parentTree = function() {
+		var nameDom = "#parentname";
+		var idDom = "#parentid";
+		var zTreeObj;
+		var setting = {
+			view : {
+				selectedMulti : false
+			},
+			check : {
+				enable : true,
+				chkStyle : "radio", //单选
+				radioType : "all"
+			},
+			data : {
+				key : {
+					name : 'name',
+					title : 'name'
+				},
+				simpleData : {
+					enable : true,
+					idKey : 'id',
+					pIdKey : 'parentid',
+					rootPId : 'null'
+				}
+			},
+			callback : {
+				onClick : zTreeOnClick,
+				onCheck : zTreeCheck
+			}
+		};
+
+		function zTreeCheck(event, treeId, treeNode) {
+			var nodes = zTreeObj.getCheckedNodes(true);
+			var ids = nodes.map(function(e) {
+				return e.id;
+			}).join(",");
+			var names = nodes.map(function(e) {
+				return e.name;
+			}).join(",");
+
+			$(nameDom).val(names);
+			$(idDom).val(ids);
+		}
+		function zTreeOnClick(event, treeId, treeNode) {
+			zTreeObj.checkNode(treeNode, !treeNode.checked, true, true);
+			return false;
+		}
+
+		return {
+			bind : function() {
+				$.getJSON(basePath + '/admin/department/treeform', function(
+						json) {
+					zTreeObj = $.fn.zTree.init($('#treeDemo'), setting, json);
+
+					var orgstr = $(idDom).val();
+					var name = '';
+					if (orgstr != '') {
+						var nodeIds = orgstr.split(',');
+						$.each(nodeIds, function() {
+							var node = zTreeObj
+									.getNodeByParam("id", this, null);
+							name += ',' + node.name;
+							zTreeObj.checkNode(node, true, true);
+						});
+						$(nameDom).val(name.substr(1)); //显示名称
+					}
+					zTreeObj.expandAll(true);
+				});
+			}
+		};
+	}();
 </script>
 </head>
 <body>
@@ -112,6 +209,15 @@
 				</c:choose>
 			<tr>
 			<tr>
+				<th>部门</th>
+				<td ><input id="parentname" type="text"
+					style="width: 150px;" onclick="showMenu();" /> <input
+					id="parentid" name="parentid" style="display: none" value="${person.sysdepartmentid}" /></td>
+				<th>邮箱</th>
+				<td><input type="text" name="emailaddress"
+					value="${person.emailaddress}" /></td>
+			<tr>
+			<tr>
 				<th>性别</th>
 				<td><select name="sex" id="sex">
 						<option value="1"
@@ -129,6 +235,7 @@
 
 				</select></td>
 			<tr>
+			
 			<tr>
 				<th>手机号码</th>
 				<td><input type="text" name="mobilephonenumber"
@@ -144,5 +251,10 @@
 			<tr>
 		</table>
 	</form>
+		<div id="menuContent" class="menuContent"
+		style="display: none; position: absolute;">
+		<ul id="treeDemo" class="ztree"
+			style="margin-top: 0; width: 150px; height: 150px;"></ul>
+	</div>
 </body>
 </html>

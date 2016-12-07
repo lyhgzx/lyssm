@@ -78,6 +78,17 @@ select.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
 	white-space: nowrap;
 	word-break: keep-all;
 }
+
+ul.ztree {
+	margin-top: 10px;
+	border: 1px solid #617775;
+	background: #f0f6e4;
+	width: 220px;
+	height: 360px;
+	overflow-y: scroll;
+	overflow-x: auto;
+	z-index: 9999;
+}
 </style>
 
 

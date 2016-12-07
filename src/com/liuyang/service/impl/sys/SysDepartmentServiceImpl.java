@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.databind.util.Converter;
 import com.liuyang.dao.sys.SysdepartmentMapper;
 import com.liuyang.pojo.sys.Sysdepartment;
 import com.liuyang.pojo.sys.SysdepartmentExample;
@@ -24,8 +25,7 @@ public class SysDepartmentServiceImpl  implements SysDepartmentService{
     
     @Override
 	public Sysdepartment getById(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return mapper.selectByPrimaryKey(Integer.parseInt(id));
 	}
 
 	@Override

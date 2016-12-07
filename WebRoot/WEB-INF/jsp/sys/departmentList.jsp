@@ -17,7 +17,7 @@
 <body>
 	<div class="container-fluid">
 		<div class="panel panel-default">
-			<div class="col-md-12 col-lg-12">
+			<div class="col-md-12">
 
 				<form class="form-inline" style="padding: 15px">
 
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-3">
 				<div class="panel panel-primary">
 
 					<div class="panel-body">
@@ -46,7 +46,7 @@
 
 				</ul>
 			</div>
-			<div class="col-md-10"> <table id="tb"></table></div>
+			<div class="col-md-9"> <table id="tb"></table></div>
 		</div>
 	</div>
 	<input id="handle_status" value="" hidden="hidden">

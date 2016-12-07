@@ -64,12 +64,12 @@ public class DepartmentController extends BaseController {
 	public String Update(Model model,String id) throws Exception{
 		Sysdepartment Sysdepartment=service.getById(id);
 		
-		model.addAttribute("Sysdepartment", Sysdepartment);
+		model.addAttribute("model", Sysdepartment);
 		model.addAttribute("status", "update");
-		return "sys/fieldForm";
+		return "sys/departmentForm";
 	}
 	
-	@RequestMapping("/departmentForm")
+	@RequestMapping("/delete")
 	@ResponseBody
 	public Object delete(String ids) throws Exception{
 		if(StringUtil.isNotBlank(ids)){

@@ -94,6 +94,10 @@ var user = {
 						title : '用户名'
 
 					}, {
+						field : 'departmentname',
+						title : '部门'
+
+					}, {
 						field : 'state',
 						title : '状态',
 						formatter : function(value, row) {

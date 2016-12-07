@@ -7,16 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <%@include file="/WEB-INF/jsp/base/sys_form.jsp"%>
 <style type="text/css">
-ul.ztree {
-	margin-top: 10px;
-	border: 1px solid #617775;
-	background: #f0f6e4;
-	width: 220px;
-	height: 360px;
-	overflow-y: scroll;
-	overflow-x: auto;
-	z-index: 9999;
-}
+
 </style>
 <script type="text/javascript">
 	$(function() {
@@ -153,7 +144,7 @@ ul.ztree {
 			$(idDom).val(ids);
 		}
 		function zTreeOnClick(event, treeId, treeNode) {
-			zTreeObj.checkNode(treeNode, !treeNode.checked, null, true);
+			zTreeObj.checkNode(treeNode, !treeNode.checked, true, true);
 			return false;
 		}
 
@@ -170,7 +161,7 @@ ul.ztree {
 						$.each(nodeIds, function() {
 							var node = zTreeObj
 									.getNodeByParam("id", this, null);
-							name += ',' + node.Name;
+							name += ',' + node.name;
 							zTreeObj.checkNode(node, true, true);
 						});
 						$(nameDom).val(name.substr(1)); //显示名称
@@ -192,7 +183,7 @@ ul.ztree {
 
 				<td colspan="3"><input id="parentname" type="text"
 					style="width: 150px;" onclick="showMenu();" /> <input
-					id="parentid" name="parentid" style="display: none" /></td>
+					id="parentid" name="parentid" style="display: none" value="${model.parentid}" /></td>
 			<tr>
 			<tr>
 				<th>组织名称<i>*</i></th>
@@ -202,15 +193,15 @@ ul.ztree {
 			<tr>
 				<th>是否叶子节点</th>
 				<td colspan="3"><select name="isleaf" id="isleaf">
-						<option value="0">否</option>
-						<option value="1">是</option>
+						<option value="0"  <c:if test="${model.isleaf==0}">selected="selected"</c:if>>否</option>
+						<option value="1" <c:if test="${model.isleaf==1}">selected="selected"</c:if>>是</option>
 				</select></td>
 			<tr>
 			<tr>
 				<th>是否自动展开</th>
 				<td colspan="3"><select name="isautoexpand" id="isautoexpand">
-						<option value="0">否</option>
-						<option value="1">是</option>
+						<option value="0" <c:if test="${model.isautoexpand==0}">selected="selected"</c:if> >否</option>
+						<option value="1" <c:if test="${model.isautoexpand==1}">selected="selected"</c:if>>是</option>
 				</select></td>
 			<tr>
 			<tr>
