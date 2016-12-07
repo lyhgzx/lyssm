@@ -53,7 +53,7 @@
 								data-toggle="dropdown" class="dropdown-toggle" href="#"> <span
 								class="clear"> <span class="block m-t-xs"><strong
 										class="font-bold">${config:getSysUserName()}</strong></span> <span
-									class="text-muted text-xs block"> ${config:getSysRoleName()} <b class="caret"></b></span>
+									class="text-muted text-xs block">  <b class="caret"></b></span>
 							</span>
 							</a>
 							<ul class="dropdown-menu animated fadeInRight m-t-xs">

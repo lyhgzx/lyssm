@@ -67,5 +67,7 @@ public class UserServiceImpl implements com.liuyang.service.sys.UserService {
 		
 		return mapper.deleteByIds(iStrings);
 	}
+	
+	
 
 }

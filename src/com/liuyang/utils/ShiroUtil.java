@@ -38,14 +38,7 @@ public class ShiroUtil {
 		return getSysUser().getName();
 	}
 
-	/**
-	 * 获取当前角色名
-	 * 
-	 * @return 用户对象
-	 */
-	public static String getSysRoleName() {
-		return getSysUser().getRoleName();
-	}
+	
 	
 	/**
 	 * 获取当前登录用户id
@@ -79,7 +72,7 @@ public class ShiroUtil {
 						List<SysMenuVo> menu3List=menu2.getSon();
 						if(menu3List!=null){
 							sbMenus.append("<li>");
-							sbMenus.append("<a href='#'>"+menu2+" <span class='fa arrow'></span></a>");
+							sbMenus.append("<a href='#'>"+menu2.getName()+" <span class='fa arrow'></span></a>");
 							sbMenus.append(" <ul class='nav nav-third-level'>");
 							
 							for (SysMenuVo menu3 : menu3List) {
@@ -107,7 +100,7 @@ public class ShiroUtil {
 	}
 
 	private static List<SysMenuVo> extracted() {
-		return sysMenuBiz.findMenusByRoleId(ShiroUtil.getSysUser().getRoleId());
+		return sysMenuBiz.selectMenusTreeByUserID(getSysUserId());
 	}
 
 	

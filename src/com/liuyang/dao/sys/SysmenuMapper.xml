@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang.dao.sys.SysmenuMapper" >
+	<resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.Sysmenu" >
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Name" property="name" jdbcType="VARCHAR" />
+		<result column="ParentId" property="parentid" jdbcType="VARCHAR" />
+		<result column="Url" property="url" jdbcType="VARCHAR" />
+		<result column="Iconic" property="iconic" jdbcType="VARCHAR" />
+		<result column="Sort" property="sort" jdbcType="INTEGER" />
+		<result column="State" property="state" jdbcType="VARCHAR" />
+		<result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="UpdateTime" property="updatetime" jdbcType="TIMESTAMP" />
+		<result column="UpdatePerson" property="updateperson" jdbcType="VARCHAR" />
+		<result column="IsLeaf" property="isleaf" jdbcType="VARCHAR" />
+		<result column="TabId" property="tabid" jdbcType="VARCHAR" />
+		<result column="CascadeId" property="cascadeid" jdbcType="VARCHAR" />
+		<result column="ParentName" property="parentname" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.liuyang.pojo.sys.Sysmenu" extends="BaseResultMap"
+		>
+		<result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause" >
+		<where >
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >and ${criterion.condition}</when>
+								<when test="criterion.singleValue" >and ${criterion.condition} #{criterion.value}</when>
+								<when test="criterion.betweenValue" >and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=","
+										>#{listItem}</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause" >
+		<where >
+			<foreach collection="example.oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >and ${criterion.condition}</when>
+								<when test="criterion.singleValue" >and ${criterion.condition} #{criterion.value}</when>
+								<when test="criterion.betweenValue" >and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=","
+										>#{listItem}</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List" >
+		Id, Name, ParentId, Url, Iconic, Sort, State, CreatePerson, CreateTime, UpdateTime,
+		UpdatePerson, IsLeaf, TabId, CascadeId, ParentName
+	</sql>
+	<sql id="Blob_Column_List" >Remark</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.liuyang.pojo.sys.SysmenuExample"
+		>
+		select
+		<if test="distinct" >distinct</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sysmenu
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >order by ${orderByClause}</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysmenuExample"
+		>
+		select
+		<if test="distinct" >distinct</if>
+		<include refid="Base_Column_List" />
+		from sysmenu
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >order by ${orderByClause}</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String"
+		>
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sysmenu
+    where Id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >delete from sysmenu
+    where Id = #{id,jdbcType=VARCHAR}</delete>
+	<delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SysmenuExample" >
+		delete from sysmenu
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liuyang.pojo.sys.Sysmenu" >
+		insert into sysmenu (Id, Name, ParentId, Url, Iconic, Sort, State, CreatePerson, CreateTime,
+		UpdateTime, UpdatePerson, IsLeaf, TabId, CascadeId, ParentName, Remark) values (#{id,jdbcType=VARCHAR},
+		#{name,jdbcType=VARCHAR}, #{parentid,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+		#{iconic,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{state,jdbcType=VARCHAR},
+		#{createperson,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP},
+		#{updateperson,jdbcType=VARCHAR}, #{isleaf,jdbcType=VARCHAR}, #{tabid,jdbcType=VARCHAR},
+		#{cascadeid,jdbcType=VARCHAR}, #{parentname,jdbcType=VARCHAR}, #{remark,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liuyang.pojo.sys.Sysmenu" >
+		insert into sysmenu
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >Id,</if>
+			<if test="name != null" >Name,</if>
+			<if test="parentid != null" >ParentId,</if>
+			<if test="url != null" >Url,</if>
+			<if test="iconic != null" >Iconic,</if>
+			<if test="sort != null" >Sort,</if>
+			<if test="state != null" >State,</if>
+			<if test="createperson != null" >CreatePerson,</if>
+			<if test="createtime != null" >CreateTime,</if>
+			<if test="updatetime != null" >UpdateTime,</if>
+			<if test="updateperson != null" >UpdatePerson,</if>
+			<if test="isleaf != null" >IsLeaf,</if>
+			<if test="tabid != null" >TabId,</if>
+			<if test="cascadeid != null" >CascadeId,</if>
+			<if test="parentname != null" >ParentName,</if>
+			<if test="remark != null" >Remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >#{id,jdbcType=VARCHAR},</if>
+			<if test="name != null" >#{name,jdbcType=VARCHAR},</if>
+			<if test="parentid != null" >#{parentid,jdbcType=VARCHAR},</if>
+			<if test="url != null" >#{url,jdbcType=VARCHAR},</if>
+			<if test="iconic != null" >#{iconic,jdbcType=VARCHAR},</if>
+			<if test="sort != null" >#{sort,jdbcType=INTEGER},</if>
+			<if test="state != null" >#{state,jdbcType=VARCHAR},</if>
+			<if test="createperson != null" >#{createperson,jdbcType=VARCHAR},</if>
+			<if test="createtime != null" >#{createtime,jdbcType=TIMESTAMP},</if>
+			<if test="updatetime != null" >#{updatetime,jdbcType=TIMESTAMP},</if>
+			<if test="updateperson != null" >#{updateperson,jdbcType=VARCHAR},</if>
+			<if test="isleaf != null" >#{isleaf,jdbcType=VARCHAR},</if>
+			<if test="tabid != null" >#{tabid,jdbcType=VARCHAR},</if>
+			<if test="cascadeid != null" >#{cascadeid,jdbcType=VARCHAR},</if>
+			<if test="parentname != null" >#{parentname,jdbcType=VARCHAR},</if>
+			<if test="remark != null" >#{remark,jdbcType=LONGVARCHAR},</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liuyang.pojo.sys.SysmenuExample" resultType="java.lang.Integer"
+		>
+		select count(*) from sysmenu
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map" >
+		update sysmenu
+		<set >
+			<if test="record.id != null" >Id = #{record.id,jdbcType=VARCHAR},</if>
+			<if test="record.name != null" >Name = #{record.name,jdbcType=VARCHAR},</if>
+			<if test="record.parentid != null" >ParentId = #{record.parentid,jdbcType=VARCHAR},</if>
+			<if test="record.url != null" >Url = #{record.url,jdbcType=VARCHAR},</if>
+			<if test="record.iconic != null" >Iconic = #{record.iconic,jdbcType=VARCHAR},</if>
+			<if test="record.sort != null" >Sort = #{record.sort,jdbcType=INTEGER},</if>
+			<if test="record.state != null" >State = #{record.state,jdbcType=VARCHAR},</if>
+			<if test="record.createperson != null" >CreatePerson = #{record.createperson,jdbcType=VARCHAR},</if>
+			<if test="record.createtime != null" >CreateTime = #{record.createtime,jdbcType=TIMESTAMP},</if>
+			<if test="record.updatetime != null" >UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},</if>
+			<if test="record.updateperson != null" >UpdatePerson = #{record.updateperson,jdbcType=VARCHAR},</if>
+			<if test="record.isleaf != null" >IsLeaf = #{record.isleaf,jdbcType=VARCHAR},</if>
+			<if test="record.tabid != null" >TabId = #{record.tabid,jdbcType=VARCHAR},</if>
+			<if test="record.cascadeid != null" >CascadeId = #{record.cascadeid,jdbcType=VARCHAR},</if>
+			<if test="record.parentname != null" >ParentName = #{record.parentname,jdbcType=VARCHAR},</if>
+			<if test="record.remark != null" >Remark = #{record.remark,jdbcType=LONGVARCHAR},</if>
+		</set>
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map" >
+		update sysmenu set Id = #{record.id,jdbcType=VARCHAR}, Name = #{record.name,jdbcType=VARCHAR},
+		ParentId = #{record.parentid,jdbcType=VARCHAR}, Url = #{record.url,jdbcType=VARCHAR},
+		Iconic = #{record.iconic,jdbcType=VARCHAR}, Sort = #{record.sort,jdbcType=INTEGER},
+		State = #{record.state,jdbcType=VARCHAR}, CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+		CreateTime = #{record.createtime,jdbcType=TIMESTAMP}, UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+		UpdatePerson = #{record.updateperson,jdbcType=VARCHAR}, IsLeaf = #{record.isleaf,jdbcType=VARCHAR},
+		TabId = #{record.tabid,jdbcType=VARCHAR}, CascadeId = #{record.cascadeid,jdbcType=VARCHAR},
+		ParentName = #{record.parentname,jdbcType=VARCHAR}, Remark = #{record.remark,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map" >
+		update sysmenu set Id = #{record.id,jdbcType=VARCHAR}, Name = #{record.name,jdbcType=VARCHAR},
+		ParentId = #{record.parentid,jdbcType=VARCHAR}, Url = #{record.url,jdbcType=VARCHAR},
+		Iconic = #{record.iconic,jdbcType=VARCHAR}, Sort = #{record.sort,jdbcType=INTEGER},
+		State = #{record.state,jdbcType=VARCHAR}, CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+		CreateTime = #{record.createtime,jdbcType=TIMESTAMP}, UpdateTime = #{record.updatetime,jdbcType=TIMESTAMP},
+		UpdatePerson = #{record.updateperson,jdbcType=VARCHAR}, IsLeaf = #{record.isleaf,jdbcType=VARCHAR},
+		TabId = #{record.tabid,jdbcType=VARCHAR}, CascadeId = #{record.cascadeid,jdbcType=VARCHAR},
+		ParentName = #{record.parentname,jdbcType=VARCHAR}
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liuyang.pojo.sys.Sysmenu"
+		>
+		update sysmenu
+		<set >
+			<if test="name != null" >Name = #{name,jdbcType=VARCHAR},</if>
+			<if test="parentid != null" >ParentId = #{parentid,jdbcType=VARCHAR},</if>
+			<if test="url != null" >Url = #{url,jdbcType=VARCHAR},</if>
+			<if test="iconic != null" >Iconic = #{iconic,jdbcType=VARCHAR},</if>
+			<if test="sort != null" >Sort = #{sort,jdbcType=INTEGER},</if>
+			<if test="state != null" >State = #{state,jdbcType=VARCHAR},</if>
+			<if test="createperson != null" >CreatePerson = #{createperson,jdbcType=VARCHAR},</if>
+			<if test="createtime != null" >CreateTime = #{createtime,jdbcType=TIMESTAMP},</if>
+			<if test="updatetime != null" >UpdateTime = #{updatetime,jdbcType=TIMESTAMP},</if>
+			<if test="updateperson != null" >UpdatePerson = #{updateperson,jdbcType=VARCHAR},</if>
+			<if test="isleaf != null" >IsLeaf = #{isleaf,jdbcType=VARCHAR},</if>
+			<if test="tabid != null" >TabId = #{tabid,jdbcType=VARCHAR},</if>
+			<if test="cascadeid != null" >CascadeId = #{cascadeid,jdbcType=VARCHAR},</if>
+			<if test="parentname != null" >ParentName = #{parentname,jdbcType=VARCHAR},</if>
+			<if test="remark != null" >Remark = #{remark,jdbcType=LONGVARCHAR},</if>
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuyang.pojo.sys.Sysmenu"
+		>
+		update sysmenu set Name = #{name,jdbcType=VARCHAR}, ParentId = #{parentid,jdbcType=VARCHAR},
+		Url = #{url,jdbcType=VARCHAR}, Iconic = #{iconic,jdbcType=VARCHAR}, Sort = #{sort,jdbcType=INTEGER},
+		State = #{state,jdbcType=VARCHAR}, CreatePerson = #{createperson,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP}, UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+		UpdatePerson = #{updateperson,jdbcType=VARCHAR}, IsLeaf = #{isleaf,jdbcType=VARCHAR},
+		TabId = #{tabid,jdbcType=VARCHAR}, CascadeId = #{cascadeid,jdbcType=VARCHAR}, ParentName
+		= #{parentname,jdbcType=VARCHAR}, Remark = #{remark,jdbcType=LONGVARCHAR} where
+		Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liuyang.pojo.sys.Sysmenu" >
+		update sysmenu set Name = #{name,jdbcType=VARCHAR}, ParentId = #{parentid,jdbcType=VARCHAR},
+		Url = #{url,jdbcType=VARCHAR}, Iconic = #{iconic,jdbcType=VARCHAR}, Sort = #{sort,jdbcType=INTEGER},
+		State = #{state,jdbcType=VARCHAR}, CreatePerson = #{createperson,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP}, UpdateTime = #{updatetime,jdbcType=TIMESTAMP},
+		UpdatePerson = #{updateperson,jdbcType=VARCHAR}, IsLeaf = #{isleaf,jdbcType=VARCHAR},
+		TabId = #{tabid,jdbcType=VARCHAR}, CascadeId = #{cascadeid,jdbcType=VARCHAR}, ParentName
+		= #{parentname,jdbcType=VARCHAR} where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	<!--  自定义方法-->
+	<select id="selectMenuByUserID" parameterType="java.lang.String" resultType="com.liuyang.pojo.sys.Sysmenu">
+		select distinct t0.* from SysMenu t0 inner join SysMenuSysRoleSysOperation t1 on t0.Id=t1.SysMenuId
+		where t1.SysRoleId in (select t1.SysRoleId from SysPerson t0 inner join SysRoleSysPerson
+		t1 on t0.Id=t1.SysPersonId where t0.Id=#{id} ) and t1.SysOperationId is null order
+		by t0.sort,t0.Remark
+	</select>
+</mapper>

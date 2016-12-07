@@ -7,29 +7,29 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
-import com.liuyang.dao.sys.SysMenuMapper;
-import com.liuyang.pojo.sys.SysMenu;
+import com.liuyang.dao.sys.SysmenuMapper;
+import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.service.sys.MenuService;
 import com.liuyang.vo.sys.SysMenuVo;
 @Service
 public class MenuServiceImpl implements MenuService {
 
 	@Autowired
-	private SysMenuMapper dao;
-	
+	private SysmenuMapper dao;
+
 	@Override
-	public List<SysMenu> findMenuByRoleId(String roleId) {
-		
-		return dao.findMenuByRoleId(roleId);
+	public List<Sysmenu> selectMenuByUserID(String userID) {
+		return dao.selectMenuByUserID(userID);
 	}
 
 	@Override
-	public List<SysMenuVo> findMenusByRoleId(String roleId) {
-		// 查询角色菜单
-		List<SysMenu> menus = dao.findMenuByRoleId(roleId);
+	public List<SysMenuVo> selectMenusTreeByUserID(String userID) {
+		List<Sysmenu> menus =dao.selectMenuByUserID(userID);
 		return getMenusVo(menus, "0");
 	}
+
+
+	
 	
 	// 获取权限TreeListMap
 		private List<Map<String, Object>> getMenusMap(List<Map<String, Object>> menus, String id) {
@@ -49,11 +49,11 @@ public class MenuServiceImpl implements MenuService {
 		}
 
 		//获取权限TreeListVo
-		private List<SysMenuVo> getMenusVo(List<SysMenu> menus, String id) {
+		private List<SysMenuVo> getMenusVo(List<Sysmenu> menus, String id) {
 			List<SysMenuVo> result = new ArrayList<SysMenuVo>();
-			for (SysMenu row : menus) {
+			for (Sysmenu row : menus) {
 				String rowid = row.getId();
-				String rowpid = row.getPid();
+				String rowpid = row.getParentid();
 				if (id.equals(rowpid)) {
 					SysMenuVo vo = row.toVo();
 					List<SysMenuVo> list = getMenusVo(menus, rowid);
@@ -65,5 +65,6 @@ public class MenuServiceImpl implements MenuService {
 			}
 			return result;
 		}
+
 
 }

@@ -26,13 +26,7 @@
 		<function-signature>java.lang.String getSysUserName()</function-signature>
 		<example>${config:getSysUserName()}</example>
 	</function>
-	<function>
-		<description>获取当前角色名</description>
-		<name>getSysRoleName</name>
-		<function-class>com.liuyang.utils.ShiroUtil</function-class>
-		<function-signature>java.lang.String getSysRoleName()</function-signature>
-		<example>${config:getSysRoleName()}</example>
-	</function>
+	
 	<function>
 		<description>获取当前用户的菜单对象列表</description>
 		<name>getSysMenus</name>

@@ -18,23 +18,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.liuyang.dao.sys.SysMenuMapper;
-import com.liuyang.dao.sys.SysUserMapper;
-import com.liuyang.pojo.sys.SysMenu;
-import com.liuyang.pojo.sys.SysUser;
-import com.liuyang.pojo.sys.SysUserExtend;
+import com.liuyang.dao.sys.SysmenuMapper;
+import com.liuyang.dao.sys.SyspersonMapper;
+import com.liuyang.pojo.sys.Sysmenu;
+import com.liuyang.pojo.sys.SyspersonExtend;
 
 
 
 public class ShiroRealm extends AuthorizingRealm {
 	private static Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
 	
+
 	@Autowired
-	private SysUserMapper userDao;
+	private SysmenuMapper menuDao;
+	
 	@Autowired
-	private SysMenuMapper menuDao;
-	
-	
+	SyspersonMapper personMapper;
 	/**
 	 * 登录认证
 	 */
@@ -42,16 +41,18 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken arg0) throws AuthenticationException {
 		logger.debug("开始登录认证");
 		UsernamePasswordToken token=(UsernamePasswordToken)arg0;
-		SysUserExtend user=userDao.selectByName(token.getUsername());
-		// 账号不存在
+		SyspersonExtend user=personMapper.selectByName(token.getUsername());
+		List<String> roles=personMapper.selectRoleIdsByUserID(user.getId());
+		        // 账号不存在
 				if (user == null) {
 					return null;
 				}
 				// 账号已禁用
-				if (user.getStatus() == 0) {
+				if (user.getState() == 0) {
 					return null;
 				}
-				ShiroUser shiroUser = new ShiroUser(user.getId(), user.getUsername(), user.getName(), user.getRoleid(),user.getRoleName());
+				ShiroUser shiroUser = new ShiroUser(user.getId(), user.getName(), user.getMyname());
+				shiroUser.setRoleIds(roles);
 				// 认证缓存信息
 				return new SimpleAuthenticationInfo(shiroUser, user.getPassword().toCharArray(), getName());
 	}
@@ -63,10 +64,10 @@ public class ShiroRealm extends AuthorizingRealm {
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection arg0) {
 		logger.debug("开始授权认证");
 		ShiroUser shiroUser = (ShiroUser) arg0.getPrimaryPrincipal();
-		String roleId = shiroUser.getRoleId();
-		List<SysMenu> roleMenuList=menuDao.findMenuByRoleId(roleId);
+		String userId = shiroUser.getId();
+		List<Sysmenu> roleMenuList=menuDao.selectMenuByUserID(userId);
 		Set<String> urlSet = new HashSet<String>();
-		for (SysMenu menu : roleMenuList) {
+		for (Sysmenu menu : roleMenuList) {
 			if (StringUtils.isNoneBlank(menu.getUrl())) {
 				urlSet.add(menu.getUrl());
 			}

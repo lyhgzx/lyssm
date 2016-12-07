@@ -33,6 +33,9 @@ public interface SyspersonMapper {
     int updateByPrimaryKey(Sysperson record);
     
     /*自定义方法*/
+    
+    List<String> selectRoleIdsByUserID(String id);
+    
     SyspersonExtend selectByName(String username);
     
     List<SyspersonExtend> selectTable(SysPersonVo vo);

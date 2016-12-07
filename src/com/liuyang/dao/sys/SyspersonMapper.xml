@@ -515,7 +515,10 @@
             select * from sysperson
     where name = #{name,jdbcType=VARCHAR}
   </select>
-  
+   <select id="selectRoleIdsByUserID" resultType="java.lang.String" parameterType="java.lang.String">
+     select SysRoleId from sysrolesysperson where SysPersonId =#{id}
+   </select>
+   
      <select id="selectTable" parameterType="com.liuyang.vo.sys.SysPersonVo" resultType="com.liuyang.pojo.sys.SyspersonExtend" >
   select SQL_CALC_FOUND_ROWS * ,t1.`Name` as departmentname from sysperson t0 LEFT JOIN sysdepartment t1 on t0.SysDepartmentId=t1.Id
 

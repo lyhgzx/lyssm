@@ -1,6 +1,7 @@
 package com.liuyang.shiro;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * 登录会话对象
@@ -16,41 +17,52 @@ public class ShiroUser implements Serializable {
 	private String username;
 	// 用户姓名
 	private String name;
-	// 角色id
-	private String roleId;
-	//角色名称
-	private String roleName;
-
-    public ShiroUser(String id, String username, String name, String roleId,String roleName) {
-        this.id = id;
-        this.username = username;
-        this.name = name;
-        this.roleId = roleId;
-        this.roleName=roleName;
-    }
-
-    public String getRoleName() {
-		return roleName;
+	
+	private List<String> roleIds;
+	
+	public ShiroUser(String id, String username, String name) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.name = name;
+	}
+	
+	public List<String> getRoleIds() {
+		return roleIds;
 	}
 
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+	public void setRoleIds(List<String> roleIds) {
+		this.roleIds = roleIds;
 	}
 
 	public String getId() {
 		return id;
 	}
-
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getUsername() {
 		return username;
 	}
-
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public String getName() {
 		return name;
 	}
-
-	public String getRoleId() {
-		return roleId;
+	public void setName(String name) {
+		this.name = name;
 	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
+
+
+
+    
+
+
+
 
 }

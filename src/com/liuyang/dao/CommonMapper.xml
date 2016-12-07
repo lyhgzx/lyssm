@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.liuyang.dao.CommonMapper" >
+	
+<!--  通用下拉框-->
   <select id="getDropDowm" parameterType="com.liuyang.vo.DropDowmVo" resultType="com.liuyang.pojo.DropDown" >
   	select ${id_fieldName} as id,${name_fieldName} as name from ${tableName} 
   </select>

@@ -2,12 +2,12 @@ package com.liuyang.service.sys;
 
 import java.util.List;
 
-
-import com.liuyang.pojo.sys.SysMenu;
+import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.vo.sys.SysMenuVo;
 
 public interface MenuService {
-	 List<SysMenu> findMenuByRoleId(String roleId);
+	
+	  List<Sysmenu> selectMenuByUserID(String userID);
 	 /**
 		 * 获取角色菜单树
 		 * 
@@ -15,5 +15,5 @@ public interface MenuService {
 		 *            角色id
 		 * @return
 		 */
-	 List<SysMenuVo> findMenusByRoleId(String roleId);
+	 List<SysMenuVo> selectMenusTreeByUserID(String userID);
 }
