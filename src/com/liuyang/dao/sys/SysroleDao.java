@@ -1,9 +1,13 @@
 package com.liuyang.dao.sys;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.liuyang.pojo.sys.Sysrole;
 import com.liuyang.pojo.sys.SysroleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.liuyang.pojo.sys.SysroleExtend;
+import com.liuyang.vo.sys.SysroleVo;
 
 public interface SysroleDao {
     int countByExample(SysroleExample example);
@@ -33,4 +37,10 @@ public interface SysroleDao {
     int updateByPrimaryKeyWithBLOBs(Sysrole record);
 
     int updateByPrimaryKey(Sysrole record);
+    
+    List<SysroleExtend> selectTable(SysroleVo vo);
+    
+    int getAllCount();
+    
+    int deleteByIds(String[] ids);
 }

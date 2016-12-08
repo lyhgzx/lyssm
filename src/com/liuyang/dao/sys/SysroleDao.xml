@@ -284,4 +284,28 @@
       UpdatePerson = #{updateperson,jdbcType=VARCHAR}
     where Id = #{id,jdbcType=VARCHAR}
   </update>
+  
+  
+ <!--  自定义 -->
+   <select id="selectTable" parameterType="com.liuyang.vo.sys.SysroleVo" resultType="com.liuyang.pojo.sys.SysroleExtend" >
+  select SQL_CALC_FOUND_ROWS  id,name,description from sysrole
+  <where>
+  	<if test="name!=null and name!=''">
+  	and	name like '%${name}%'
+  	</if> 	
+  </where>
+  	order by createtime   
+  limit #{PageIndex},#{PageSize} ;
+  </select>
+   <select id="getAllCount" resultType="java.lang.Integer">
+ 	SELECT FOUND_ROWS();
+ </select>
+ 
+  <delete id="deleteByIds">
+ 	delete from sysrole
+ 	where id in
+ 	<foreach collection="array" item="id" open="(" separator="," close=")">
+ 		#{id}
+ 	</foreach>
+ </delete>
 </mapper>
