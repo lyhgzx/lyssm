@@ -10,6 +10,7 @@
     <%@ include file="/WEB-INF/jsp/base/sys_head.jsp"%>
   <script
 	src="${staticPath}/js/sys/person.js"></script>
+
 </head>
 <body>
 <div class="panel panel-default">
@@ -31,6 +32,7 @@
                <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
              <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
                    <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>
+                                              <button id="author" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 为用户分配角色</button>
             </form>
         </div>
     </div>

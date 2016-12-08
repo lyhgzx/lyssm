@@ -27,6 +27,7 @@
                <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
              <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
                    <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>
+           
             </form>
         </div>
     </div>

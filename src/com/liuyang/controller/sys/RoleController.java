@@ -20,6 +20,7 @@ import com.liuyang.utils.StringUtil;
 import com.liuyang.vo.sys.SysPersonVo;
 import com.liuyang.vo.sys.SysfieldVo;
 import com.liuyang.vo.sys.SysroleVo;
+import com.liuyang.vo.sys.SysrolesyspersonVo;
 
 
 @Controller
@@ -86,5 +87,37 @@ public class RoleController extends BaseController {
 		
 		
 	}
+	/**
+	 * 用户分配角色
+	 * @param personId
+	 * @return
+	 */
+	@RequestMapping("/GivePersonRole")
+	public String GivePersonRole(String personId,Model model){
+		model.addAttribute("personid", personId);
+		return "sys/GivePersonRoleList";
+	}
 	
+	//用户角色授权表
+	@RequestMapping(value="/GivePersonRoletable",method=RequestMethod.POST)
+	@ResponseBody
+	public Object GivePersonRoletable(HttpServletRequest request, SysroleVo vo) throws Exception{
+		
+	  SysroleVo vpersonVo=service.getRoleByPerson(vo);
+		return vpersonVo;
+	}
+	
+	
+	@RequestMapping(value="/author",method=RequestMethod.POST)
+	@ResponseBody
+	public Object author(SysrolesyspersonVo vo) throws Exception{
+		  
+		try {
+			service.authorPersonRole(vo);
+			return sendOk();
+		} catch (Exception e) {
+			return sendError();
+		}
+		
+	}
 }

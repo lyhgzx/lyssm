@@ -2,22 +2,22 @@
  * 用户管理
  */
 $(function() {
-			user.init();
+			list.init();
 		});
 
 var app = {
 	table : null,
 	status : null
 };
-var user = {
+var list = {
 	init : function() {
-		user.bind();
-		user.loadTable();
+		list.bind();
+		list.loadTable();
 	},
 	bind : function() {
 		// 增加
 		$("#insert").click(function() {
-			user.openDialog({
+			list.openDialog({
 				status:"增加",
 				url:basePath + '/admin/person/addPage'				
 			});
@@ -67,12 +67,34 @@ var user = {
 			if (selected == null) {
 				return;
 			}
-			user.openDialog({
+			list.openDialog({
 				status:"修改",
 				url:basePath + '/admin/person/updatePage?id='+ selected.id
 				
 				
 			});
+			
+
+		});
+		$("#author").click(function() {
+			var selected = table.getSelectedObj();
+			if (selected == null) {
+				return;
+			}
+			
+			layer.open({
+				type : 2,
+				title : '为用户分配角色',
+				shadeClose : false,
+				maxmin : true, // 开启最大化最小化按钮
+				area : ['800px', '450px'],
+				fix : false, // 不固定
+				content : [basePath + '/admin/role/GivePersonRole?personId=\''+ selected.id+'\'', 'no'], // iframe的url
+				btn : ['确认', '取消']
+				
+			
+			});
+			
 			
 
 		});

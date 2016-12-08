@@ -1,5 +1,5 @@
 /**
- * 用户管理
+ * 用户分配角色
  */
 $(function() {
 			list.init();
@@ -61,35 +61,92 @@ var list = {
 							});
 				});
 
-		// 修改
-		$("#modify").click(function() {
+		// 授权
+		$("#selectAuthor").click(function() {
 			var selected = table.getSelectedObj();
 			if (selected == null) {
 				return;
 			}
-			list.openDialog({
-				status:"修改",
-				url:basePath + '/admin/role/updatePage?id='+ selected.id
+			var data={};
+			data.roleid=selected.id;
+			data.personid=_personid;
+			data.action="author";
+			$.post(basePath + '/admin/role/author',data, function(
+					data) {
+				if(data.code==1){
+					layer.msg('授权成功！', {
+					icon : 2,
+					time : 2000
+						// 2秒关闭（如果不配置，默认是3秒）
+					}, function() {
+					table.reload();
+				});
+				}else{
+						layer.msg('授权失败！', {
+					icon : 2,
+					time : 2000
+						// 2秒关闭（如果不配置，默认是3秒）
+					}, function() {
+					table.reload();
+				});
 				
-				
+				}
 			});
-			
 
 		});
 		
-		
+		// 取消授权
+		$("#noselectAuthor").click(function() {
+			var selected = table.getSelectedObj();
+			if (selected == null) {
+				return;
+			}
+			var data={};
+			data.roleid=selected.id;
+			data.personid=_personid;
+			data.action="noauthor";
+			$.post(basePath + '/admin/role/author',data, function(
+					data) {
+				if(data.code==1){
+					layer.msg('取消授权成功！', {
+					icon : 2,
+					time : 2000
+						// 2秒关闭（如果不配置，默认是3秒）
+					}, function() {
+					table.reload();
+				});
+				}else{
+						layer.msg('取消授权失败！', {
+					icon : 2,
+					time : 2000
+						// 2秒关闭（如果不配置，默认是3秒）
+					}, function() {
+					table.reload();
+				});
+				
+				}
+			});
+
+		});
 	},
 	loadTable : function() {
 
 		var opt = {
 			target : "#tb",
-			url : basePath + "/admin/role/findtable",
+			url : basePath + "/admin/role/GivePersonRoletable",
 			uniqueId : "id",
+			queryparam:{
+				personid:_personid
+			},
 			columns : [{
 						checkbox : true
 					}, {
 						field : 'name',
 						title : '角色名称'
+
+					}, {
+						field : 'author',
+						title : '是否授权'
 
 					}, {
 						field : 'description',

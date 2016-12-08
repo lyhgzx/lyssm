@@ -65,6 +65,10 @@ var BTable = function(options) {
 	// 选择单行对象
 	this.getSelectedObj = function() {
 		var selectedDatas = this.selectObjs();
+		if(selectedDatas.length>1){
+			layer.msg('选择一个对象');
+			return null;
+		}
 		return selectedDatas == null ? null : selectedDatas[0];
 	}
 	// 选择多行对象
