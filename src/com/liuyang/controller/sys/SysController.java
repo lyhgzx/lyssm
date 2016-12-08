@@ -1,8 +1,6 @@
 package com.liuyang.controller.sys;
 
 
-import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.DisabledAccountException;
@@ -10,26 +8,14 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
 import com.liuyang.controller.base.BaseController;
-import com.liuyang.pojo.sys.SysUser;
-import com.liuyang.service.impl.sys.UserServiceImpl;
-import com.liuyang.service.sys.MenuService;
-import com.liuyang.service.sys.UserService;
-import com.liuyang.utils.Config;
 import com.liuyang.utils.DigestUtil;
-import com.liuyang.utils.ShiroUtil;
-import com.liuyang.utils.SpringContextUtil;
-import com.liuyang.vo.sys.UserVo;
 
 
 
@@ -46,20 +32,13 @@ import com.liuyang.vo.sys.UserVo;
 public class SysController extends BaseController{
 	@Value("${adminPath}")  
 	private String strUrl;  
-	@Autowired
-	private UserService service;
+
 
 	@RequestMapping(value = "/index")
 	public String index() {
 		return "sys/index";
 	}
-	@RequestMapping(value="/user")
-	@ResponseBody
-	public String getUserById(@RequestParam(value="id",required=false,defaultValue="1")String id) throws Exception{
-		SysUser user=service.getUser(id);
-       logger.info(Config.getAdminPath());
-		return user.toString();
-	}
+
 	
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String Login(){
@@ -82,7 +61,7 @@ public class SysController extends BaseController{
         token.setRememberMe(true);
         try {
             user.login(token);
-            updateUserLastTime();
+ 
  
         } catch (UnknownAccountException e) {
             logger.error("账号不存在：{}", e.getMessage());
@@ -116,17 +95,7 @@ public class SysController extends BaseController{
     }
 	
 	
-	/**
-	 * 跟新用户登录时间
-	 * @throws Exception 
-	 */
-	private void updateUserLastTime() throws Exception {
-		
-		SysUser user = new SysUser();
-		user.setId(ShiroUtil.getSysUserId());
-		user.setLasttime(new Date());
-		service.update(user);
-	}
+	
 	
 	
 	

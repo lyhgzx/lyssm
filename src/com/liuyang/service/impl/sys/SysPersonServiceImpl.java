@@ -13,7 +13,6 @@ import com.liuyang.service.sys.SysPersonService;
 import com.liuyang.utils.DigestUtil;
 import com.liuyang.utils.ToolsUtil;
 import com.liuyang.vo.sys.SysPersonVo;
-import com.liuyang.vo.sys.UserVo;
 @Service
 public class SysPersonServiceImpl implements SysPersonService {
 

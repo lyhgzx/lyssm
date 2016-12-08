@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.liuyang.dao.sys.SysRoleMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.SysRoleMenu" >
-    <id column="roleId" property="roleid" jdbcType="VARCHAR" />
-    <id column="menuId" property="menuid" jdbcType="VARCHAR" />
-    <result column="operate" property="operate" jdbcType="VARCHAR" />
+<mapper namespace="com.liuyang.dao.sys.SysrolesyspersonDao" >
+  <resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.Sysrolesysperson" >
+    <id column="SysPersonId" property="syspersonid" jdbcType="VARCHAR" />
+    <id column="SysRoleId" property="sysroleid" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +64,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    roleId, menuId, operate
+    SysPersonId, SysRoleId
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysRoleMenuExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysrolesyspersonExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from sys_role_menu
+    from sysrolesysperson
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -81,72 +80,54 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysRoleMenuKey" >
-    select 
-    <include refid="Base_Column_List" />
-    from sys_role_menu
-    where roleId = #{roleid,jdbcType=VARCHAR}
-      and menuId = #{menuid,jdbcType=VARCHAR}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.liuyang.pojo.sys.SysRoleMenuKey" >
-    delete from sys_role_menu
-    where roleId = #{roleid,jdbcType=VARCHAR}
-      and menuId = #{menuid,jdbcType=VARCHAR}
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from sysrolesysperson
+    where SysPersonId = #{syspersonid,jdbcType=VARCHAR}
+      and SysRoleId = #{sysroleid,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SysRoleMenuExample" >
-    delete from sys_role_menu
+  <delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SysrolesyspersonExample" >
+    delete from sysrolesysperson
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.liuyang.pojo.sys.SysRoleMenu" >
-    insert into sys_role_menu (roleId, menuId, operate
-      )
-    values (#{roleid,jdbcType=VARCHAR}, #{menuid,jdbcType=VARCHAR}, #{operate,jdbcType=VARCHAR}
-      )
+  <insert id="insert" parameterType="com.liuyang.pojo.sys.Sysrolesysperson" >
+    insert into sysrolesysperson (SysPersonId, SysRoleId)
+    values (#{syspersonid,jdbcType=VARCHAR}, #{sysroleid,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.liuyang.pojo.sys.SysRoleMenu" >
-    insert into sys_role_menu
+  <insert id="insertSelective" parameterType="com.liuyang.pojo.sys.Sysrolesysperson" >
+    insert into sysrolesysperson
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
-        roleId,
+      <if test="syspersonid != null" >
+        SysPersonId,
       </if>
-      <if test="menuid != null" >
-        menuId,
-      </if>
-      <if test="operate != null" >
-        operate,
+      <if test="sysroleid != null" >
+        SysRoleId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
-        #{roleid,jdbcType=VARCHAR},
+      <if test="syspersonid != null" >
+        #{syspersonid,jdbcType=VARCHAR},
       </if>
-      <if test="menuid != null" >
-        #{menuid,jdbcType=VARCHAR},
-      </if>
-      <if test="operate != null" >
-        #{operate,jdbcType=VARCHAR},
+      <if test="sysroleid != null" >
+        #{sysroleid,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.liuyang.pojo.sys.SysRoleMenuExample" resultType="java.lang.Integer" >
-    select count(*) from sys_role_menu
+  <select id="countByExample" parameterType="com.liuyang.pojo.sys.SysrolesyspersonExample" resultType="java.lang.Integer" >
+    select count(*) from sysrolesysperson
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update sys_role_menu
+    update sysrolesysperson
     <set >
-      <if test="record.roleid != null" >
-        roleId = #{record.roleid,jdbcType=VARCHAR},
+      <if test="record.syspersonid != null" >
+        SysPersonId = #{record.syspersonid,jdbcType=VARCHAR},
       </if>
-      <if test="record.menuid != null" >
-        menuId = #{record.menuid,jdbcType=VARCHAR},
-      </if>
-      <if test="record.operate != null" >
-        operate = #{record.operate,jdbcType=VARCHAR},
+      <if test="record.sysroleid != null" >
+        SysRoleId = #{record.sysroleid,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -154,28 +135,11 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update sys_role_menu
-    set roleId = #{record.roleid,jdbcType=VARCHAR},
-      menuId = #{record.menuid,jdbcType=VARCHAR},
-      operate = #{record.operate,jdbcType=VARCHAR}
+    update sysrolesysperson
+    set SysPersonId = #{record.syspersonid,jdbcType=VARCHAR},
+      SysRoleId = #{record.sysroleid,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.liuyang.pojo.sys.SysRoleMenu" >
-    update sys_role_menu
-    <set >
-      <if test="operate != null" >
-        operate = #{operate,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where roleId = #{roleid,jdbcType=VARCHAR}
-      and menuId = #{menuid,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.liuyang.pojo.sys.SysRoleMenu" >
-    update sys_role_menu
-    set operate = #{operate,jdbcType=VARCHAR}
-    where roleId = #{roleid,jdbcType=VARCHAR}
-      and menuId = #{menuid,jdbcType=VARCHAR}
   </update>
 </mapper>
