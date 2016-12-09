@@ -8,7 +8,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 
 import com.liuyang.pojo.SessionConst;
-import com.liuyang.service.sys.MenuService;
+import com.liuyang.service.sys.SysMenuService;
 import com.liuyang.shiro.ShiroUser;
 import com.liuyang.vo.sys.SysMenuVo;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -19,7 +19,7 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
  *
  */
 public class ShiroUtil {
-	private static MenuService sysMenuBiz = SpringContextUtil.getBean(MenuService.class);
+	private static SysMenuService sysMenuBiz = SpringContextUtil.getBean(SysMenuService.class);
 	/**
 	 * 获取当前登录用户对象
 	 * 

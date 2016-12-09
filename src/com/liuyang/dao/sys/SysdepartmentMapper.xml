@@ -452,10 +452,8 @@
  		<if test="id!=null and id!='' or id==0" >
  			and ParentId = #{id}
  		</if>
-
  	</where>
  		order by id 
-
  </select>
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();

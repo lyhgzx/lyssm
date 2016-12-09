@@ -261,10 +261,27 @@
 	</update>
 	
 	<!--  自定义方法-->
-	<select id="selectMenuByUserID" parameterType="java.lang.String" resultType="com.liuyang.pojo.sys.Sysmenu">
+	<select id="selectMenuByUserID" parameterType="java.lang.String" resultType="com.liuyang.pojo.sys.SysmenuExtend">
 		select distinct t0.* from SysMenu t0 inner join SysMenuSysRoleSysOperation t1 on t0.Id=t1.SysMenuId
 		where t1.SysRoleId in (select t1.SysRoleId from SysPerson t0 inner join SysRoleSysPerson
 		t1 on t0.Id=t1.SysPersonId where t0.Id=#{id} ) and t1.SysOperationId is null order
 		by t0.sort,t0.Remark
 	</select>
+	
+	<select id="selectTable" parameterType="com.liuyang.vo.sys.SysMenuVo" resultMap="BaseResultMap">
+		select  * from sysmenu
+		<where>
+			<if test="id!=null and id!=''" >and ParentId = #{id}</if>
+		</where>
+		order by id
+	</select>
+
+	<select id="selectMenuByParent" parameterType="com.liuyang.pojo.sys.Sysmenu"
+		resultMap="BaseResultMap">select * from Sysmenu where ParentId=#{parentid} and id!=#{id} order by id</select>
+	<select id="selectFirst" parameterType="com.liuyang.pojo.sys.Sysmenu" resultMap="BaseResultMap">select * from Sysmenu where id=#{parentid}  order by id limit 1;</select>
+	<delete id="deleteByIds">
+		delete from Sysmenu
+ 	   where id in
+		<foreach collection="array" item="id" open="(" separator="," close=")">#{id}</foreach>
+	</delete>
 </mapper>

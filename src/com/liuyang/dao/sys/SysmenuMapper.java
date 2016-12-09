@@ -1,9 +1,13 @@
 package com.liuyang.dao.sys;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SysmenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
+import com.liuyang.pojo.sys.SysmenuExtend;
+import com.liuyang.vo.sys.SysMenuVo2;
 
 public interface SysmenuMapper {
     int countByExample(SysmenuExample example);
@@ -34,5 +38,14 @@ public interface SysmenuMapper {
 
     int updateByPrimaryKey(Sysmenu record);
     
+/*    自定义方法*/
     List<Sysmenu> selectMenuByUserID(String id);
+    
+    List<SysmenuExtend> selectTable(SysMenuVo2 vo);
+
+   	int deleteByIds(String[] ids);
+   
+   	List<Sysmenu> selectMenuByParent(Sysmenu record);
+   	
+   	Sysmenu selectFirst(Sysmenu record);
 }
