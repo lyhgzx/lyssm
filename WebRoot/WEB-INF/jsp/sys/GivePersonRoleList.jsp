@@ -9,32 +9,36 @@
 
 <%@ include file="/WEB-INF/jsp/base/sys_head.jsp"%>
 <script type="text/javascript">
-	var _personid = ${personid};
-	
+  var _personid = ${personid};
 </script>
 <script src="${staticPath}/js/sys/GivePersonRole.js"></script>
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="panel panel-default">
-			<div class="col-md-12 col-lg-12">
 
 
-
+		<div class="row" >
+			<div class="col-md-12 pull-right">
 				<button id="selectAuthor" class="btn btn-primary " type="button">
 					<i class="fa fa-paste"></i> 授权选中
 				</button>
 				<button id="noselectAuthor" class="btn btn-primary " type="button">
 					<i class="fa fa-times"></i> 取消授权
 				</button>
-
-
 			</div>
 		</div>
+
+
+
+
+
 		<div class="row">
-			<table id="tb"></table>
+			<div class="col-md-12">
+				<table id="tb"></table>
+			</div>
+
+
 		</div>
 	</div>
-	
 </body>
 </html>

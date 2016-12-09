@@ -455,7 +455,7 @@
 
  	</where>
  		order by id 
-   limit #{PageIndex},#{PageSize} ;
+   limit #{PageIndex},#{PageSize};
  </select>
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();

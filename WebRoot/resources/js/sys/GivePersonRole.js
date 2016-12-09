@@ -75,7 +75,7 @@ var list = {
 					data) {
 				if(data.code==1){
 					layer.msg('授权成功！', {
-					icon : 2,
+					icon : 1,
 					time : 2000
 						// 2秒关闭（如果不配置，默认是3秒）
 					}, function() {

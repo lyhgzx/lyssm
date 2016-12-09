@@ -16,7 +16,7 @@
 <div class="panel panel-default">
     <div class="col-md-12 col-lg-12">
         <div class="panel panel-widget">
-            <form class="form-inline" style="padding:15px">
+  
              <div class="form-group">
                     <label >字典名:</label>
 
@@ -27,11 +27,12 @@
                   <input type="text" class="form-control" id="dicTypename" />
              
                 </div>
+                						<div class="pull-right">
               <button id="search" class="btn btn-primary " type="button"><i class="fa fa-search"></i> 搜索</button>
-               <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-check"></i> 增加</button>
+               <button  id="insert"  class="btn btn-primary " type="button"><i class="fa fa-plus"></i> 增加</button>
              <button id="modify" class="btn btn-primary " type="button"><i class="fa fa-paste"></i> 编辑</button>
                    <button id="delete" class="btn btn-primary " type="button"><i class="fa fa-times"></i> 删除</button>
-            </form>
+           </div>
         </div>
     </div>
 </div>

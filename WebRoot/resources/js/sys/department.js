@@ -35,9 +35,11 @@ var list = {
 		});
 
 		// 删除
-		$("#delete").click(
-				function() {
-
+		$("#delete").click(function() {
+		layer.confirm('确定要删除吗？', {
+				btn : ['确定', '取消']
+					// 按钮
+				}, function() {
 					var ids = table.getSelectedProperties("id");
 
 					$.getJSON(basePath + '/admin/department/delete?ids=' + ids,
@@ -63,6 +65,10 @@ var list = {
 
 								}
 							});
+							
+				},function(){
+					
+				});
 				});
 
 		// 修改
