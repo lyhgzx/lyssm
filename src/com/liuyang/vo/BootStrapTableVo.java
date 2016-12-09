@@ -22,7 +22,7 @@ public class BootStrapTableVo {
 	/**
 	 * 总数
 	 */
-	private int total;
+	private Long total;
 	/*
 	 * 记录
 	 */
@@ -51,10 +51,10 @@ public class BootStrapTableVo {
 	public void setOrderBy(String orderBy) {
 		OrderBy = orderBy;
 	}
-	public int getTotal() {
+	public Long getTotal() {
 		return total;
 	}
-	public void setTotal(int total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 	public Object getRows() {

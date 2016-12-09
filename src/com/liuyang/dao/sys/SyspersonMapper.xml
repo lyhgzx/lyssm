@@ -520,7 +520,7 @@
    </select>
    
      <select id="selectTable" parameterType="com.liuyang.vo.sys.SysPersonVo" resultType="com.liuyang.pojo.sys.SyspersonExtend" >
-  select SQL_CALC_FOUND_ROWS * ,t1.`Name` as departmentname from sysperson t0 LEFT JOIN sysdepartment t1 on t0.SysDepartmentId=t1.Id
+  select  * ,t1.`Name` as departmentname from sysperson t0 LEFT JOIN sysdepartment t1 on t0.SysDepartmentId=t1.Id
 
   <where>
   	<if test="name!=null and name!=''">
@@ -531,8 +531,6 @@
   	</if>
   </where>
   	order by t0.createtime   
-  	
-  limit #{PageIndex},#{PageSize} ;
   </select>
   
   <select id="getAllCount" resultType="java.lang.Integer">

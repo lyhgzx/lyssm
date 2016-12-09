@@ -1,12 +1,16 @@
 package com.liuyang.service.impl.sys;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.liuyang.dao.sys.SysfieldMapper;
 import com.liuyang.pojo.sys.Sysfield;
+import com.liuyang.pojo.sys.SysfieldExtend;
 import com.liuyang.service.sys.SysFieldService;
 import com.liuyang.utils.ToolsUtil;
 import com.liuyang.vo.sys.SysfieldVo;
@@ -39,9 +43,10 @@ public class SysFieldServiceImpl implements SysFieldService {
 	@Override
 	public SysfieldVo getTable(SysfieldVo vo) throws Exception {
 		SysfieldVo vo2 = new SysfieldVo();
-		vo.setPageIndex((vo.getPageNumber() - 1) * vo.getPageSize());
-		vo2.setRows(mapper.selectTable(vo));
-		vo2.setTotal(mapper.getAllCount());
+		   PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
+		   List<SysfieldExtend> list=mapper.selectTable(vo);
+		vo2.setRows(list);
+		vo2.setTotal(((Page)list).getTotal());
 		return vo2;
 	}
 

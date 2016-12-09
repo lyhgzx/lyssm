@@ -447,7 +447,7 @@
   
   <!-- 自定义 -->
   <select id="selectTable" parameterType="com.liuyang.vo.sys.SysdepartmentVo" resultMap="BaseResultMap">
- 	select SQL_CALC_FOUND_ROWS  * from sysdepartment
+ 	select  * from sysdepartment
  	<where>
  		<if test="id!=null and id!='' or id==0" >
  			and ParentId = #{id}
@@ -455,7 +455,7 @@
 
  	</where>
  		order by id 
-   limit #{PageIndex},#{PageSize};
+
  </select>
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();

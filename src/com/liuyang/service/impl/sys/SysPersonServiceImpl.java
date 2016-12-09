@@ -6,9 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.liuyang.dao.sys.SyspersonMapper;
 import com.liuyang.pojo.sys.Sysperson;
 import com.liuyang.pojo.sys.SyspersonExample;
+import com.liuyang.pojo.sys.SyspersonExtend;
 import com.liuyang.service.sys.SysPersonService;
 import com.liuyang.utils.DigestUtil;
 import com.liuyang.utils.ToolsUtil;
@@ -53,10 +56,11 @@ public class SysPersonServiceImpl implements SysPersonService {
 	@Override
 	public SysPersonVo getTable(SysPersonVo vo) throws Exception {
 		SysPersonVo vo2=new SysPersonVo();
-	      vo.setPageIndex((vo.getPageNumber()-1)*vo.getPageSize());
-	   
-	      vo2.setRows(mapper.selectTable(vo));
-	      vo2.setTotal(mapper.getAllCount());
+	    
+	      PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
+	      List<SyspersonExtend> list=mapper.selectTable(vo);
+	      vo2.setRows(list);
+	      vo2.setTotal(((Page) list).getTotal());
 	      return vo2;
 	}
 

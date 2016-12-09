@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.liuyang.dao.sys.SysroleDao;
 import com.liuyang.dao.sys.SysrolesyspersonDao;
 import com.liuyang.pojo.sys.Sysrole;
@@ -54,19 +56,19 @@ public class SysRoleServiceImpl implements SysRoleService {
 	@Override
 	public SysroleVo getTable(SysroleVo vo) throws Exception {
 		SysroleVo vo2=new SysroleVo();
-	      vo.setPageIndex((vo.getPageNumber()-1)*vo.getPageSize());
-	   
+	    PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
+	   List<SysroleExtend> list=dao.selectTable(vo);
 	      vo2.setRows(dao.selectTable(vo));
-	      vo2.setTotal(dao.getAllCount());
+	      vo2.setTotal(((Page) list).getTotal());
 	      return vo2;
 	}
 
 	@Override
 	public SysroleVo getRoleByPerson(SysroleVo vo) throws Exception {
 		SysroleVo vo2=new SysroleVo();
-	      vo.setPageIndex((vo.getPageNumber()-1)*vo.getPageSize());
+		  PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
 	     List<SysroleExtend> list=dao.selectTable(vo);
-	     vo2.setTotal(dao.getAllCount());
+	     vo2.setTotal(((Page) list).getTotal());
 	     for (SysroleExtend sysroleExtend : list) {
 	    	 SysrolesyspersonExample example=new SysrolesyspersonExample();
 	    	 SysrolesyspersonExample.Criteria criteria=example.createCriteria();

@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fasterxml.jackson.databind.util.Converter;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.liuyang.dao.sys.SysdepartmentMapper;
 import com.liuyang.pojo.sys.Sysdepartment;
 import com.liuyang.pojo.sys.SysdepartmentExample;
@@ -62,9 +64,10 @@ public class SysDepartmentServiceImpl  implements SysDepartmentService{
 	@Override
 	public SysdepartmentVo GetSubOrgs(SysdepartmentVo vo) {
 		SysdepartmentVo vo2 = new SysdepartmentVo();
-		vo.setPageIndex((vo.getPageNumber() - 1) * vo.getPageSize());
-		vo2.setRows(mapper.selectTable(vo));
-		vo2.setTotal(mapper.getAllCount());
+	    PageHelper.startPage(vo.getPageNumber(), vo.getPageSize());
+	    List<SysdepartmentExtend> list=mapper.selectTable(vo);
+		vo2.setRows(list);
+		vo2.setTotal(((Page)list).getTotal());
 		return vo2;
 	}
 

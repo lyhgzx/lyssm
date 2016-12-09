@@ -270,7 +270,7 @@
   </resultMap>
 
  <select id="selectTable" parameterType="com.liuyang.vo.sys.SysfieldVo" resultMap="BaseResultMapExtend">
- 	select SQL_CALC_FOUND_ROWS  * from Sysfield
+ 	select  * from Sysfield
  	<where>
  		<if test="dicName!=null">
  			and Dic_Name like '%${dicName}%'
@@ -280,7 +280,7 @@
  		</if>
  	</where>
  		order by createTime 
-   limit #{PageIndex},#{PageSize} ;
+
  </select>
  <select id="getAllCount" resultType="java.lang.Integer">
  	SELECT FOUND_ROWS();
