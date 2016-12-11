@@ -11,6 +11,11 @@
 </style>
 <script type="text/javascript">
 	$(function() {
+		
+		 //多选
+	    $("#SysOperationId").select2({
+	        maximumSelectionLength: 3  //最多能够选择的个数
+	    });
 		//启动验证
 		var v = $("#myForm").validate({
 
@@ -46,7 +51,7 @@
 			data.status = $("#status").val();
 	
 					$.ajax({
-						url : basePath + '/admin/department/save',
+						url : basePath + '/admin/menu/save',
 						type : 'POST',
 						dataType : 'json',
 						cache : false,
@@ -150,7 +155,7 @@
 
 		return {
 			bind : function() {
-				$.getJSON(basePath + '/admin/department/treeform', function(
+				$.getJSON(basePath + '/admin/menu/treeform', function(
 						json) {
 					zTreeObj = $.fn.zTree.init($('#treeDemo'), setting, json);
 
@@ -179,16 +184,21 @@
 		<input type="hidden" name="id" value="${model.id}">
 		<table class="myTable">
 			<tr>
-				<th>上级机构</th>
+				<th>上级菜单</th>
 
 				<td colspan="3"><input id="parentname" type="text"
 					style="width: 150px;" onclick="showMenu();" /> <input
 					id="parentid" name="parentid" style="display: none" value="${model.parentid}" /></td>
 			<tr>
 			<tr>
-				<th>组织名称<i>*</i></th>
+				<th>菜单名称<i>*</i></th>
 				<td colspan="3"><input type="text" name="name" id="name"
 					value="${model.name}" /></td>
+			<tr>
+			<tr>
+				<th>菜单URL<i>*</i></th>
+				<td colspan="3"><input type="text" name="url" id="url"
+					value="${model.url}" /></td>
 			<tr>
 			<tr>
 				<th>是否叶子节点</th>
@@ -202,6 +212,16 @@
 				<td colspan="3"><select name="isautoexpand" id="isautoexpand">
 						<option value="0" <c:if test="${model.isautoexpand==0}">selected="selected"</c:if> >否</option>
 						<option value="1" <c:if test="${model.isautoexpand==1}">selected="selected"</c:if>>是</option>
+				</select></td>
+			<tr>
+			<tr>
+				<th>操作</th>
+				<td colspan="3">  <select name="SysOperationId" id="SysOperationId" style="width: 150px"  class="js-example-basic-multiple js-states " multiple="multiple">
+				 <option value="1">用户管理</option>
+                 <option value="2">角色管理</option>
+                 <option value="3">部门管理</option>
+                 <option value="4">菜单管理</option>
+				
 				</select></td>
 			<tr>
 			<tr>

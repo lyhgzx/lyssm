@@ -141,7 +141,7 @@ var list = {
 			title : param.status + '菜单',
 			shadeClose : false,
 			maxmin : true, // 开启最大化最小化按钮
-			area : [ '750px', '300px' ],
+			area : [ '600px', '400px' ],
 			fix : false, // 不固定
 			content : [ param.url, 'no' ], // iframe的url
 			btn : [ '确认', '取消' ],

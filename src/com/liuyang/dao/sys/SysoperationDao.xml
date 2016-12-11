@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liuyang.dao.sys.SysoperationDao" >
+	<resultMap id="BaseResultMap" type="com.liuyang.pojo.sys.Sysoperation" >
+		<id column="Id" property="id" jdbcType="VARCHAR" />
+		<result column="Name" property="name" jdbcType="VARCHAR" />
+		<result column="Script" property="script" jdbcType="VARCHAR" />
+		<result column="Icon" property="icon" jdbcType="VARCHAR" />
+		<result column="Sort" property="sort" jdbcType="INTEGER" />
+		<result column="State" property="state" jdbcType="VARCHAR" />
+		<result column="CreateTime" property="createtime" jdbcType="TIMESTAMP" />
+		<result column="CreatePerson" property="createperson" jdbcType="VARCHAR" />
+		<result column="DomId" property="domid" jdbcType="VARCHAR" />
+		<result column="Type" property="type" jdbcType="VARCHAR" />
+		<result column="Attr" property="attr" jdbcType="VARCHAR" />
+		<result column="ClassCss" property="classcss" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs" type="com.liuyang.pojo.sys.Sysoperation" extends="BaseResultMap"
+		>
+		<result column="Remark" property="remark" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause" >
+		<where >
+			<foreach collection="oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >and ${criterion.condition}</when>
+								<when test="criterion.singleValue" >and ${criterion.condition} #{criterion.value}</when>
+								<when test="criterion.betweenValue" >and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=","
+										>#{listItem}</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause" >
+		<where >
+			<foreach collection="example.oredCriteria" item="criteria" separator="or" >
+				<if test="criteria.valid" >
+					<trim prefix="(" suffix=")" prefixOverrides="and" >
+						<foreach collection="criteria.criteria" item="criterion" >
+							<choose >
+								<when test="criterion.noValue" >and ${criterion.condition}</when>
+								<when test="criterion.singleValue" >and ${criterion.condition} #{criterion.value}</when>
+								<when test="criterion.betweenValue" >and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}</when>
+								<when test="criterion.listValue" >
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem" open="(" close=")" separator=","
+										>#{listItem}</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List" >
+		Id, Name, Script, Icon, Sort, State, CreateTime, CreatePerson, DomId, Type, Attr,
+		ClassCss
+	</sql>
+	<sql id="Blob_Column_List" >Remark</sql>
+	<select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.liuyang.pojo.sys.SysoperationExample"
+		>
+		select
+		<if test="distinct" >distinct</if>
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sysoperation
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >order by ${orderByClause}</if>
+	</select>
+	<select id="selectByExample" resultMap="BaseResultMap" parameterType="com.liuyang.pojo.sys.SysoperationExample"
+		>
+		select
+		<if test="distinct" >distinct</if>
+		<include refid="Base_Column_List" />
+		from sysoperation
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >order by ${orderByClause}</if>
+	</select>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String"
+		>
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sysoperation
+    where Id = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String" >delete from sysoperation
+    where Id = #{id,jdbcType=VARCHAR}</delete>
+	<delete id="deleteByExample" parameterType="com.liuyang.pojo.sys.SysoperationExample"
+		>
+		delete from sysoperation
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.liuyang.pojo.sys.Sysoperation" >
+		insert into sysoperation (Id, Name, Script, Icon, Sort, State, CreateTime, CreatePerson,
+		DomId, Type, Attr, ClassCss, Remark) values (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{script,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER},
+		#{state,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createperson,jdbcType=VARCHAR},
+		#{domid,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{attr,jdbcType=VARCHAR}, #{classcss,jdbcType=VARCHAR},
+		#{remark,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.liuyang.pojo.sys.Sysoperation" >
+		insert into sysoperation
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="id != null" >Id,</if>
+			<if test="name != null" >Name,</if>
+			<if test="script != null" >Script,</if>
+			<if test="icon != null" >Icon,</if>
+			<if test="sort != null" >Sort,</if>
+			<if test="state != null" >State,</if>
+			<if test="createtime != null" >CreateTime,</if>
+			<if test="createperson != null" >CreatePerson,</if>
+			<if test="domid != null" >DomId,</if>
+			<if test="type != null" >Type,</if>
+			<if test="attr != null" >Attr,</if>
+			<if test="classcss != null" >ClassCss,</if>
+			<if test="remark != null" >Remark,</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides="," >
+			<if test="id != null" >#{id,jdbcType=VARCHAR},</if>
+			<if test="name != null" >#{name,jdbcType=VARCHAR},</if>
+			<if test="script != null" >#{script,jdbcType=VARCHAR},</if>
+			<if test="icon != null" >#{icon,jdbcType=VARCHAR},</if>
+			<if test="sort != null" >#{sort,jdbcType=INTEGER},</if>
+			<if test="state != null" >#{state,jdbcType=VARCHAR},</if>
+			<if test="createtime != null" >#{createtime,jdbcType=TIMESTAMP},</if>
+			<if test="createperson != null" >#{createperson,jdbcType=VARCHAR},</if>
+			<if test="domid != null" >#{domid,jdbcType=VARCHAR},</if>
+			<if test="type != null" >#{type,jdbcType=VARCHAR},</if>
+			<if test="attr != null" >#{attr,jdbcType=VARCHAR},</if>
+			<if test="classcss != null" >#{classcss,jdbcType=VARCHAR},</if>
+			<if test="remark != null" >#{remark,jdbcType=LONGVARCHAR},</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.liuyang.pojo.sys.SysoperationExample"
+		resultType="java.lang.Integer" >
+		select count(*) from sysoperation
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map" >
+		update sysoperation
+		<set >
+			<if test="record.id != null" >Id = #{record.id,jdbcType=VARCHAR},</if>
+			<if test="record.name != null" >Name = #{record.name,jdbcType=VARCHAR},</if>
+			<if test="record.script != null" >Script = #{record.script,jdbcType=VARCHAR},</if>
+			<if test="record.icon != null" >Icon = #{record.icon,jdbcType=VARCHAR},</if>
+			<if test="record.sort != null" >Sort = #{record.sort,jdbcType=INTEGER},</if>
+			<if test="record.state != null" >State = #{record.state,jdbcType=VARCHAR},</if>
+			<if test="record.createtime != null" >CreateTime = #{record.createtime,jdbcType=TIMESTAMP},</if>
+			<if test="record.createperson != null" >CreatePerson = #{record.createperson,jdbcType=VARCHAR},</if>
+			<if test="record.domid != null" >DomId = #{record.domid,jdbcType=VARCHAR},</if>
+			<if test="record.type != null" >Type = #{record.type,jdbcType=VARCHAR},</if>
+			<if test="record.attr != null" >Attr = #{record.attr,jdbcType=VARCHAR},</if>
+			<if test="record.classcss != null" >ClassCss = #{record.classcss,jdbcType=VARCHAR},</if>
+			<if test="record.remark != null" >Remark = #{record.remark,jdbcType=LONGVARCHAR},</if>
+		</set>
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExampleWithBLOBs" parameterType="map" >
+		update sysoperation set Id = #{record.id,jdbcType=VARCHAR}, Name = #{record.name,jdbcType=VARCHAR},
+		Script = #{record.script,jdbcType=VARCHAR}, Icon = #{record.icon,jdbcType=VARCHAR},
+		Sort = #{record.sort,jdbcType=INTEGER}, State = #{record.state,jdbcType=VARCHAR},
+		CreateTime = #{record.createtime,jdbcType=TIMESTAMP}, CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+		DomId = #{record.domid,jdbcType=VARCHAR}, Type = #{record.type,jdbcType=VARCHAR},
+		Attr = #{record.attr,jdbcType=VARCHAR}, ClassCss = #{record.classcss,jdbcType=VARCHAR},
+		Remark = #{record.remark,jdbcType=LONGVARCHAR}
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map" >
+		update sysoperation set Id = #{record.id,jdbcType=VARCHAR}, Name = #{record.name,jdbcType=VARCHAR},
+		Script = #{record.script,jdbcType=VARCHAR}, Icon = #{record.icon,jdbcType=VARCHAR},
+		Sort = #{record.sort,jdbcType=INTEGER}, State = #{record.state,jdbcType=VARCHAR},
+		CreateTime = #{record.createtime,jdbcType=TIMESTAMP}, CreatePerson = #{record.createperson,jdbcType=VARCHAR},
+		DomId = #{record.domid,jdbcType=VARCHAR}, Type = #{record.type,jdbcType=VARCHAR},
+		Attr = #{record.attr,jdbcType=VARCHAR}, ClassCss = #{record.classcss,jdbcType=VARCHAR}
+		<if test="_parameter != null" >
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.liuyang.pojo.sys.Sysoperation"
+		>
+		update sysoperation
+		<set >
+			<if test="name != null" >Name = #{name,jdbcType=VARCHAR},</if>
+			<if test="script != null" >Script = #{script,jdbcType=VARCHAR},</if>
+			<if test="icon != null" >Icon = #{icon,jdbcType=VARCHAR},</if>
+			<if test="sort != null" >Sort = #{sort,jdbcType=INTEGER},</if>
+			<if test="state != null" >State = #{state,jdbcType=VARCHAR},</if>
+			<if test="createtime != null" >CreateTime = #{createtime,jdbcType=TIMESTAMP},</if>
+			<if test="createperson != null" >CreatePerson = #{createperson,jdbcType=VARCHAR},</if>
+			<if test="domid != null" >DomId = #{domid,jdbcType=VARCHAR},</if>
+			<if test="type != null" >Type = #{type,jdbcType=VARCHAR},</if>
+			<if test="attr != null" >Attr = #{attr,jdbcType=VARCHAR},</if>
+			<if test="classcss != null" >ClassCss = #{classcss,jdbcType=VARCHAR},</if>
+			<if test="remark != null" >Remark = #{remark,jdbcType=LONGVARCHAR},</if>
+		</set>
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs" parameterType="com.liuyang.pojo.sys.Sysoperation"
+		>
+		update sysoperation set Name = #{name,jdbcType=VARCHAR}, Script = #{script,jdbcType=VARCHAR},
+		Icon = #{icon,jdbcType=VARCHAR}, Sort = #{sort,jdbcType=INTEGER}, State = #{state,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP}, CreatePerson = #{createperson,jdbcType=VARCHAR},
+		DomId = #{domid,jdbcType=VARCHAR}, Type = #{type,jdbcType=VARCHAR}, Attr = #{attr,jdbcType=VARCHAR},
+		ClassCss = #{classcss,jdbcType=VARCHAR}, Remark = #{remark,jdbcType=LONGVARCHAR}
+		where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.liuyang.pojo.sys.Sysoperation"
+		>
+		update sysoperation set Name = #{name,jdbcType=VARCHAR}, Script = #{script,jdbcType=VARCHAR},
+		Icon = #{icon,jdbcType=VARCHAR}, Sort = #{sort,jdbcType=INTEGER}, State = #{state,jdbcType=VARCHAR},
+		CreateTime = #{createtime,jdbcType=TIMESTAMP}, CreatePerson = #{createperson,jdbcType=VARCHAR},
+		DomId = #{domid,jdbcType=VARCHAR}, Type = #{type,jdbcType=VARCHAR}, Attr = #{attr,jdbcType=VARCHAR},
+		ClassCss = #{classcss,jdbcType=VARCHAR} where Id = #{id,jdbcType=VARCHAR}
+	</update>
+	
+	
+	
+	<!--  自定义 -->
+	<select id="selectTable" parameterType="com.liuyang.vo.sys.SysoperationVo" resultType="com.liuyang.pojo.sys.SysoperationExtend"
+		>
+		select   * from Sysoperation
+		<where>
+			<if test="name!=null and name!=''">	name like '%${name}%'</if>
+		</where>
+		order by createtime
+	</select>
+
+	
+	<delete id="deleteByIds">
+		delete from Sysoperation
+ 	where id in
+		<foreach collection="array" item="id" open="(" separator="," close=")">#{id}</foreach>
+	</delete>
+</mapper>

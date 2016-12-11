@@ -3,46 +3,75 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="staticPath" value="${basePath}/resources"></c:set>
-
+<link href="${staticPath}/css/bootstrap.min.css?v=3.3.6"
+	rel="stylesheet">
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">
 <link
-	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"	rel="stylesheet">
+	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"
+	rel="stylesheet">
+<link
+	href="${staticPath}/js/plugins/select2/css/select2.min.css"
+	rel="stylesheet">
 <!-- 全局js -->
 <script src="${staticPath}/js/jquery.min.js?v=2.1.4"></script>
 
-
+<script src="${staticPath}/js/bootstrap.min.js?v=3.3.6"></script>
 <script
 	src="${staticPath}/js/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script
 	src="${staticPath}/js/plugins/jquery-validation/localization/messages_zh.js"></script>
 
-	<!-- ztree -->
-		<script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
+<!-- ztree -->
+<script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
 
+<!-- select2 -->
+
+<script src="${staticPath}/js/plugins/select2/js/select2.min.js"></script>
+<script src="${staticPath}/js/plugins/select2/js/i18n/zh-CN.js"></script>
 <style>
- /*错误样式*/
-input.error { border: 1px dashed red;background:yellow; padding:2px; }
-select.error { border: 1px dashed red; background:yellow; padding:2px; }
+/*错误样式*/
+input.error {
+	border: 1px dashed red;
+	background: yellow;
+	padding: 2px;
+}
+
+select.error {
+	border: 1px dashed red;
+	background: yellow;
+	padding: 2px;
+}
+
 .error {
-    padding-left: 16px; 
-    margin-left: 2px; 
-    color:red; 
-    /*背景图片（校验未通过的’×’图标）*/
-    background: url(${staticPath}/img/error.png) no-repeat 0px 0px;
-    font-family:Verdana, Geneva, sans-serif;
-    font-size:11px;
+	padding-left: 16px;
+	margin-left: 2px;
+	color: red;
+	/*背景图片（校验未通过的’×’图标）*/
+	background: url(${staticPath}/img/error.png) no-repeat 0px 0px;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
 }
 /*验证通过样式*/
-input.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
-select.valid{ background:#FFC; border:#09F solid 1px; padding:2px;}
+input.valid {
+	background: #FFC;
+	border: #09F solid 1px;
+	padding: 2px;
+}
+
+select.valid {
+	background: #FFC;
+	border: #09F solid 1px;
+	padding: 2px;
+}
+
 .valid {
-    padding-left: 16px; 
-    margin-left: 2px;
-    /*背景图片(校验通过的’√’图标)*/
-    background: url(checked.gif) no-repeat 0px 0px;
-    font-family:Verdana, Geneva, sans-serif;
-    color:#00F;
-    font-size:11px;
+	padding-left: 16px;
+	margin-left: 2px;
+	/*背景图片(校验通过的’√’图标)*/
+	background: url(checked.gif) no-repeat 0px 0px;
+	font-family: Verdana, Geneva, sans-serif;
+	color: #00F;
+	font-size: 11px;
 }
 
 /*表单样式*/
@@ -103,7 +132,7 @@ ul.ztree {
 			}
 			var formData = this.serialize();
 			//解决序列化乱码问题
-			formData=decodeURIComponent(formData,true);
+			formData = decodeURIComponent(formData, true);
 			var params = toArray(formData, "&");
 			var resultJSON = {};
 			var connecter = function(name, source, value) {
@@ -130,7 +159,5 @@ ul.ztree {
 			connect : ","
 		};
 	})(jQuery);
-	
- 
 </script>
 

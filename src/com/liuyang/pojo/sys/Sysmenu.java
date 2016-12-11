@@ -1,10 +1,11 @@
 package com.liuyang.pojo.sys;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.liuyang.vo.sys.SysMenuVo;
 
-public class Sysmenu {
+public class Sysmenu implements Serializable {
     private String id;
 
     private String name;
@@ -27,7 +28,9 @@ public class Sysmenu {
 
     private String updateperson;
 
-    private String isleaf;
+    private Byte isleaf;
+
+    private Byte isautoexpand;
 
     private String tabid;
 
@@ -36,6 +39,8 @@ public class Sysmenu {
     private String parentname;
 
     private String remark;
+
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -125,12 +130,20 @@ public class Sysmenu {
         this.updateperson = updateperson == null ? null : updateperson.trim();
     }
 
-    public String getIsleaf() {
+    public Byte getIsleaf() {
         return isleaf;
     }
 
-    public void setIsleaf(String isleaf) {
-        this.isleaf = isleaf == null ? null : isleaf.trim();
+    public void setIsleaf(Byte isleaf) {
+        this.isleaf = isleaf;
+    }
+
+    public Byte getIsautoexpand() {
+        return isautoexpand;
+    }
+
+    public void setIsautoexpand(Byte isautoexpand) {
+        this.isautoexpand = isautoexpand;
     }
 
     public String getTabid() {
@@ -164,15 +177,43 @@ public class Sysmenu {
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(getClass().getSimpleName());
+        sb.append(" [");
+        sb.append("Hash = ").append(hashCode());
+        sb.append(", id=").append(id);
+        sb.append(", name=").append(name);
+        sb.append(", parentid=").append(parentid);
+        sb.append(", url=").append(url);
+        sb.append(", iconic=").append(iconic);
+        sb.append(", sort=").append(sort);
+        sb.append(", state=").append(state);
+        sb.append(", createperson=").append(createperson);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", updatetime=").append(updatetime);
+        sb.append(", updateperson=").append(updateperson);
+        sb.append(", isleaf=").append(isleaf);
+        sb.append(", isautoexpand=").append(isautoexpand);
+        sb.append(", tabid=").append(tabid);
+        sb.append(", cascadeid=").append(cascadeid);
+        sb.append(", parentname=").append(parentname);
+        sb.append(", remark=").append(remark);
+        sb.append(", serialVersionUID=").append(serialVersionUID);
+        sb.append("]");
+        return sb.toString();
+    }
     
-	public SysMenuVo toVo() {
-		SysMenuVo vo = new SysMenuVo();
-		vo.setId(id);
-		vo.setParentid(parentid);
-		vo.setName(name);
-		vo.setUrl(url);
-		vo.setIconic(iconic);
-		vo.setSort(sort);
-		return vo;
-	}
+    	public SysMenuVo toVo() {
+    			SysMenuVo vo = new SysMenuVo();
+    			vo.setId(id);
+    			vo.setParentid(parentid);
+    			vo.setName(name);
+    		    vo.setUrl(url);
+    			vo.setIconic(iconic);
+    			vo.setSort(sort);
+    			return vo;
+    		}
 }

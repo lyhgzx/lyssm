@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.liuyang.dao.sys.SysmenuDao;
 import com.liuyang.dao.sys.SysmenuMapper;
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SysmenuExample;
@@ -20,10 +21,10 @@ import com.liuyang.vo.sys.SysMenuVo;
 import com.liuyang.vo.sys.SysMenuVo2;
 
 @Service
-public class MenuServiceImpl implements SysMenuService {
+public class SysMenuServiceImpl implements SysMenuService {
 
 	@Autowired
-	private SysmenuMapper dao;
+	 SysmenuDao dao;
 
 	@Override
 	public List<Sysmenu> selectMenuByUserID(String userID) {

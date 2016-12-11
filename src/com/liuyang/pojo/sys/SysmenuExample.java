@@ -855,63 +855,113 @@ public class SysmenuExample {
             return (Criteria) this;
         }
 
-        public Criteria andIsleafEqualTo(String value) {
+        public Criteria andIsleafEqualTo(Byte value) {
             addCriterion("IsLeaf =", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafNotEqualTo(String value) {
+        public Criteria andIsleafNotEqualTo(Byte value) {
             addCriterion("IsLeaf <>", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafGreaterThan(String value) {
+        public Criteria andIsleafGreaterThan(Byte value) {
             addCriterion("IsLeaf >", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafGreaterThanOrEqualTo(String value) {
+        public Criteria andIsleafGreaterThanOrEqualTo(Byte value) {
             addCriterion("IsLeaf >=", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafLessThan(String value) {
+        public Criteria andIsleafLessThan(Byte value) {
             addCriterion("IsLeaf <", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafLessThanOrEqualTo(String value) {
+        public Criteria andIsleafLessThanOrEqualTo(Byte value) {
             addCriterion("IsLeaf <=", value, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafLike(String value) {
-            addCriterion("IsLeaf like", value, "isleaf");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsleafNotLike(String value) {
-            addCriterion("IsLeaf not like", value, "isleaf");
-            return (Criteria) this;
-        }
-
-        public Criteria andIsleafIn(List<String> values) {
+        public Criteria andIsleafIn(List<Byte> values) {
             addCriterion("IsLeaf in", values, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafNotIn(List<String> values) {
+        public Criteria andIsleafNotIn(List<Byte> values) {
             addCriterion("IsLeaf not in", values, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafBetween(String value1, String value2) {
+        public Criteria andIsleafBetween(Byte value1, Byte value2) {
             addCriterion("IsLeaf between", value1, value2, "isleaf");
             return (Criteria) this;
         }
 
-        public Criteria andIsleafNotBetween(String value1, String value2) {
+        public Criteria andIsleafNotBetween(Byte value1, Byte value2) {
             addCriterion("IsLeaf not between", value1, value2, "isleaf");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandIsNull() {
+            addCriterion("IsAutoExpand is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandIsNotNull() {
+            addCriterion("IsAutoExpand is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandEqualTo(Byte value) {
+            addCriterion("IsAutoExpand =", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandNotEqualTo(Byte value) {
+            addCriterion("IsAutoExpand <>", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandGreaterThan(Byte value) {
+            addCriterion("IsAutoExpand >", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandGreaterThanOrEqualTo(Byte value) {
+            addCriterion("IsAutoExpand >=", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandLessThan(Byte value) {
+            addCriterion("IsAutoExpand <", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandLessThanOrEqualTo(Byte value) {
+            addCriterion("IsAutoExpand <=", value, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandIn(List<Byte> values) {
+            addCriterion("IsAutoExpand in", values, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandNotIn(List<Byte> values) {
+            addCriterion("IsAutoExpand not in", values, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandBetween(Byte value1, Byte value2) {
+            addCriterion("IsAutoExpand between", value1, value2, "isautoexpand");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsautoexpandNotBetween(Byte value1, Byte value2) {
+            addCriterion("IsAutoExpand not between", value1, value2, "isautoexpand");
             return (Criteria) this;
         }
 
