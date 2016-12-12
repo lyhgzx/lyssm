@@ -18,6 +18,7 @@ import com.liuyang.pojo.sys.SysmenuExtend;
 import com.liuyang.service.sys.SysMenuService;
 import com.liuyang.utils.ShiroUtil;
 import com.liuyang.utils.ToolsUtil;
+import com.liuyang.vo.sys.MenuVo;
 import com.liuyang.vo.sys.SysMenuVo;
 import com.liuyang.vo.sys.SysMenuVo2;
 
@@ -209,6 +210,17 @@ public class SysMenuServiceImpl implements SysMenuService {
 	    		insertMenuOperation(model.getId(),str);
 			}
 		}
+	}
+
+	@Override
+	public List<MenuVo> selectAllMenus() throws Exception {
+		
+		return dao.selectAllMenus();
+	}
+
+	@Override
+	public List<MenuVo> selectGiveMenusByRoleId(String roleId) throws Exception {
+		return dao.selectGiveMenusByRoleId(roleId);
 	}
 
 }

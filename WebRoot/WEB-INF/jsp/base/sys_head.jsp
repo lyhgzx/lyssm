@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html;charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${staticPath}/css/bootstrap.min.css?v=3.3.6"
 	rel="stylesheet">
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">

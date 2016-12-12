@@ -6,6 +6,7 @@ import java.util.Map;
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SysmenuExtend;
 import com.liuyang.service.BaseService;
+import com.liuyang.vo.sys.MenuVo;
 import com.liuyang.vo.sys.SysMenuVo;
 import com.liuyang.vo.sys.SysMenuVo2;
 
@@ -55,4 +56,8 @@ public interface SysMenuService extends BaseService<Sysmenu>{
    	
    	int insert(SysmenuExtend model);
    	void update(SysmenuExtend model);
+   	
+	List<MenuVo> selectAllMenus() throws Exception;
+   	
+   	List<MenuVo> selectGiveMenusByRoleId(String roleId) throws Exception;
 }

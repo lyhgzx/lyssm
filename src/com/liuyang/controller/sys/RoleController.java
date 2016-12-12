@@ -14,9 +14,11 @@ import com.liuyang.pojo.sys.Sysfield;
 import com.liuyang.pojo.sys.Sysperson;
 import com.liuyang.pojo.sys.Sysrole;
 import com.liuyang.service.sys.SysFieldService;
+import com.liuyang.service.sys.SysMenuService;
 import com.liuyang.service.sys.SysPersonService;
 import com.liuyang.service.sys.SysRoleService;
 import com.liuyang.utils.StringUtil;
+import com.liuyang.vo.sys.RoleMenuVo;
 import com.liuyang.vo.sys.SysPersonVo;
 import com.liuyang.vo.sys.SysfieldVo;
 import com.liuyang.vo.sys.SysroleVo;
@@ -27,7 +29,9 @@ import com.liuyang.vo.sys.SysrolesyspersonVo;
 @RequestMapping(value="/admin/role")
 public class RoleController extends BaseController {
 	@Autowired
-	private  SysRoleService service;
+	SysRoleService service;
+	@Autowired
+	SysMenuService menuService;
 	
 	@RequestMapping("")
 	public String showTable(){
@@ -114,6 +118,88 @@ public class RoleController extends BaseController {
 		  
 		try {
 			service.authorPersonRole(vo);
+			return sendOk();
+		} catch (Exception e) {
+			return sendError();
+		}
+		
+	}
+	/**
+	 * 为角色分配菜单
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/rolemenu")
+	public String rolemenu(String id,Model model){
+		model.addAttribute("id", id);
+		return "sys/roleMenu";
+	}
+	/**
+	 * 为角色分配操作
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/roleoperation")
+	public String roleoperation(String id,Model model){
+		model.addAttribute("id", id);
+		return "sys/roleOperation";
+	}
+	/**
+	 * 所有的菜单
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/getallmenus")
+	@ResponseBody
+	public Object getAllMenus() throws Exception{
+
+			return menuService.selectAllMenus();
+
+	}
+	/**
+	 * 当前角色已经分配的菜单
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/getgivemenus")
+	@ResponseBody
+	public Object getGiveMenus(String id) throws Exception{
+
+			return menuService.selectGiveMenusByRoleId(id);
+
+	}
+	/**
+	 * 为角色分配菜单--授权选中
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/AddSysMenuSysRoleSysOperation",method=RequestMethod.POST)
+	@ResponseBody
+	public Object AddSysMenuSysRoleSysOperation(RoleMenuVo vo) throws Exception{
+		  
+		try {
+			service.AddSysMenuSysRoleSysOperation(vo);
+			return sendOk();
+		} catch (Exception e) {
+			return sendError();
+		}
+		
+	}
+	
+	/**
+	 *  为角色分配菜单--授权取消
+	 * @param vo
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value="/DelSysMenuSysRoleSysOperation",method=RequestMethod.POST)
+	@ResponseBody
+	public Object DelSysMenuSysRoleSysOperation(RoleMenuVo vo) throws Exception{
+		  
+		try {
+			service.DelSysMenuSysRoleSysOperation(vo);
 			return sendOk();
 		} catch (Exception e) {
 			return sendError();

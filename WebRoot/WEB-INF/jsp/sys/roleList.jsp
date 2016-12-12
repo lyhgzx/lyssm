@@ -20,9 +20,16 @@
 						<label>角色名:</label> <input type="text" class="form-control"
 							id="name"/ >
 					</div>
-					<div class="pull-right">
+					
 						<button id="search" class="btn btn-primary " type="button">
 							<i class="fa fa-search"></i> 搜索
+						</button>
+						<div class="pull-right">
+							<button id="rolemenu" class="btn btn-primary " type="button">
+							<i class="fa fa-check"></i> 为角色分配菜单
+						</button>
+							<button id="roleoperation" class="btn btn-primary " type="button">
+							<i class="fa fa-check"></i> 为角色分配操作
 						</button>
 						<button id="insert" class="btn btn-primary " type="button">
 							<i class="fa fa-check"></i> 增加

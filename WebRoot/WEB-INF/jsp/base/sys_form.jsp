@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="basePath" value="${pageContext.request.contextPath}"></c:set>
 <c:set var="staticPath" value="${basePath}/resources"></c:set>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="${staticPath}/css/bootstrap.min.css?v=3.3.6"
 	rel="stylesheet">
 <link href="${staticPath}/css/font-awesome.css?v=4.4.0" rel="stylesheet">

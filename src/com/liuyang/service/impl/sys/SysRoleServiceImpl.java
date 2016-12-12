@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.liuyang.dao.sys.SysmenusysrolesysoperationDao;
 import com.liuyang.dao.sys.SysroleDao;
 import com.liuyang.dao.sys.SysrolesyspersonDao;
+import com.liuyang.pojo.sys.Sysmenusysrolesysoperation;
+import com.liuyang.pojo.sys.SysmenusysrolesysoperationExample;
 import com.liuyang.pojo.sys.Sysrole;
 import com.liuyang.pojo.sys.SysroleExtend;
 import com.liuyang.pojo.sys.Sysrolesysperson;
@@ -17,6 +20,8 @@ import com.liuyang.pojo.sys.SysrolesyspersonExample;
 import com.liuyang.service.sys.SysRoleService;
 import com.liuyang.utils.ShiroUtil;
 import com.liuyang.utils.ToolsUtil;
+import com.liuyang.vo.sys.MenuVo;
+import com.liuyang.vo.sys.RoleMenuVo;
 import com.liuyang.vo.sys.SysroleVo;
 import com.liuyang.vo.sys.SysrolesyspersonVo;
 @Service
@@ -26,6 +31,9 @@ public class SysRoleServiceImpl implements SysRoleService {
 	SysroleDao dao;
 	@Autowired 
 	SysrolesyspersonDao rolepersonDao;
+	@Autowired
+	SysmenusysrolesysoperationDao rolemenuDao;
+	
 	@Override
 	public Sysrole getById(String id) throws Exception {
 		return dao.selectByPrimaryKey(id);
@@ -104,5 +112,44 @@ public class SysRoleServiceImpl implements SysRoleService {
 		}
 		
 	}
+
+	@Override
+	public void AddSysMenuSysRoleSysOperation(RoleMenuVo vo) {
+		if(vo!=null){
+			if(vo.getMenuIds().size()>0){
+				for (String menuid : vo.getMenuIds()) {
+					SysmenusysrolesysoperationExample example=new SysmenusysrolesysoperationExample();
+					SysmenusysrolesysoperationExample.Criteria criteria=example.createCriteria();
+					criteria.andSysmenuidEqualTo(menuid);
+					criteria.andSysroleidEqualTo(vo.getRoleId());
+					if(rolemenuDao.countByExample(example)==0){
+						Sysmenusysrolesysoperation model=new Sysmenusysrolesysoperation();
+						model.setId(ToolsUtil.getUUID());
+						model.setSysmenuid(menuid);
+						model.setSysroleid(vo.getRoleId());
+						rolemenuDao.insert(model);
+					}
+				}
+			}
+		}
+		
+	}
+
+	@Override
+	public void DelSysMenuSysRoleSysOperation(RoleMenuVo vo) {
+		if(vo!=null){
+			if(vo.getMenuIds().size()>0){
+				SysmenusysrolesysoperationExample example=new SysmenusysrolesysoperationExample();
+				SysmenusysrolesysoperationExample.Criteria criteria=example.createCriteria();
+				criteria.andSysroleidEqualTo(vo.getRoleId());
+				criteria.andSysmenuidIn(vo.getMenuIds());
+				rolemenuDao.deleteByExample(example);
+			
+			}
+		}
+		
+	}
+
+	
 
 }

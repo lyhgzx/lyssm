@@ -497,4 +497,16 @@
 	<delete id="deleteMenuOperationByMenuId" parameterType="java.lang.String">
 		delete from sysmenusysoperation where SysMenuId=#{value}
 	</delete>
+<!--	所有的菜单-->
+	<select id="selectAllMenus" resultType="com.liuyang.vo.sys.MenuVo">
+		select id,name,parentid,cascadeid from sysmenu 
+	</select>
+<!--	已经分配的菜单-->
+	<select  id="selectGiveMenusByRoleId" parameterType="java.lang.String" resultType="com.liuyang.vo.sys.MenuVo">
+		select t0.id,name,parentid,cascadeid from sysmenu t0 LEFT JOIN sysmenusysrolesysoperation t1 on t0.id=t1.SysMenuId
+where t1.SysRoleId=#{value} and t1.SysOperationId is null 
+		order by CreateTime 
+		
+	</select>
+	
 </mapper>

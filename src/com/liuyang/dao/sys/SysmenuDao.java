@@ -3,6 +3,7 @@ package com.liuyang.dao.sys;
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SysmenuExample;
 import com.liuyang.pojo.sys.SysmenuExtend;
+import com.liuyang.vo.sys.MenuVo;
 import com.liuyang.vo.sys.SysMenuVo2;
 
 import java.util.List;
@@ -55,4 +56,8 @@ public interface SysmenuDao {
    	int insertMenuOperation(Map<String, String> map);
    	
    	void deleteMenuOperationByMenuId(String menuId);
+   	
+   	List<MenuVo> selectAllMenus();
+   	
+   	List<MenuVo> selectGiveMenusByRoleId(String roleId);
 }
