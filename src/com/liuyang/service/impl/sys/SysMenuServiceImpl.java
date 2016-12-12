@@ -2,6 +2,7 @@ package com.liuyang.service.impl.sys;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,12 @@ import org.springframework.stereotype.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.liuyang.dao.sys.SysmenuDao;
-import com.liuyang.dao.sys.SysmenuMapper;
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SysmenuExample;
 import com.liuyang.pojo.sys.SysmenuExtend;
 import com.liuyang.service.sys.SysMenuService;
 import com.liuyang.utils.ShiroUtil;
+import com.liuyang.utils.ToolsUtil;
 import com.liuyang.vo.sys.SysMenuVo;
 import com.liuyang.vo.sys.SysMenuVo2;
 
@@ -101,14 +102,16 @@ public class SysMenuServiceImpl implements SysMenuService {
 
 	@Override
 	public int insert(Sysmenu model) throws Exception {
-		model.setId("0");
+		model.setId(ToolsUtil.getUUID());
 		ChangeModuleCascade(model);
 		model.setCreatetime(new Date());
 		model.setCreateperson(ShiroUtil.getSysUserName());
 		if (model.getParentid() == null) {
 			model.setParentid("0");
 		}
-		return dao.insert(model);
+		int result=dao.insert(model);
+	
+		return result;
 	}
 
 	@Override
@@ -156,6 +159,56 @@ public class SysMenuServiceImpl implements SysMenuService {
 		}
 
 		model.setCascadeid(cascadeId);
+	}
+
+	@Override
+	public List<String> selectOperationByMenu(String menuId)
+	{
+		return dao.selectOperationByMenu(menuId);
+	}
+
+	@Override
+	public int insertMenuOperation(String sysMenuId, String sysOperationId)
+	{ 
+		HashMap<String, String> map=new HashMap<>();
+		map.put("SysMenuId", sysMenuId);
+		map.put("SysOperationId", sysOperationId);
+		return dao.insertMenuOperation(map);
+	}
+
+	@Override
+	public int insert(SysmenuExtend model)
+	{
+		model.setId(ToolsUtil.getUUID());
+		ChangeModuleCascade(model);
+		model.setCreatetime(new Date());
+		model.setCreateperson(ShiroUtil.getSysUserName());
+		if (model.getParentid() == null) {
+			model.setParentid("0");
+		}
+		int result=dao.insert(model);
+	    if(result>0&&model.getOperationIds().size()>0){
+	    	for (String  str : model.getOperationIds())
+			{
+	    		insertMenuOperation(model.getId(),str);
+			}
+	    }
+		return result;
+	}
+
+	@Override
+	public void update(SysmenuExtend model)
+	{
+		ChangeModuleCascade(model);
+		int result=dao.updateByPrimaryKeySelective(model);
+		if(result>0){
+			dao.deleteMenuOperationByMenuId(model.getId());
+			
+			for (String  str : model.getOperationIds())
+			{
+	    		insertMenuOperation(model.getId(),str);
+			}
+		}
 	}
 
 }

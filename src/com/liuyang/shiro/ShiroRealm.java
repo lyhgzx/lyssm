@@ -18,7 +18,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.liuyang.dao.sys.SysmenuMapper;
+import com.liuyang.dao.sys.SysmenuDao;
 import com.liuyang.dao.sys.SyspersonMapper;
 import com.liuyang.pojo.sys.Sysmenu;
 import com.liuyang.pojo.sys.SyspersonExtend;
@@ -30,7 +30,7 @@ public class ShiroRealm extends AuthorizingRealm {
 	
 
 	@Autowired
-	private SysmenuMapper menuDao;
+	private SysmenuDao menuDao;
 	
 	@Autowired
 	SyspersonMapper personMapper;

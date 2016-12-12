@@ -54,13 +54,12 @@ var list = {
 										list.bindTree();
 									});
 								} else {
-									layer.msg('删除失败！', {
+									layer.msg(data.data, {
 										icon : 2,
 										time : 2000
 									// 2秒关闭（如果不配置，默认是3秒）
 									}, function() {
-										table.reload();
-										list.bindTree();
+										
 									});
 
 								}

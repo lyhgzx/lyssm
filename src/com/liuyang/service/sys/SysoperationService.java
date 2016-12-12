@@ -6,4 +6,5 @@ import com.liuyang.vo.sys.SysoperationVo;
 
 public interface SysoperationService extends BaseService<Sysoperation>{
 	SysoperationVo getTable(SysoperationVo vo) throws Exception;
+    
 }

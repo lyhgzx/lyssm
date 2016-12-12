@@ -6,6 +6,8 @@ import com.liuyang.pojo.sys.SysmenuExtend;
 import com.liuyang.vo.sys.SysMenuVo2;
 
 import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface SysmenuDao {
@@ -47,4 +49,10 @@ public interface SysmenuDao {
    	List<Sysmenu> selectMenuByParent(Sysmenu record);
    	
    	Sysmenu selectFirst(Sysmenu record);
+   	
+   	List<String> selectOperationByMenu(String menuId);
+   	
+   	int insertMenuOperation(Map<String, String> map);
+   	
+   	void deleteMenuOperationByMenuId(String menuId);
 }

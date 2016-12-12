@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,10 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.liuyang.controller.base.BaseController;
+import com.liuyang.pojo.DropDown;
 import com.liuyang.pojo.sys.Sysmenu;
+import com.liuyang.pojo.sys.SysmenuExtend;
+import com.liuyang.service.CommonService;
 import com.liuyang.service.sys.SysMenuService;
+import com.liuyang.utils.JsonUtil;
 import com.liuyang.utils.StringUtil;
+import com.liuyang.vo.DropDowmVo;
 import com.liuyang.vo.sys.SysMenuVo2;
+import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 
 
 @Controller
@@ -24,7 +31,8 @@ public class MenuController extends BaseController
 {
 	@Autowired
 	private SysMenuService service;
-
+	@Autowired
+	CommonService CommonService;
 	@RequestMapping("")
 	public String showTable()
 	{
@@ -44,12 +52,13 @@ public class MenuController extends BaseController
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	@ResponseBody
-	public Object save(Sysmenu model) throws Exception
+	public Object save(SysmenuExtend model) throws Exception
 	{
 		if (StringUtil.isBlank(model.getId()))
 		{
+ 
+		  service.insert(model);
 
-			service.insert(model);
 		} else
 		{
 
@@ -62,7 +71,7 @@ public class MenuController extends BaseController
 	@RequestMapping("/addPage")
 	public String Add(Model model)
 	{
-
+		model.addAttribute("operationIds","[]");
 		model.addAttribute("status", "add");
 		return "sys/menuForm";
 	}
@@ -70,9 +79,11 @@ public class MenuController extends BaseController
 	@RequestMapping("/updatePage")
 	public String Update(Model model, String id) throws Exception
 	{
+		
 		Sysmenu Sysmenu = service.getById(id);
-
 		model.addAttribute("model", Sysmenu);
+		String jsonString=JsonUtil.toString(service.selectOperationByMenu(id));
+		model.addAttribute("operationIds",jsonString.equals("")?"[]":jsonString);
 		model.addAttribute("status", "update");
 		return "sys/menuForm";
 	}
@@ -81,13 +92,19 @@ public class MenuController extends BaseController
 	@ResponseBody
 	public Object delete(String ids) throws Exception
 	{
-		if (StringUtil.isNotBlank(ids))
+		try
 		{
-			service.delete(ids);
-			return sendOk();
-		} else
+			if (StringUtil.isNotBlank(ids))
+			{
+				service.delete(ids);
+				return sendOk();
+			} else
+			{
+				return sendError();
+			} 
+		} catch (DataIntegrityViolationException e)
 		{
-			return sendError();
+			return sendError("存在菜单相关联的操作，请先删除相应操作信息");
 		}
 
 	}
@@ -113,5 +130,37 @@ public class MenuController extends BaseController
 		List<Sysmenu> sysmenus = service.getList();
 
 		return sysmenus;
+	}
+	/**
+	 * 菜单-操作
+	  * SysOperationSelect(菜单-操作)
+	  * @Title: SysOperationSelect
+	  * @Description: TODO
+	  * @param @return    设定文件
+	  * @return Object    返回类型
+	  * @throws
+	 */
+	@RequestMapping("/operationSelect")
+	@ResponseBody
+	public Object SysOperationSelect(){
+		DropDowmVo vo =new DropDowmVo("id", "name", "sysoperation","");
+		List<DropDown> dropDowns=CommonService.getDropDowm(vo);
+		return dropDowns;
+	}
+	/**
+	 * 
+	  * selectOperationByMenu(获取当前菜单后的操作集合)
+	  *
+	  * @Title: selectOperationByMenu
+	  * @Description: TODO
+	  * @param @param id
+	  * @param @return    设定文件
+	  * @return Object    返回类型
+	  * @throws
+	 */
+	@RequestMapping("/operationByMenu")
+	@ResponseBody
+	public Object selectOperationByMenu(String id){
+		return service.selectOperationByMenu(id);
 	}
 }

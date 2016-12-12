@@ -14,7 +14,9 @@
 		
 		 //多选
 	    $("#SysOperationId").select2({
-	        maximumSelectionLength: 3  //最多能够选择的个数
+	        language: "zh-CN",
+	        placeholder:'请选择',
+	        allowClear:true
 	    });
 		//启动验证
 		var v = $("#myForm").validate({
@@ -24,9 +26,6 @@
 		        required: true
  
 		      }
-
-		  
-		   
 
 		    },
 		    messages: {
@@ -41,15 +40,21 @@
 
 		parentTree.bind();
 
+		var operationids=${operationIds};
+		SysOperationSelect.show(operationids);
 	})
 
 	function save() {
 		if ($("#myForm").valid()) {
 
 			var data = $("form").serializeJSON();
-
+	          //$("#SysOperationId").val()得到数组类型，然后.toString()转换成字符串 后方用list<String>解析
+	          if($("#SysOperationId").val()){
+	            data.operationIds=$("#SysOperationId").val().toString() ; 
+	          }
+           
 			data.status = $("#status").val();
-	
+
 					$.ajax({
 						url : basePath + '/admin/menu/save',
 						type : 'POST',
@@ -62,11 +67,9 @@
 
 							if (msg.code === 1) {
 								parent.$("#handle_status").val('1');
-
 								parent.layer.close(index); //再执行关闭
 
 							} else {
-
 								parent.$("#handle_status").val('0');
 								parent.layer.close(index); //再执行关闭
 							}
@@ -76,7 +79,7 @@
 
 							return;
 						}
-					})
+					}) 
 
 		}
 
@@ -176,6 +179,33 @@
 			}
 		};
 	}();
+	
+	
+//菜单-操作
+	var SysOperationSelect = function () {
+	    return {
+	        show: function (d) {
+	            $.getJSON(basePath + '/admin/menu/operationSelect', function (data) {
+	                var select = $('#SysOperationId');
+	                select.empty();
+	                for (var i = 0; i < data.length; i++) {
+	                    var option = $("<option>").text(data[i].name).val(data[i].id)
+	                    select.append(option);
+	                }
+	                if (d) {
+	                
+	                  $("#SysOperationId").val(d).trigger('change');
+	                }
+	                
+	            });
+	        
+	        }
+	    }
+
+
+	}();
+	
+	
 </script>
 </head>
 <body>
@@ -216,12 +246,9 @@
 			<tr>
 			<tr>
 				<th>操作</th>
-				<td colspan="3">  <select name="SysOperationId" id="SysOperationId" style="width: 150px"  class="js-example-basic-multiple js-states " multiple="multiple">
-				 <option value="1">用户管理</option>
-                 <option value="2">角色管理</option>
-                 <option value="3">部门管理</option>
-                 <option value="4">菜单管理</option>
-				
+				<td colspan="3"> 
+				 <select name="SysOperationId" id="SysOperationId" style="width: 100%"   multiple="multiple">
+		
 				</select></td>
 			<tr>
 			<tr>

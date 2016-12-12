@@ -10,6 +10,7 @@
 
 </style>
 <script type="text/javascript">
+
 	$(function() {
 		//启动验证
 		var v = $("#myForm").validate({
@@ -20,17 +21,12 @@
  
 		      }
 
-		  
-		   
-
 		    },
 		    messages: {
 		    	name: {
 		        required:"请输入部门名称"
 	
 		      }
-
-
 		    }
 		});
 
