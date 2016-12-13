@@ -10,6 +10,9 @@
 <link
 	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"
 	rel="stylesheet">
+	<link
+	href="${staticPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
+	rel="stylesheet">
 <link
 	href="${staticPath}/js/plugins/select2/css/select2.min.css"
 	rel="stylesheet">
@@ -29,6 +32,17 @@
 
 <script src="${staticPath}/js/plugins/select2/js/select2.min.js"></script>
 <script src="${staticPath}/js/plugins/select2/js/i18n/zh-CN.js"></script>
+
+<!-- Bootstrap table -->
+<script
+	src="${staticPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+
+<script
+	src="${staticPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script
+	src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
+	
+	<script src="${staticPath}/js/plugins/layer/layer.min.js"></script>
 <style>
 /*错误样式*/
 input.error {

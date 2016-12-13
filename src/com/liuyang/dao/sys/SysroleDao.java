@@ -1,12 +1,14 @@
 package com.liuyang.dao.sys;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.liuyang.pojo.sys.Sysrole;
 import com.liuyang.pojo.sys.SysroleExample;
 import com.liuyang.pojo.sys.SysroleExtend;
+import com.liuyang.vo.sys.RoleMenuOperationVo;
 import com.liuyang.vo.sys.SysroleVo;
 
 public interface SysroleDao {
@@ -43,4 +45,6 @@ public interface SysroleDao {
     int getAllCount();
     
     int deleteByIds(String[] ids);
+    
+   	List<Map> selectOperationByRoleMenu(RoleMenuOperationVo map);
 }

@@ -308,6 +308,14 @@
  		#{id}
  	</foreach>
  </delete>
- 
+ <!--	角色已经分配的菜单的操作-->
+	<select id="selectOperationByRoleMenu" parameterType="com.liuyang.vo.sys.RoleMenuOperationVo"  resultType="java.util.Map">
+		select t3.id,t3.name,case when t2.SysOperationId is null then '未授权' else '已授权' end as author  from (select t0.* from SysOperation t0 inner join SysMenuSysOperation t1 on t0.Id=t1.SysOperationId 
+where t1.SysMenuId=#{menuId}  ) t3   
+ left join SysMenuSysRoleSysOperation t2 on t3.Id=t2.SysOperationId
+and t2.SysMenuId=#{menuId}  
+		and t2.SysRoleId=#{roleId}
+		
+	</select>
   
 </mapper>

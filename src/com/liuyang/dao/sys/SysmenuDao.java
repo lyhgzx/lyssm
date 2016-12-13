@@ -60,4 +60,6 @@ public interface SysmenuDao {
    	List<MenuVo> selectAllMenus();
    	
    	List<MenuVo> selectGiveMenusByRoleId(String roleId);
+   	
+
 }

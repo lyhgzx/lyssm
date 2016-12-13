@@ -18,7 +18,9 @@ import com.liuyang.service.sys.SysMenuService;
 import com.liuyang.service.sys.SysPersonService;
 import com.liuyang.service.sys.SysRoleService;
 import com.liuyang.utils.StringUtil;
+import com.liuyang.vo.sys.RoleMenuOperationVo;
 import com.liuyang.vo.sys.RoleMenuVo;
+import com.liuyang.vo.sys.RoleOperationVo;
 import com.liuyang.vo.sys.SysPersonVo;
 import com.liuyang.vo.sys.SysfieldVo;
 import com.liuyang.vo.sys.SysroleVo;
@@ -206,4 +208,59 @@ public class RoleController extends BaseController {
 		}
 		
 	}
+	
+	    /**
+	     * 为角色分配操作
+	     * @param request
+	     * @param vo
+	     * @return
+	     * @throws Exception
+	     */
+		@RequestMapping(value="/getOperationTable",method=RequestMethod.POST)
+		@ResponseBody
+		public Object getOperationTable(HttpServletRequest request, RoleMenuOperationVo vo) throws Exception{
+			
+			RoleMenuOperationVo vpersonVo=service.getOperationTable(vo);
+			return vpersonVo;
+		}
+		
+		
+		/**
+		 * 为角色分配操作--授权选中
+		 * @param vo
+		 * @return
+		 * @throws Exception
+		 */
+		@RequestMapping(value="/AuthorRoleOperation",method=RequestMethod.POST)
+		@ResponseBody
+		public Object AuthorRoleOperation(RoleOperationVo vo) throws Exception{
+			  
+			try {
+				service.AuthorRoleOperation(vo);
+				return sendOk();
+			} catch (Exception e) {
+				return sendError();
+			}
+			
+		}
+		
+		/**
+		 *  为角色分配操作--授权取消
+		 * @param vo
+		 * @return
+		 * @throws Exception
+		 */
+		@RequestMapping(value="/NuAuthorRoleOperation",method=RequestMethod.POST)
+		@ResponseBody
+		public Object NuAuthorRoleOperation(RoleOperationVo vo) throws Exception{
+			  
+			try {
+				service.NuAuthorRoleOperation(vo);
+				return sendOk();
+			} catch (Exception e) {
+				return sendError();
+			}
+			
+		}
+		
 }
