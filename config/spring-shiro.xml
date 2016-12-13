@@ -36,6 +36,7 @@
                 /${adminPath}/login = anon 
                 /${adminPath}/logout = anon
                 /${adminPath}/unauth = anon
+                 /srcAdd.jsp = anon 
                 /resources/** = anon
                 <!-- 需要认证 -->
                 /** = authc 
