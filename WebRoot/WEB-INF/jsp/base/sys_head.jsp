@@ -10,7 +10,9 @@
 <link
 	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"
 	rel="stylesheet">
-
+<link
+	href="${staticPath}/js/plugins/datepicker/css/bootstrap-datepicker3.standalone.min.css"
+	rel="stylesheet">
 <link href="${staticPath}/css/style.css" rel="stylesheet">
 
 <script type="text/javascript">
@@ -30,5 +32,9 @@
 <script src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
 <!-- ztree -->
 <script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
+<!-- datepicker -->
+
+<script src="${staticPath}/js/plugins/datepicker/js/bootstrap-datepicker.min.js" ></script>
+<script src="${staticPath}/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <!-- 自定义工具类 -->
 <script src="${staticPath}/js/ly.js"></script>

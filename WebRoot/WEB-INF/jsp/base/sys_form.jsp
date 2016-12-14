@@ -40,7 +40,8 @@
 
 <!-- layer -->
 <script src="${staticPath}/js/plugins/layer/layer.min.js"></script>
-
+<!-- datepicker -->
+<script src="${staticPath}/js/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
 <!-- 自定义工具类 -->
 <script src="${staticPath}/js/ly.js"></script>
 <style>
