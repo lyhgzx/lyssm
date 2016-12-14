@@ -10,11 +10,10 @@
 <link
 	href="${staticPath}/js/plugins/ztree/css/metroStyle/metroStyle.css"
 	rel="stylesheet">
-	<link
+<link
 	href="${staticPath}/css/plugins/bootstrap-table/bootstrap-table.min.css"
 	rel="stylesheet">
-<link
-	href="${staticPath}/js/plugins/select2/css/select2.min.css"
+<link href="${staticPath}/js/plugins/select2/css/select2.min.css"
 	rel="stylesheet">
 <!-- 全局js -->
 <script src="${staticPath}/js/jquery.min.js?v=2.1.4"></script>
@@ -29,20 +28,21 @@
 <script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
 
 <!-- select2 -->
-
 <script src="${staticPath}/js/plugins/select2/js/select2.min.js"></script>
 <script src="${staticPath}/js/plugins/select2/js/i18n/zh-CN.js"></script>
 
 <!-- Bootstrap table -->
 <script
 	src="${staticPath}/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
-
 <script
 	src="${staticPath}/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
-<script
-	src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
-	
-	<script src="${staticPath}/js/plugins/layer/layer.min.js"></script>
+<script src="${staticPath}/js/plugins/bootstrap-table/jquery-btable.js"></script>
+
+<!-- layer -->
+<script src="${staticPath}/js/plugins/layer/layer.min.js"></script>
+
+<!-- 自定义工具类 -->
+<script src="${staticPath}/js/ly.js"></script>
 <style>
 /*错误样式*/
 input.error {
@@ -137,42 +137,41 @@ ul.ztree {
 
 
 <script type="text/javascript">
-	var basePath = "${basePath}";
-	var staticPath = "${basePath}";
-	(function($) {
-		$.fn.serializeJSON = function(options) {
-			var opts = $.extend({}, $.fn.serializeJSON.defaults, options);
-			var toArray = function(value, char) {
-				return value.split(char);
-			}
-			var formData = this.serialize();
-			//解决序列化乱码问题
-			formData = decodeURIComponent(formData, true);
-			var params = toArray(formData, "&");
-			var resultJSON = {};
-			var connecter = function(name, source, value) {
-				if (!value || value.length < 1)
-					return source;
-				var char = opts.connectName[name] ? opts.connectName[name]
-						: opts.connect;
-				return source + char + value;
-			}
-			$.each(params, function() {
-				var param = toArray(this, "=");
-				var attr = param[0];
-				var val = param[1];
-				if (resultJSON[attr]) {//multi
-					resultJSON[attr] = connecter(attr, resultJSON[attr], val);
-				} else {
-					resultJSON[attr] = val;
-				}
-			})
-			return resultJSON;
-		};
-		$.fn.serializeJSON.defaults = {
-			connectName : {},
-			connect : ","
-		};
-	})(jQuery);
+  var basePath = "${basePath}";
+  var staticPath = "${basePath}";
+  (function($) {
+    $.fn.serializeJSON = function(options) {
+      var opts = $.extend({}, $.fn.serializeJSON.defaults, options);
+      var toArray = function(value, char) {
+        return value.split(char);
+      }
+      var formData = this.serialize();
+      //解决序列化乱码问题
+      formData = decodeURIComponent(formData, true);
+      var params = toArray(formData, "&");
+      var resultJSON = {};
+      var connecter = function(name, source, value) {
+        if (!value || value.length < 1) return source;
+        var char = opts.connectName[name] ? opts.connectName[name]
+                : opts.connect;
+        return source + char + value;
+      }
+      $.each(params, function() {
+        var param = toArray(this, "=");
+        var attr = param[0];
+        var val = param[1];
+        if (resultJSON[attr]) {//multi
+          resultJSON[attr] = connecter(attr, resultJSON[attr], val);
+        } else {
+          resultJSON[attr] = val;
+        }
+      })
+      return resultJSON;
+    };
+    $.fn.serializeJSON.defaults = {
+      connectName: {},
+      connect: ","
+    };
+  })(jQuery);
 </script>
 
