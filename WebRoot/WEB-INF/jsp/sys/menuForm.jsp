@@ -211,13 +211,14 @@
 <body>
 
 	<form id="myForm">
+	
 		<input type="hidden" name="id" value="${model.id}">
 		<table class="myTable">
 			<tr>
 				<th>上级菜单</th>
 
 				<td colspan="3"><input id="parentname" type="text"
-					style="width: 150px;" onclick="showMenu();" /> <input
+					style="width: 200px;" onclick="showMenu();" /> <input
 					id="parentid" name="parentid" style="display: none" value="${model.parentid}" /></td>
 			<tr>
 			<tr>
@@ -247,7 +248,7 @@
 			<tr>
 				<th>操作</th>
 				<td colspan="3"> 
-				 <select name="SysOperationId" id="SysOperationId" style="width: 100%"   multiple="multiple">
+				 <select name="SysOperationId" id="SysOperationId" style="width: 300px"   multiple="multiple">
 		
 				</select></td>
 			<tr>
@@ -261,7 +262,7 @@
 	<div id="menuContent" class="menuContent"
 		style="display: none; position: absolute;">
 		<ul id="treeDemo" class="ztree"
-			style="margin-top: 0; width: 150px; height: 150px;"></ul>
+			style="margin-top: 0; width: 200px; height: 200px;"></ul>
 	</div>
 </body>
 </html>

@@ -109,10 +109,12 @@ select.valid {
 	color: #1185da;
 	text-align: center;
 	font-weight: 100;
+
 }
 
 .myTable td {
 	/*background-color: white;*/
+
 	border-collapse: collapse;
 	border: 1px solid #94aec9;
 	height: 28px;
@@ -122,6 +124,7 @@ select.valid {
 	text-align: left;
 	white-space: nowrap;
 	word-break: keep-all;
+	
 }
 
 ul.ztree {

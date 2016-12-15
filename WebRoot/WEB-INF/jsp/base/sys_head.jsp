@@ -34,7 +34,57 @@
 <script src="${staticPath}/js/plugins/ztree/js/jquery.ztree.all.js"></script>
 <!-- datepicker -->
 
-<script src="${staticPath}/js/plugins/datepicker/js/bootstrap-datepicker.min.js" ></script>
-<script src="${staticPath}/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
+<script
+	src="${staticPath}/js/plugins/datepicker/js/bootstrap-datepicker.min.js"></script>
+<script
+	src="${staticPath}/js/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.min.js"
+	charset="UTF-8"></script>
 <!-- 自定义工具类 -->
 <script src="${staticPath}/js/ly.js"></script>
+<script type="text/javascript">
+
+  //datepicker 开始时间，结束时间封装
+  function DatePicker(beginSelector, endSelector)
+  {
+    // 仅选择日期  
+    $(beginSelector).datepicker({
+      language: "zh-CN",
+      autoclose: true,
+      startView: 0,
+      format: "yyyy-mm-dd",
+      clearBtn: true,
+      todayBtn: false,
+      endDate: new Date()
+    }).on('changeDate', function(ev)
+    {
+      if (ev.date)
+      {
+        $(endSelector).datepicker('setStartDate', new Date(ev.date.valueOf()))
+      } else
+      {
+        $(endSelector).datepicker('setStartDate', null);
+      }
+    })
+
+    $(endSelector).datepicker({
+      language: "zh-CN",
+      autoclose: true,
+      startView: 0,
+      format: "yyyy-mm-dd",
+      clearBtn: true,
+      todayBtn: false,
+      endDate: new Date()
+    }).on('changeDate', function(ev)
+    {
+      if (ev.date)
+      {
+        $(beginSelector).datepicker('setEndDate', new Date(ev.date.valueOf()))
+      } else
+      {
+        $(beginSelector).datepicker('setEndDate', new Date());
+      }
+
+    })
+  }
+</script>
+

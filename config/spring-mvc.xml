@@ -3,24 +3,40 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.0.xsd 
-            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd  
-            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd              
-            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:/org/springframework/beans/factory/xml/spring-beans-3.2.xsd 
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd  
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd              
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd">
 
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.liuyang.controller.sys" />
 	<!-- 引入配置文件 -->
 	<context:property-placeholder location="classpath:config.properties" />
 	<!-- 引入静态资源 -->
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+	    <mvc:message-converters register-defaults="true">
+	    	<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+		    	<constructor-arg value="UTF-8" />
+			</bean>
+	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+                <property name="prettyPrint" value="false"/>
+	            <property name="objectMapper">
+	            	<bean class="com.liuyang.utils.JsonUtil"/>
+	            </property>
+	            <property name="supportedMediaTypes">
+	                <list><value>application/json;charset=UTF-8</value></list>
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	 
+      
+  
+
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 
-	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-	<!-- <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"> 
-		<property name="supportedMediaTypes"> <list> <value>text/html;charset=UTF-8</value> 
-		</list> </property> </bean> -->
-	
+
+	 	
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
